@@ -9,8 +9,14 @@ using UnityEngine;
 public class BallMovementScript : MonoBehaviour
 {
     Rigidbody rb;
-    float hitForce = 40;
+    public int hitPowerMod = 5;
+    float hitForce = 0;
+    float mouseHitForce = 0.0f;
+    Vector3 hitDirection = Vector3.zero;
+    Vector3 hitDirectionStart = Vector3.zero;
+    Vector3 hitDirectionEnd = Vector3.zero;
     public bool allowMove = true;
+    private bool Aim = false;
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -21,7 +27,59 @@ public class BallMovementScript : MonoBehaviour
     {
         if(allowMove)
         {
-            move();
+            //Display Text on Screen saying your turn
+            mouseMove();
+            //move();
+        }
+    }
+    void mouseMove()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            hitDirectionStart = Input.mousePosition;
+            Aim = true;
+        }
+
+        if(Aim)
+        {
+            hitForce -= Input.GetAxis("Mouse Y")*hitPowerMod;
+            if(hitForce <= 0)
+            {
+                hitForce = 0;
+            }
+            if(hitForce >= 100)
+            {
+                hitForce = 100;
+            }
+            Debug.Log("Current Force: "+hitForce);   
+        }
+        
+        if(Input.GetMouseButtonUp(0))
+        {
+            
+            hitDirectionEnd = Input.mousePosition;
+
+            Debug.Log("Start "+hitDirectionStart);
+            Debug.Log("End "+hitDirectionEnd);
+
+            hitDirection = hitDirectionEnd - hitDirectionStart;
+            hitDirection = Vector3.Normalize(hitDirection);
+            hitDirection = new Vector3(hitDirection.x, 0, hitDirection.y);
+            
+
+            Debug.Log("Sub: "+hitDirection);
+
+            Aim = false;
+            if(hitForce > 0.1)
+            {
+                Debug.Log("Hitforce: " + hitForce);
+                rb.AddForce(-hitDirection*hitForce,ForceMode.Impulse);
+                allowMove = false;
+            }
+            else
+            {
+                allowMove = true;
+            }
         }
     }
     void move()
