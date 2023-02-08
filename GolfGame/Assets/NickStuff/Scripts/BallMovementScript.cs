@@ -9,7 +9,7 @@ using UnityEngine;
 public class BallMovementScript : MonoBehaviour
 {
     Rigidbody rb;
-    float hitForce = 40;
+    float hitForce = 5;
     public bool allowMove = true;
     void Start()
     {

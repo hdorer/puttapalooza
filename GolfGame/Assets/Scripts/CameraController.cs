@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CameraController : MonoBehaviour
-{
-    [SerializeField] private Vector3 offset = Vector3.zero;
-    [SerializeField] private Transform cameraTransform;
+public class CameraController : MonoBehaviour {
+    [SerializeField] private Transform ball;
 
     private bool rotating = false;
     [SerializeField] float sensitivity = 1.0f;
@@ -14,13 +12,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private InputAction startMovement;
     [SerializeField] private InputAction rotate;
 
-    private void OnValidate()
-    {
-        cameraTransform.localPosition = offset;
-    }
-
-    private void OnEnable()
-    {
+    private void OnEnable() {
         startMovement.Enable();
         rotate.Enable();
 
@@ -30,18 +22,19 @@ public class CameraController : MonoBehaviour
         rotate.performed += onLook;
     }
 
-    private void onLook(InputAction.CallbackContext context)
-    {
-        if (rotating)
-        {
+    private void Update() {
+        transform.position = ball.position;
+    }
+
+    private void onLook(InputAction.CallbackContext context) {
+        if(rotating) {
             float rotation = context.ReadValue<float>();
             rotation = rotation * sensitivity * Time.deltaTime;
             transform.Rotate(new Vector3(0, rotation, 0));
         }
     }
 
-    private void OnDisable()
-    {
+    private void OnDisable() {
         startMovement.Disable();
         rotate.Disable();
     }
