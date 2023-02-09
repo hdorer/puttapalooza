@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Powerups;
 using UnityEngine;
 
 public class PowerupPickup : MonoBehaviour {
