@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerupCubeRotator : MonoBehaviour {
+public class PowerupPickupRotator : MonoBehaviour {
     private const float rotationSpeed = 50f;
     private const float yMoveScalar = 0.3f;
     private float startingY;

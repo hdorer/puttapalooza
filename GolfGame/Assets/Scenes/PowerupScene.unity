@@ -940,6 +940,7 @@ GameObject:
   - component: {fileID: 1906177583}
   - component: {fileID: 1906177578}
   - component: {fileID: 1906177582}
+  - component: {fileID: 1906177584}
   m_Layer: 0
   m_Name: Player
   m_TagString: GolfBall
@@ -1054,6 +1055,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1906177584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906177577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9197294117a7c494396d98bbbe071066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1740098030607104146
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1109,5 +1122,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 45
       objectReference: {fileID: 0}
+    - target: {fileID: 8478246674797983135, guid: e00226edbed928d41ad85c92429f4d22, type: 3}
+      propertyPath: powerup
+      value: 
+      objectReference: {fileID: 11400000, guid: 63606ada9ff635446a9591a4beee238c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e00226edbed928d41ad85c92429f4d22, type: 3}
