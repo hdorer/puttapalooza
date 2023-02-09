@@ -66,7 +66,6 @@ public class NewBallMovement : MonoBehaviour
             //Add Gui here
 
             Debug.Log("Current Strength: " + strength);
-            Debug.ClearDeveloperConsole();
         }
         if (Input.GetMouseButtonUp(0)) 
         {
@@ -100,10 +99,9 @@ public class NewBallMovement : MonoBehaviour
     }
     private void DrawLine(Vector3 worldPoint)
     {
+        lineRenderer.SetPosition(0,gameObject.transform.position);
+        lineRenderer.SetPosition(1,-worldPoint);
         
-        Vector3[] positions = {gameObject.transform.position, worldPoint};
-
-        lineRenderer.SetPositions(positions);
         lineRenderer.enabled=true;
     }
     private void Stop() 
