@@ -8,13 +8,12 @@ using UnityEngine.Events;
 public class NewBallMovement : MonoBehaviour
 {
     [SerializeField] private float shotPowerScalar;
-    [SerializeField] private float stopVelocity = .05f; //The velocity below which the rigidbody will be considered as stopped
-	[SerializeField] private LineRenderer lineRenderer;
-    private bool isIdle;
+    [SerializeField] private float stopVelocity; //The velocity below which the rigidbody will be considered as stopped
+    [SerializeField] private bool isIdle;
     public bool IsIdle { get => isIdle; }
-    private bool isAiming;
+    [SerializeField] private bool isAiming;
     public bool IsAiming { get => isAiming; }
-    private bool isMagnetized;
+    [SerializeField] private bool isMagnetized;
     public bool IsMagnetized { set { isMagnetized = value; } }
 
     private Vector2 pressPoint;
@@ -34,16 +33,27 @@ public class NewBallMovement : MonoBehaviour
         isAiming = false;
         isMagnetized = false;
 
-        lineRenderer.enabled = false;
+        //lineRenderer.enabled = false;
     }
 
-    private void Update() {
-        if(rb.velocity.magnitude < stopVelocity && !isIdle) {
-            Stop();
-        }
+    private void FixedUpdate() {
+        
+    }
 
-        ProcessAim();
-        magnetize();
+    private void Update()
+    {
+        if(isIdle)
+        {
+            ProcessAim();
+        }
+        else
+        {
+            if(rb.velocity.magnitude < stopVelocity) 
+            {
+                Stop();
+            }
+            magnetize();
+        }
     }
 
     //private void OnMouseDown() {
@@ -64,7 +74,8 @@ public class NewBallMovement : MonoBehaviour
         float shotMagnitude;
         Vector3 shotForce;
 
-        if(Input.GetMouseButtonDown(0)) {
+        if(Input.GetMouseButtonDown(0)) 
+        {
             if(isIdle) {
                 isAiming = true;
                 onMovementStateUpdate?.Invoke();
@@ -72,8 +83,11 @@ public class NewBallMovement : MonoBehaviour
                 pressPoint = Input.mousePosition;
             }
         }
-        if(Input.GetMouseButtonUp(0)) {
-            if(isAiming) {
+        if(Input.GetMouseButtonUp(0)) 
+        {
+            isIdle = false;
+            if(isAiming) 
+            {
                 releasePoint = Input.mousePosition;
                 Debug.Log("press: " + pressPoint + " release: " + releasePoint);
 
@@ -154,16 +168,17 @@ public class NewBallMovement : MonoBehaviour
     //}
     private void DrawLine(Vector3 worldPoint)
     {
-        lineRenderer.SetPosition(0, gameObject.transform.position);
-        lineRenderer.SetPosition(1, worldPoint);
+        //lineRenderer.SetPosition(0, gameObject.transform.position);
+        //lineRenderer.SetPosition(1, worldPoint);
         
-        lineRenderer.enabled=true;
+        //lineRenderer.enabled=true;
     }
     private void Stop() 
     {
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         isIdle = true;
+        isAiming = false;
         isMagnetized = false;
         onMovementStateUpdate?.Invoke();
     }
