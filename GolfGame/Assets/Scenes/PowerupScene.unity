@@ -897,6 +897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ff44df832403164c995f594f8c5b701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  magnetRange: 3
 --- !u!1 &899222388
 GameObject:
   m_ObjectHideFlags: 0
@@ -1615,6 +1616,7 @@ MonoBehaviour:
   shotPower: 5
   stopVelocity: 0.3
   lineRenderer: {fileID: 955933209}
+  hole: {fileID: 871954534}
   onMovementStateUpdate:
     m_PersistentCalls:
       m_Calls:

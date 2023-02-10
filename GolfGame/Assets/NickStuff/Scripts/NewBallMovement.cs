@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,6 +13,11 @@ public class NewBallMovement : MonoBehaviour
     public bool IsIdle { get => isIdle; }
     private bool isAiming;
     public bool IsAiming { get => isAiming; }
+    private bool isMagnetized;
+    public bool IsMagnetized { set { isMagnetized = value; Debug.Log("isMagnetized = " + isMagnetized); } }
+
+    [SerializeField] private Hole hole;
+    
     private Rigidbody rb;
 
     public UnityEvent onMovementStateUpdate;
@@ -21,15 +27,18 @@ public class NewBallMovement : MonoBehaviour
 
         isIdle = true;
         isAiming = false;
+        isMagnetized = false;
+
         lineRenderer.enabled = false;
     }
 
     private void FixedUpdate() {
-        if(rb.velocity.magnitude < stopVelocity) {
+        if(rb.velocity.magnitude < stopVelocity && !isIdle) {
             Stop();
         }
 
         ProcessAim();
+        magnetize();
     }
 
     private void OnMouseDown() {
@@ -117,6 +126,7 @@ public class NewBallMovement : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         isIdle = true;
+        isMagnetized = false;
         onMovementStateUpdate?.Invoke();
     }
     private Vector3 CastMouseClickRay() 
@@ -137,5 +147,24 @@ public class NewBallMovement : MonoBehaviour
         {
             return Vector3.negativeInfinity;
         }
+    }
+
+    private void magnetize() {
+        if(!isMagnetized) {
+            Debug.Log("not magnetized");
+            return;
+        }
+
+        if(Vector3.Distance(transform.position, hole.transform.position) > hole.MagnetRange) {
+            Debug.Log(Vector3.Distance(transform.position, hole.transform.position) + " > " + hole.MagnetRange);
+            return;
+        }
+
+        Debug.Log("Magnetizing");
+
+        float magnitude = rb.velocity.magnitude;
+        Vector3 direction = (hole.transform.position - transform.position).normalized;
+
+        rb.velocity = direction * magnitude;
     }
 }
