@@ -37,7 +37,7 @@ public class NewBallMovement : MonoBehaviour
         lineRenderer.enabled = false;
     }
 
-    private void FixedUpdate() {
+    private void Update() {
         if(rb.velocity.magnitude < stopVelocity && !isIdle) {
             Stop();
         }
