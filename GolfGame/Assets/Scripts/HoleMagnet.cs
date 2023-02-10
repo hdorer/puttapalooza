@@ -4,7 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "HoleMagnet", menuName = "ScriptableObjects/HoleMagnet")]
 public class HoleMagnet : Powerup {
-    public override void use() {
-        
+    public override void use(PlayerPowerups ball) {
+        Debug.Log("Hole magnet used");
     }
 }

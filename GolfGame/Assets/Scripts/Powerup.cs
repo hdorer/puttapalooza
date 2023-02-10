@@ -7,5 +7,5 @@ public abstract class Powerup : ScriptableObject {
     [SerializeField] private string description;
     public string Name { get { return powerupName; } }
     
-    public abstract void use();
+    public abstract void use(PlayerPowerups ball);
 }

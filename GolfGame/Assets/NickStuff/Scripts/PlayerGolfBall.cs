@@ -9,20 +9,12 @@ using UnityEngine;
 
 public class PlayerGolfBall : MonoBehaviour
 {
-    private bool IsTurn;
+    private bool isTurn;
+    public bool IsTurn { get => isTurn; set => isTurn = value; }
     private int TurnNum;
     Vector3 PlayerPosition;
     public string PowerUpName;
     private int PlayerId;
-    
-    void setTurn(bool t)
-    {
-        IsTurn = t;
-    }
-    bool getTurn()
-    {
-        return IsTurn;
-    }
 
     // Update is called once per frame
     void Update()

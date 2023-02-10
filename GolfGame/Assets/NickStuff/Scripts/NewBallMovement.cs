@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class NewBallMovement : MonoBehaviour
 {
@@ -8,13 +9,17 @@ public class NewBallMovement : MonoBehaviour
     [SerializeField] private float stopVelocity = .05f; //The velocity below which the rigidbody will be considered as stopped
 	[SerializeField] private LineRenderer lineRenderer;
     private bool isIdle;
+    public bool IsIdle { get => isIdle; }
     private bool isAiming;
+    public bool IsAiming { get => isAiming; }
     private Rigidbody rb;
 
+    public UnityEvent onMovementStateUpdate;
 
     private void Awake() {
         rb = GetComponent<Rigidbody>();
 
+        isIdle = true;
         isAiming = false;
         lineRenderer.enabled = false;
     }
@@ -30,6 +35,7 @@ public class NewBallMovement : MonoBehaviour
     private void OnMouseDown() {
         if (isIdle) {
             isAiming = true;
+            onMovementStateUpdate?.Invoke();
         }
     }
     private void ProcessAim() 
@@ -75,6 +81,7 @@ public class NewBallMovement : MonoBehaviour
     private void Shoot(Vector3 worldPoint) 
     {
         isAiming = false;
+        onMovementStateUpdate?.Invoke();
         lineRenderer.enabled = false;
 
         Vector3 horizontalWorldPoint = new Vector3(worldPoint.x, transform.position.y, worldPoint.z);
@@ -96,6 +103,7 @@ public class NewBallMovement : MonoBehaviour
         
         rb.AddForce(-direction * strength * shotPower);
         isIdle = false;
+        onMovementStateUpdate?.Invoke();
     }
     private void DrawLine(Vector3 worldPoint)
     {
@@ -109,6 +117,7 @@ public class NewBallMovement : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         isIdle = true;
+        onMovementStateUpdate?.Invoke();
     }
     private Vector3 CastMouseClickRay() 
     {
