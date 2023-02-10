@@ -16,6 +16,7 @@ public class PlayerPowerups : MonoBehaviour {
     }
     
     public void usePowerup() {
+        Debug.Log("this code is being reached");
         powerup.use(this);
         powerup = null;
         onPowerupUpdate?.Invoke();

@@ -12,6 +12,10 @@ public class CameraController : MonoBehaviour {
     [SerializeField] private InputAction startMovement;
     [SerializeField] private InputAction rotate;
 
+    private void OnValidate() {
+        transform.position = ball.position;
+    }
+
     private void OnEnable() {
         startMovement.Enable();
         rotate.Enable();
