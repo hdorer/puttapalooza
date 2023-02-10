@@ -56,12 +56,14 @@ public class NewBallMovement : MonoBehaviour
         }
     }
 
-    //private void OnMouseDown() {
-    //    if (isIdle) {
-    //        isAiming = true;
-    //        onMovementStateUpdate?.Invoke();
-    //    }
-    //}
+    private void OnMouseDown() {
+        if(isIdle) {
+            isAiming = true;
+            onMovementStateUpdate?.Invoke();
+
+            pressPoint = Input.mousePosition;
+        }
+    }
     private void ProcessAim() 
     {        
         //if(!isAiming || !isIdle) {
@@ -74,15 +76,15 @@ public class NewBallMovement : MonoBehaviour
         float shotMagnitude;
         Vector3 shotForce;
 
-        if(Input.GetMouseButtonDown(0)) 
-        {
-            if(isIdle) {
-                isAiming = true;
-                onMovementStateUpdate?.Invoke();
+        //if(Input.GetMouseButtonDown(0)) 
+        //{
+        //    if(isIdle) {
+        //        isAiming = true;
+        //        onMovementStateUpdate?.Invoke();
 
-                pressPoint = Input.mousePosition;
-            }
-        }
+        //        pressPoint = Input.mousePosition;
+        //    }
+        //}
         if(Input.GetMouseButtonUp(0)) 
         {
             isIdle = false;
@@ -92,7 +94,7 @@ public class NewBallMovement : MonoBehaviour
                 Debug.Log("press: " + pressPoint + " release: " + releasePoint);
 
                 screenDifference = releasePoint - pressPoint;
-                screenDifference = Vector2.ClampMagnitude(screenDifference, Screen.height / 2);
+                screenDifference = Vector2.ClampMagnitude(screenDifference, Screen.height / 4);
                 shotDirection = Vector3.Normalize(new Vector3(screenDifference.x, 0, -screenDifference.y));
                 shotMagnitude = 1 * (screenDifference.magnitude / (Screen.height / 2)) * shotPowerScalar;
                 shotForce = shotDirection * shotMagnitude;

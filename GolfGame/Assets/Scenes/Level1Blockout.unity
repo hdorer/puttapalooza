@@ -220,7 +220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!120 &61541800
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -5742,14 +5742,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1040393811}
-  m_LocalRotation: {x: 0.23576146, y: -0, z: 0.000000037252903, w: 0.97181106}
-  m_LocalPosition: {x: -2.478373e-11, y: 16.599981, z: -17.000336}
+  m_LocalRotation: {x: 0.23147216, y: -0, z: -0.000000022351742, w: 0.9728416}
+  m_LocalPosition: {x: 0, y: 24, z: -42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 31418811}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 27.273, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 26.768, y: 0, z: 0}
 --- !u!81 &1040393813
 AudioListener:
   m_ObjectHideFlags: 0
@@ -18601,9 +18601,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ad0bc70148abba42af8643c89c755da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotPowerScalar: 25000
+  shotPowerScalar: 40000
   stopVelocity: 10
-  lineRenderer: {fileID: 61541800}
+  isIdle: 0
+  isAiming: 0
+  isMagnetized: 0
   cameraPivot: {fileID: 31418811}
   hole: {fileID: 2146220505}
   onMovementStateUpdate:
@@ -19589,7 +19591,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1740098030126562974, guid: e00226edbed928d41ad85c92429f4d22, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.8
+      value: 6.82
       objectReference: {fileID: 0}
     - target: {fileID: 1740098030126562974, guid: e00226edbed928d41ad85c92429f4d22, type: 3}
       propertyPath: m_LocalPosition.z
