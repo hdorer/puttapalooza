@@ -2199,7 +2199,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24776
+  m_Name: pb_Mesh24774
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5343,7 +5343,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24804
+  m_Name: pb_Mesh24802
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5507,7 +5507,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24790
+  m_Name: pb_Mesh24788
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5803,7 +5803,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 197328342}
-  pMovement: {fileID: 1317447506}
+  pMovement: {fileID: 0}
   pPowerups: {fileID: 1317447505}
 --- !u!114 &1068154942
 MonoBehaviour:
@@ -18665,7 +18665,7 @@ GameObject:
   - component: {fileID: 1317447509}
   - component: {fileID: 1317447508}
   - component: {fileID: 1317447507}
-  - component: {fileID: 1317447506}
+  - component: {fileID: 1317447512}
   - component: {fileID: 1317447505}
   m_Layer: 0
   m_Name: Player
@@ -18687,40 +18687,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onPowerupUpdate:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1068154941}
-        m_TargetAssemblyTypeName: PowerupButton, Assembly-CSharp
-        m_MethodName: updateButtonState
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1317447506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1317447504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ad0bc70148abba42af8643c89c755da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shotPowerScalar: 1000
-  stopVelocity: 3
-  isIdle: 0
-  isAiming: 0
-  isMagnetized: 0
-  cameraPivot: {fileID: 31418811}
-  hole: {fileID: 856984332}
-  onMovementStateUpdate:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1068154941}
@@ -18830,6 +18796,85 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1317447512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317447504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f504cb73644d64bb9551311087b9c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aim:
+    m_Name: Aim
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: dcf842e9-43cf-4739-8856-0cd123c6af4f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 1D Axis
+      m_Id: 68423f58-0827-48ca-8b9d-167dbc11c2ae
+      m_Path: 1DAxis
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Aim
+      m_Flags: 4
+    - m_Name: negative
+      m_Id: 1f97165e-20ef-423f-b3bc-7fcae0195461
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Aim
+      m_Flags: 8
+    - m_Name: positive
+      m_Id: 8da354a0-ca91-4be5-9bef-7fc61369c0dc
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Aim
+      m_Flags: 8
+    m_Flags: 0
+  confirm:
+    m_Name: Confirm
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 1bb72010-8cbd-46c7-bc5f-b1870308a7da
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: e70ace01-4cc8-42e3-8802-133e03e8b927
+      m_Path: <Keyboard>/z
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Confirm
+      m_Flags: 0
+    m_Flags: 0
+  goBack:
+    m_Name: Go Back
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 609ba3c9-d050-4c05-b5a0-0ba09df84948
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 887e026a-a283-457d-ac10-ebb65c06ee40
+      m_Path: <Keyboard>/x
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Go Back
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1 &1322119742
 GameObject:
   m_ObjectHideFlags: 0
