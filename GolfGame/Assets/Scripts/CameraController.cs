@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour {
     [SerializeField] private Transform ball;
 
     private bool rotating = false;
-    [SerializeField] float sensitivity = 1.0f;
+    [SerializeField] private float sensitivity = 1.0f;
 
     [SerializeField] private InputAction startMovement;
     [SerializeField] private InputAction rotate;

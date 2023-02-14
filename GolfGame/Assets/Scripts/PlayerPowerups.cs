@@ -10,13 +10,18 @@ public class PlayerPowerups : MonoBehaviour {
 
     public UnityEvent onPowerupUpdate;
 
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.LeftShift)) {
+            usePowerup();
+        }
+    }
+
     private void setPowerup(Powerup value) {
         powerup = value;
         onPowerupUpdate?.Invoke();
     }
     
     public void usePowerup() {
-        Debug.Log("this code is being reached");
         powerup.use(this);
         powerup = null;
         onPowerupUpdate?.Invoke();

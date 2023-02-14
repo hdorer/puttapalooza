@@ -11,6 +11,7 @@ public class NewBallMovement : MonoBehaviour
     [SerializeField] private float stopVelocity; //The velocity below which the rigidbody will be considered as stopped
     [SerializeField] private bool isIdle;
     public bool IsIdle { get => isIdle; }
+    private bool shouldAddForce;
     [SerializeField] private bool isAiming;
     public bool IsAiming { get => isAiming; }
     [SerializeField] private bool isMagnetized;
@@ -18,6 +19,7 @@ public class NewBallMovement : MonoBehaviour
 
     private Vector2 pressPoint;
     private Vector2 releasePoint;
+    private Vector3 shotForce;
 
     [SerializeField] private Transform cameraPivot;
     [SerializeField] private Hole hole;
@@ -30,29 +32,28 @@ public class NewBallMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         isIdle = true;
+        shouldAddForce = false;
         isAiming = false;
         isMagnetized = false;
 
         //lineRenderer.enabled = false;
     }
 
-    private void FixedUpdate() {
-        
+    private void Update() {
+        ProcessAim();
+        magnetize();
     }
 
-    private void Update()
-    {
-        if(isIdle)
-        {
-            ProcessAim();
+    private void FixedUpdate() {
+        Debug.Log(rb.velocity.magnitude + " " + stopVelocity);
+        if(rb.velocity.magnitude < stopVelocity && !isIdle) {
+            Stop();
         }
-        else
-        {
-            if(rb.velocity.magnitude < stopVelocity) 
-            {
-                Stop();
-            }
-            magnetize();
+        if(shouldAddForce) {
+            rb.AddForce(shotForce, ForceMode.Impulse);
+            Debug.Log("ball hit this frame");
+            shouldAddForce = false;
+            isIdle = false;
         }
     }
 
@@ -74,7 +75,6 @@ public class NewBallMovement : MonoBehaviour
         Vector2 screenDifference;
         Vector3 shotDirection;
         float shotMagnitude;
-        Vector3 shotForce;
 
         //if(Input.GetMouseButtonDown(0)) 
         //{
@@ -87,11 +87,10 @@ public class NewBallMovement : MonoBehaviour
         //}
         if(Input.GetMouseButtonUp(0)) 
         {
-            isIdle = false;
             if(isAiming) 
             {
                 releasePoint = Input.mousePosition;
-                Debug.Log("press: " + pressPoint + " release: " + releasePoint);
+                //Debug.Log("press: " + pressPoint + " release: " + releasePoint);
 
                 screenDifference = releasePoint - pressPoint;
                 screenDifference = Vector2.ClampMagnitude(screenDifference, Screen.height / 4);
@@ -101,10 +100,8 @@ public class NewBallMovement : MonoBehaviour
                 shotForce = Quaternion.AngleAxis(cameraPivot.rotation.eulerAngles.y, Vector3.up) * shotForce;
 
                 isAiming = false;
-                isIdle = false;
+                shouldAddForce = true;
                 onMovementStateUpdate?.Invoke();
-
-                rb.AddForce(shotForce);
             }
         }
 
@@ -177,6 +174,7 @@ public class NewBallMovement : MonoBehaviour
     }
     private void Stop() 
     {
+        Debug.Log("stopping");
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         isIdle = true;
@@ -205,17 +203,17 @@ public class NewBallMovement : MonoBehaviour
     //}
 
     private void magnetize() {
+        //Debug.Log(Vector3.Distance(transform.position, hole.transform.position) + " > " + hole.MagnetRange + " " + isMagnetized);
+
         if(!isMagnetized) {
-            // Debug.Log("not magnetized");
             return;
         }
 
         if(Vector3.Distance(transform.position, hole.transform.position) > hole.MagnetRange) {
-            // Debug.Log(Vector3.Distance(transform.position, hole.transform.position) + " > " + hole.MagnetRange);
             return;
         }
 
-        Debug.Log("Magnetizing");
+        //Debug.Log("Magnetizing");
 
         float magnitude = rb.velocity.magnitude;
         Vector3 direction = (hole.transform.position - transform.position).normalized;
