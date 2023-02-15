@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CameraController : MonoBehaviour {
+public class BallCameraController : MonoBehaviour {
     [SerializeField] private Transform ball;
 
     private bool rotating = false;
