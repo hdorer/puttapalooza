@@ -20710,6 +20710,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1709213647}
   - component: {fileID: 1709213646}
+  - component: {fileID: 1709213648}
   m_Layer: 0
   m_Name: HoverCamera
   m_TagString: Untagged
@@ -20752,7 +20753,19 @@ MonoBehaviour:
     m_InheritPosition: 0
     m_OnCameraLive:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1709213648}
+          m_TargetAssemblyTypeName: HoverCameraController, Assembly-CSharp
+          m_MethodName: resetTransform
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 2035670009}
 --- !u!4 &1709213647
@@ -20771,6 +20784,69 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &1709213648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709213645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a277d6ecfd96c4cbb5bb109bd43edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballCameraAnchor: {fileID: 31418811}
+  movementSpeed: 5
+  movementInput:
+    m_Name: Movement Input
+    m_Type: 0
+    m_ExpectedControlType: Button
+    m_Id: 5833e985-8367-49b8-b72b-8652d7ff1cc6
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 2D Vector
+      m_Id: 667ca378-423a-48d7-8984-031015a47f15
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Movement Input
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 26a99029-81c6-4834-97ae-6200bb432e9d
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Movement Input
+      m_Flags: 8
+    - m_Name: down
+      m_Id: c582840c-1447-47c7-a613-19692de3f19e
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Movement Input
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 3acd503e-58a4-494b-b3e1-3b5ae644c97d
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Movement Input
+      m_Flags: 8
+    - m_Name: right
+      m_Id: b4468626-4075-4c9b-bf2e-ba1f48df725f
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Movement Input
+      m_Flags: 8
+    m_Flags: 0
 --- !u!1 &1710761860
 GameObject:
   m_ObjectHideFlags: 0
