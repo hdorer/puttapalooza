@@ -9,12 +9,13 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private InputAction goBack;
     [SerializeField] private InputAction doDebug;
 
-    private bool isAim, isFire;
+    private bool isAim = true, isFire = false;
     public bool isTurn = true;
 
     private float angle = 0;
     private Vector3 hitDirection = Vector3.forward;
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private LineRenderer line;
     private Vector3 hitForce = Vector3.zero;
     [SerializeField] private float hitPower;
 
@@ -40,14 +41,26 @@ public class PlayerMovement : MonoBehaviour {
         confirm.Disable();
         goBack.Disable();
         doDebug.Disable();
+
+        line.enabled = false;
     }
 
     private void Update()
     {
         if(isTurn)
         {
-            if(isFire)
+            if(isAim)
             {
+                line.enabled = true;
+                line.SetPosition(0, gameObject.transform.position);
+                line.SetPosition(1, hitDirection);
+                Debug.Log("Aiming");
+            }
+            else if(isFire)
+            {
+                //Add a gui element
+                //Power increases and decreases from 0 to 1
+                // when click mb1 it stops takes that float and multiplies it to hit force
                 if(Input.GetMouseButtonDown(0))
                 {
                     isFire = false;
@@ -56,6 +69,20 @@ public class PlayerMovement : MonoBehaviour {
 
                     hitForce = hitDirection * hitPower;
                     rb.AddForce(hitForce, ForceMode.Impulse);
+                    line.enabled = false;
+                }
+            }
+            else
+            {
+                Debug.Log("moving");
+                if(rb.angularDrag < .01f)
+                {
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = Vector3.zero;
+                    isAim = true;
+                    angle = 0;
+                    hitDirection = Vector3.forward;
+                    //turn ends here normally;
                 }
             }
         }
@@ -75,7 +102,7 @@ public class PlayerMovement : MonoBehaviour {
     //This is for Q and E to rotate the direction the ball will go
     private void onAim(InputAction.CallbackContext context) {
         Debug.Log("aim " + context.ReadValue<float>());
-        if(context.ReadValue<float>() > 0)
+        if(context.ReadValue<float>() > 0 && isAim)
         {
             //rotate right
             angle += 1;
@@ -84,7 +111,7 @@ public class PlayerMovement : MonoBehaviour {
                 angle = 0;
             }
         }
-        else if(context.ReadValue<float>() < 0)
+        else if(context.ReadValue<float>() < 0 && isAim)
         {
             //rotate left
             angle -= 1;
