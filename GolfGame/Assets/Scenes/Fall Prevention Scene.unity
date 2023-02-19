@@ -838,6 +838,7 @@ GameObject:
   - component: {fileID: 1388117769}
   - component: {fileID: 1388117773}
   - component: {fileID: 1388117774}
+  - component: {fileID: 1388117775}
   m_Layer: 0
   m_Name: Golf Ball
   m_TagString: GolfBall
@@ -937,7 +938,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 2
 --- !u!114 &1388117774
 MonoBehaviour:
@@ -946,14 +947,120 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1388117768}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ad0bc70148abba42af8643c89c755da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotPower: 5
+  shotPowerScalar: 0
   stopVelocity: 0.05
-  lineRenderer: {fileID: 349583987}
+  isIdle: 0
+  isAiming: 0
+  isMagnetized: 0
+  cameraPivot: {fileID: 0}
+  hole: {fileID: 0}
+  onMovementStateUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1388117775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388117768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f504cb73644d64bb9551311087b9c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aim:
+    m_Name: Aim
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b61b68e9-77ec-4aed-a212-eab44d49078f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 1D Axis
+      m_Id: 59d29131-082f-4ff3-b161-39743d359db7
+      m_Path: 1DAxis
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Aim
+      m_Flags: 4
+    - m_Name: negative
+      m_Id: a34f063c-1081-4c51-b194-8ac5fd7563fa
+      m_Path: <Keyboard>/q
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Aim
+      m_Flags: 8
+    - m_Name: positive
+      m_Id: b4cdc399-4b65-497d-ba45-d272504857cf
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Aim
+      m_Flags: 8
+    m_Flags: 0
+  confirm:
+    m_Name: Confirm
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 0c4d1126-fb9f-442d-a044-218c01865deb
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: ba41a78d-89ae-4c46-8155-2433f0c04390
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Confirm
+      m_Flags: 0
+    m_Flags: 0
+  goBack:
+    m_Name: Go Back
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8832f388-a8db-455e-901f-b894a983a12b
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 76dfcd7a-b287-4ad8-8a51-d218da4e05b8
+      m_Path: <Keyboard>/backspace
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Go Back
+      m_Flags: 0
+    m_Flags: 0
+  doDebug:
+    m_Name: Do Debug
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 0a549cb6-4245-4537-b27e-a1ef55d9f530
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: ab70679f-9f36-4b11-8ae9-511aba4e4631
+      m_Path: <Keyboard>/h
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Do Debug
+      m_Flags: 0
+    m_Flags: 0
+  isTurn: 1
+  rb: {fileID: 1388117773}
+  hitPower: 10
 --- !u!1 &1696764682
 GameObject:
   m_ObjectHideFlags: 0
