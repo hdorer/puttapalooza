@@ -11,7 +11,6 @@ public class HoverCameraController : MonoBehaviour {
 
     [SerializeField] private InputAction movementInput;
     Vector2 movement;
-    
 
     private void OnEnable() {
         movementInput.Enable();

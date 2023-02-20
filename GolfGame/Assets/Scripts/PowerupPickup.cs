@@ -7,7 +7,7 @@ public class PowerupPickup : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.tag == "GolfBall") {
-            other.GetComponent<PlayerPowerups>().Powerup = powerup;
+            other.GetComponent<PlayerPowerups>().setPowerup(powerup);
             Destroy(gameObject);
         }
     }

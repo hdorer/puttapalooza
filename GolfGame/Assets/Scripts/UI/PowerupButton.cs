@@ -7,7 +7,7 @@ public class PowerupButton : MonoBehaviour {
     private Button button;
     [SerializeField] private Text text;
 
-    [SerializeField] private NewBallMovement pMovement;
+    [SerializeField] private PlayerMovement pMovement;
     [SerializeField] private PlayerPowerups pPowerups;
 
     private void Awake() {
@@ -15,7 +15,7 @@ public class PowerupButton : MonoBehaviour {
     }
 
     public void updateButtonState() {
-        button.interactable = pPowerups.hasPowerup && pMovement.IsIdle && !pMovement.IsAiming;
+        button.interactable = pPowerups.hasPowerup && pMovement.IsAim; // this could still be better
         text.text = pPowerups.hasPowerup ? pPowerups.Powerup.Name : "[No powerup]";
     }
 }
