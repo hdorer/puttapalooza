@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private InputAction aim;
     [SerializeField] private InputAction confirm;
     [SerializeField] private InputAction goBack;
+    [SerializeField] private InputAction fire;
     [SerializeField] private InputAction doDebug;
 
     private bool isAim = true;
@@ -30,47 +31,43 @@ public class PlayerMovement : MonoBehaviour {
         aim.Enable();
         confirm.Enable();
         goBack.Enable();
+        fire.Enable();
         doDebug.Enable();
 
         aim.performed += onAim;
         confirm.performed += onConfirm;
         goBack.performed += onGoBack;
+        fire.performed += onFire;
         doDebug.performed += onDebug;
     }
 
     private void Update() {
         if(!isTurn) {
-            if(isAim) {
-                line.enabled = true;
-                line.SetPosition(0, gameObject.transform.position);
-                line.SetPosition(1, hitDirection);
-                Debug.Log("Aiming");
-            } else if(isFire) {
-                //Add a gui element
-                //Power increases and decreases from 0 to 1
-                // when click mb1 it stops takes that float and multiplies it to hit force
-                if(Input.GetMouseButtonDown(0)) {
-                    isFire = false;
-                    isAim = false;
+            return;
+        }
 
-                    hitForce = hitDirection * hitPower;
-                    rb.AddForce(hitForce, ForceMode.Impulse);
-                    line.enabled = false;
-                }
-            } else {
-                Debug.Log("moving");
-                if(!isMoving) {
-                    rb.velocity = Vector3.zero;
-                    rb.angularVelocity = Vector3.zero;
+        if(isAim) {
+            line.enabled = true;
+            line.SetPosition(0, gameObject.transform.position);
+            line.SetPosition(1, hitDirection);
+            Debug.Log("Aiming");
+        } else if(isFire) {
+            //Add a gui element
+            //Power increases and decreases from 0 to 1
+            // when click mb1 it stops takes that float and multiplies it to hit force (now on the new InputAction)
+        } else {
+            Debug.Log("moving");
+            if(!isMoving) {
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
 
-                    isAim = true;
-                    angle = 0;
-                    hitDirection = Vector3.forward;
+                isAim = true;
+                angle = 0;
+                hitDirection = Vector3.forward;
 
-                    magnetized = false;
+                magnetized = false;
 
-                    //turn ends here normally
-                }
+                //turn ends here normally
             }
         }
     }
@@ -83,11 +80,13 @@ public class PlayerMovement : MonoBehaviour {
         aim.performed -= onAim;
         confirm.performed -= onConfirm;
         goBack.performed -= onGoBack;
+        fire.performed -= onFire;
         doDebug.performed -= onDebug;
 
         aim.Disable();
         confirm.Disable();
         goBack.Disable();
+        fire.Disable();
         doDebug.Disable();
 
         line.enabled = false;
@@ -161,5 +160,18 @@ public class PlayerMovement : MonoBehaviour {
         Vector3 direction = (hole.MagnetPoint - transform.position).normalized;
 
         rb.velocity = direction * magnitude; // DIRECTION and MAGNITUDE
+    }
+
+    private void onFire(InputAction.CallbackContext context) {
+        if(!isFire) {
+            return;
+        }
+
+        isFire = false;
+        isAim = false;
+
+        hitForce = hitDirection * hitPower;
+        rb.AddForce(hitForce, ForceMode.Impulse);
+        line.enabled = false;
     }
 }

@@ -19108,6 +19108,23 @@ MonoBehaviour:
       m_Action: Go Back
       m_Flags: 0
     m_Flags: 0
+  fire:
+    m_Name: Fire
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 7437c854-6f32-4d8c-ba63-c43ea66356a6
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: b65cec9f-18cb-408c-983a-7a56c35d8d65
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Fire
+      m_Flags: 0
+    m_Flags: 0
   doDebug:
     m_Name: Do Debug
     m_Type: 0
