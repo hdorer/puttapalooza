@@ -23,6 +23,9 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 hitForce = Vector3.zero;
     [SerializeField] private float hitPower;
 
+    [SerializeField] private Hole hole;
+    private bool magnetized;
+
     private void OnEnable() {
         aim.Enable();
         confirm.Enable();
@@ -63,7 +66,10 @@ public class PlayerMovement : MonoBehaviour {
                     isAim = true;
                     angle = 0;
                     hitDirection = Vector3.forward;
-                    //turn ends here normally;
+
+                    magnetized = false;
+
+                    //turn ends here normally
                 }
             }
         }
@@ -85,6 +91,10 @@ public class PlayerMovement : MonoBehaviour {
         doDebug.Disable();
 
         line.enabled = false;
+    }
+
+    public void activateMagnet() {
+        magnetized = true;
     }
 
     private void DebugLog() {
@@ -135,5 +145,21 @@ public class PlayerMovement : MonoBehaviour {
     //Prints a debug log
     private void onDebug(InputAction.CallbackContext context) {
         DebugLog();
+    }
+
+    private void doMagnetization() {
+        if(!magnetized) {
+            return;
+        }
+
+        float distanceToHole = Vector3.Distance(transform.position, hole.MagnetPoint);
+        if(distanceToHole > hole.MagnetRange && distanceToHole <= hole.MagnetDeadZone) {
+            return;
+        }
+
+        float magnitude = rb.velocity.magnitude;
+        Vector3 direction = (hole.MagnetPoint - transform.position).normalized;
+
+        rb.velocity = direction * magnitude; // DIRECTION and MAGNITUDE
     }
 }
