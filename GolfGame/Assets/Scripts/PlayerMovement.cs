@@ -4,29 +4,39 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour {
+    //SerializeField Items
     [SerializeField] private InputAction aim;
     [SerializeField] private InputAction confirm;
     [SerializeField] private InputAction goBack;
     [SerializeField] private InputAction fire;
     [SerializeField] private InputAction doDebug;
-
-    private bool isAim = true;
-    public bool IsAim { get => isAim; }
-    private bool isFire = false;
-    private bool isTurn = true;
-    public bool isMoving { get => rb.velocity.magnitude >= stoppingSpeed; }
-
-    [SerializeField] private float stoppingSpeed = 0.1f;
-    private float angle = 0;
-    private Vector3 hitDirection = Vector3.forward;
+        //Non Input Actions
+    [SerializeField] private float stoppingSpeed = 0.01f;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private LineRenderer line;
-    private Vector3 hitForce = Vector3.zero;
     [SerializeField] private float hitPower;
-
     [SerializeField] private Hole hole;
-    private bool magnetized;
 
+
+    //Bools
+    private bool isAim = true;
+    private bool isFire = false;
+    private bool isTurn = true;
+    private bool magnetized;
+    private bool toOne = true;
+    public bool IsAim { get => isAim; }
+    //There is a problem with isMoving. It instantly becaomes false right after you hit the ball. Would have to change this to something in 
+    public bool isMoving { get => rb.velocity.magnitude >= stoppingSpeed; }
+
+    //Floats
+    private float turnFloat;
+    private float angle = 0;
+    public float hitStrength = 0;
+
+    //Vector3
+    private Vector3 hitDirection = Vector3.forward;
+    private Vector3 hitForce = Vector3.zero;
+    
     private void OnEnable() {
         aim.Enable();
         confirm.Enable();
@@ -35,6 +45,7 @@ public class PlayerMovement : MonoBehaviour {
         doDebug.Enable();
 
         aim.performed += onAim;
+        aim.canceled += onAim;
         confirm.performed += onConfirm;
         goBack.performed += onGoBack;
         fire.performed += onFire;
@@ -47,17 +58,53 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         if(isAim) {
+
+            if(turnFloat > 0)
+            {
+                angle++;
+            }
+            else if(turnFloat < 0)
+            {
+                angle--;
+            }
+
+            if(angle > 360 || angle < -360)
+            {
+                angle = 0;
+            }
+
+            hitDirection = Quaternion.AngleAxis(angle, Vector3.up) * Vector3.forward;
+
             line.enabled = true;
-            line.SetPosition(0, gameObject.transform.position);
+            line.SetPosition(0, new Vector3(0,0,0));
             line.SetPosition(1, hitDirection);
             Debug.Log("Aiming");
-        } else if(isFire) {
-            //Add a gui element
-            //Power increases and decreases from 0 to 1
-            // when click mb1 it stops takes that float and multiplies it to hit force (now on the new InputAction)
-        } else {
+            hitStrength = 0;
+        } 
+        else if(isFire) {
+            //I dont like this set up, but it is the best i have so far.
+            if(hitStrength < 1 && toOne)
+            {
+                hitStrength += .001f;
+                if(hitStrength >= 1)
+                {
+                    toOne = false;
+                }
+            }
+            else if(hitStrength > 0 && !toOne)
+            {
+                hitStrength -= .001f;
+                if(hitStrength <= 0)
+                {
+                    toOne = true;
+                }
+            }
+
+        } 
+        else {
             Debug.Log("moving");
-            if(!isMoving) {
+            if(!isMoving) 
+            {
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
 
@@ -66,6 +113,7 @@ public class PlayerMovement : MonoBehaviour {
                 hitDirection = Vector3.forward;
 
                 magnetized = false;
+                line.enabled = false;
 
                 //turn ends here normally
             }
@@ -78,6 +126,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void OnDisable() {
         aim.performed -= onAim;
+        aim.canceled -= onAim;
         confirm.performed -= onConfirm;
         goBack.performed -= onGoBack;
         fire.performed -= onFire;
@@ -109,22 +158,7 @@ public class PlayerMovement : MonoBehaviour {
     //This is for Q and E to rotate the direction the ball will go
     private void onAim(InputAction.CallbackContext context) {
         Debug.Log("aim " + context.ReadValue<float>());
-        if(context.ReadValue<float>() > 0 && isAim) {
-            //rotate right
-            angle += 1;
-            if(angle > 360) {
-                angle = 0;
-            }
-        } else if(context.ReadValue<float>() < 0 && isAim) {
-            //rotate left
-            angle -= 1;
-            if(angle < -360) {
-                angle = 0;
-            }
-        }
-
-        hitDirection = Quaternion.AngleAxis(angle, Vector3.up) * Vector3.forward;
-        //hitDirection = Vector3.RotateTowards(Vector3.forward,Vector3.up,angle, 0);
+        turnFloat = context.ReadValue<float>();
     }
 
     //This is to continue from aim and item use to hitting
@@ -170,7 +204,7 @@ public class PlayerMovement : MonoBehaviour {
         isFire = false;
         isAim = false;
 
-        hitForce = hitDirection * hitPower;
+        hitForce = hitDirection * (hitPower * hitStrength);
         rb.AddForce(hitForce, ForceMode.Impulse);
         line.enabled = false;
     }

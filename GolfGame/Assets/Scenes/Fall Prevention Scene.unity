@@ -837,7 +837,6 @@ GameObject:
   - component: {fileID: 1388117770}
   - component: {fileID: 1388117769}
   - component: {fileID: 1388117773}
-  - component: {fileID: 1388117774}
   - component: {fileID: 1388117775}
   m_Layer: 0
   m_Name: Golf Ball
@@ -941,28 +940,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 2
---- !u!114 &1388117774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1388117768}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ad0bc70148abba42af8643c89c755da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shotPowerScalar: 0
-  stopVelocity: 0.05
-  isIdle: 0
-  isAiming: 0
-  isMagnetized: 0
-  cameraPivot: {fileID: 0}
-  hole: {fileID: 0}
-  onMovementStateUpdate:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1388117775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -986,12 +963,12 @@ MonoBehaviour:
     - m_Name: 1D Axis
       m_Id: 59d29131-082f-4ff3-b161-39743d359db7
       m_Path: 1DAxis
-      m_Interactions: 
+      m_Interactions: Hold(duration=0.1)
       m_Processors: 
       m_Groups: 
       m_Action: Aim
       m_Flags: 4
-    - m_Name: negative
+    - m_Name: Negative
       m_Id: a34f063c-1081-4c51-b194-8ac5fd7563fa
       m_Path: <Keyboard>/q
       m_Interactions: 
@@ -999,7 +976,7 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Aim
       m_Flags: 8
-    - m_Name: positive
+    - m_Name: Positive
       m_Id: b4cdc399-4b65-497d-ba45-d272504857cf
       m_Path: <Keyboard>/e
       m_Interactions: 
@@ -1042,6 +1019,23 @@ MonoBehaviour:
       m_Action: Go Back
       m_Flags: 0
     m_Flags: 0
+  fire:
+    m_Name: Fire
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: d1544c58-16c0-405c-9534-f1bb327d84ef
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 1be47772-0107-4f80-88e7-aa9187768afe
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Fire
+      m_Flags: 0
+    m_Flags: 0
   doDebug:
     m_Name: Do Debug
     m_Type: 0
@@ -1059,10 +1053,12 @@ MonoBehaviour:
       m_Action: Do Debug
       m_Flags: 0
     m_Flags: 0
-  isTurn: 1
+  stoppingSpeed: 0.1
   rb: {fileID: 1388117773}
   line: {fileID: 349583987}
   hitPower: 10
+  hole: {fileID: 0}
+  hitStrength: 0
 --- !u!1 &1696764682
 GameObject:
   m_ObjectHideFlags: 0
