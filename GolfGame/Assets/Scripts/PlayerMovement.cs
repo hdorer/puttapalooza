@@ -10,20 +10,19 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private InputAction goBack;
     [SerializeField] private InputAction fire;
     [SerializeField] private InputAction doDebug;
-        //Non Input Actions
+    //Non Input Actions
     [SerializeField] private float stoppingSpeed = 0.01f;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private LineRenderer line;
     [SerializeField] private float hitPower;
+    [SerializeField] private float turnSpeed;
     [SerializeField] private Hole hole;
-
 
     //Bools
     private bool isAim = true;
     private bool isFire = false;
     private bool isTurn = true;
     private bool magnetized;
-    private bool toOne = true;
     public bool IsAim { get => isAim; }
     //There is a problem with isMoving. It instantly becaomes false right after you hit the ball. Would have to change this to something in 
     public bool isMoving { get => rb.velocity.magnitude >= stoppingSpeed; }
@@ -31,7 +30,8 @@ public class PlayerMovement : MonoBehaviour {
     //Floats
     private float turnFloat;
     private float angle = 0;
-    public float hitStrength = 0;
+    [SerializeField] private float hitStrength = 0;
+    private float hitStrengthSign = 1;
 
     //Vector3
     private Vector3 hitDirection = Vector3.forward;
@@ -58,53 +58,28 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         if(isAim) {
+            angle += turnFloat * turnSpeed * Time.deltaTime;
 
-            if(turnFloat > 0)
-            {
-                angle++;
-            }
-            else if(turnFloat < 0)
-            {
-                angle--;
-            }
-
-            if(angle > 360 || angle < -360)
-            {
+            if(angle > 360 || angle < -360) {
                 angle = 0;
             }
 
             hitDirection = Quaternion.AngleAxis(angle, Vector3.up) * Vector3.forward;
 
             line.enabled = true;
-            line.SetPosition(0, new Vector3(0,0,0));
+            line.SetPosition(0, new Vector3(0, 0, 0));
             line.SetPosition(1, hitDirection);
-            Debug.Log("Aiming");
+            Debug.Log("Aiming " + angle);
             hitStrength = 0;
-        } 
-        else if(isFire) {
+        } else if(isFire) {
             //I dont like this set up, but it is the best i have so far.
-            if(hitStrength < 1 && toOne)
-            {
-                hitStrength += .001f;
-                if(hitStrength >= 1)
-                {
-                    toOne = false;
-                }
+            hitStrength += .001f * hitStrengthSign;
+            if(hitStrength >= 1 || hitStrength <= 0) {
+                hitStrengthSign *= -1;
             }
-            else if(hitStrength > 0 && !toOne)
-            {
-                hitStrength -= .001f;
-                if(hitStrength <= 0)
-                {
-                    toOne = true;
-                }
-            }
-
-        } 
-        else {
+        } else {
             Debug.Log("moving");
-            if(!isMoving) 
-            {
+            if(!isMoving) {
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
 
@@ -173,6 +148,8 @@ public class PlayerMovement : MonoBehaviour {
         Debug.Log("go back");
         isAim = true;
         isFire = false;
+        hitStrength = 0;
+        hitStrengthSign = 1;
     }
 
     //Prints a debug log
@@ -205,7 +182,10 @@ public class PlayerMovement : MonoBehaviour {
         isAim = false;
 
         hitForce = hitDirection * (hitPower * hitStrength);
+        Debug.Log(hitForce);
         rb.AddForce(hitForce, ForceMode.Impulse);
+        hitStrength = 0;
+        hitStrengthSign = 1;
         line.enabled = false;
     }
 }

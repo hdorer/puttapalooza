@@ -220,7 +220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!120 &61541800
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -18710,7 +18710,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh25458
+  m_Name: pb_Mesh33320
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -19059,7 +19059,7 @@ MonoBehaviour:
       m_Flags: 4
     - m_Name: negative
       m_Id: 1f97165e-20ef-423f-b3bc-7fcae0195461
-      m_Path: <Keyboard>/a
+      m_Path: <Keyboard>/q
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -19067,7 +19067,7 @@ MonoBehaviour:
       m_Flags: 8
     - m_Name: positive
       m_Id: 8da354a0-ca91-4be5-9bef-7fc61369c0dc
-      m_Path: <Keyboard>/d
+      m_Path: <Keyboard>/e
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -19137,8 +19137,10 @@ MonoBehaviour:
   stoppingSpeed: 0.1
   rb: {fileID: 1317447508}
   line: {fileID: 61541800}
-  hitPower: 0
+  hitPower: 750
+  turnSpeed: 60
   hole: {fileID: 856984332}
+  hitStrength: 0
 --- !u!1 &1322119742
 GameObject:
   m_ObjectHideFlags: 0
