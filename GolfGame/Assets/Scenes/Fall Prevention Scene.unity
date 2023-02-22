@@ -1315,7 +1315,7 @@ MonoBehaviour:
     - m_Name: 1D Axis
       m_Id: 59d29131-082f-4ff3-b161-39743d359db7
       m_Path: 1DAxis
-      m_Interactions: Hold(duration=0.1)
+      m_Interactions: Hold(duration=0.1,pressPoint=0.1)
       m_Processors: 
       m_Groups: 
       m_Action: Aim
@@ -1409,8 +1409,9 @@ MonoBehaviour:
   rb: {fileID: 1388117773}
   line: {fileID: 349583987}
   hitPower: 10
+  turnSpeed: 20
   hole: {fileID: 0}
-  powerSlider: {fileID: 420691367}
+  powSlider: {fileID: 420691367}
   hitStrength: 0
 --- !u!1 &1534708432
 GameObject:

@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float hitPower;
     [SerializeField] private float turnSpeed;
     [SerializeField] private Hole hole;
+    [SerializeField] private Canvas powSlider;
 
     //Bools
     private bool isAim = true;
@@ -43,6 +44,7 @@ public class PlayerMovement : MonoBehaviour {
         goBack.Enable();
         fire.Enable();
         doDebug.Enable();
+        powSlider.GetComponent<PowerSliderScript>().DisableSlider();
 
         aim.performed += onAim;
         aim.canceled += onAim;
@@ -59,7 +61,6 @@ public class PlayerMovement : MonoBehaviour {
 
         if(isAim) {
             angle += turnFloat * turnSpeed * Time.deltaTime;
-
             if(angle > 360 || angle < -360) {
                 angle = 0;
             }
@@ -69,14 +70,14 @@ public class PlayerMovement : MonoBehaviour {
             line.enabled = true;
             line.SetPosition(0, new Vector3(0, 0, 0));
             line.SetPosition(1, hitDirection);
-            Debug.Log("Aiming " + angle);
             hitStrength = 0;
         } else if(isFire) {
             //I dont like this set up, but it is the best i have so far.
-            hitStrength += .001f * hitStrengthSign;
+            hitStrength += .01f * hitStrengthSign;
             if(hitStrength >= 1 || hitStrength <= 0) {
                 hitStrengthSign *= -1;
             }
+            powSlider.GetComponent<PowerSliderScript>().ChangeFill(hitStrength);
         } else {
             Debug.Log("moving");
             if(!isMoving) {
@@ -141,6 +142,7 @@ public class PlayerMovement : MonoBehaviour {
         Debug.Log("confirm");
         isAim = false;
         isFire = true;
+        powSlider.GetComponent<PowerSliderScript>().EneableSlider();
     }
 
     //This is to go from hitting the ball to item and aim
@@ -150,6 +152,7 @@ public class PlayerMovement : MonoBehaviour {
         isFire = false;
         hitStrength = 0;
         hitStrengthSign = 1;
+        powSlider.GetComponent<PowerSliderScript>().DisableSlider();
     }
 
     //Prints a debug log
@@ -186,6 +189,8 @@ public class PlayerMovement : MonoBehaviour {
         rb.AddForce(hitForce, ForceMode.Impulse);
         hitStrength = 0;
         hitStrengthSign = 1;
+        hitDirection = Vector3.forward;
         line.enabled = false;
+        powSlider.GetComponent<PowerSliderScript>().DisableSlider();
     }
 }
