@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float stoppingSpeed = 0.01f;
     [SerializeField] private float hitStrength = 0.0f;
     [SerializeField] private Hole hole;
-    [SerializeField] private Canvas powSlider;
+    [SerializeField] private PowerSliderScript powSlider;
 
     //Bools
     private bool isAim = true;
@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour {
         goBack.Enable();
         fire.Enable();
         doDebug.Enable();
-        powSlider.GetComponent<PowerSliderScript>().DisableSlider();
+        powSlider.gameObject.SetActive(false);
         lastPosition = gameObject.transform.position;
 
         aim.performed += onAim;
@@ -81,7 +81,7 @@ public class PlayerMovement : MonoBehaviour {
             if(hitStrength >= 1 || hitStrength <= 0) {
                 hitStrengthSign *= -1;
             }
-            powSlider.GetComponent<PowerSliderScript>().ChangeFill(hitStrength);
+            powSlider.ChangeFill(hitStrength);
         } 
         else {
             Debug.Log("moving");
@@ -168,7 +168,7 @@ public class PlayerMovement : MonoBehaviour {
         Debug.Log("confirm");
         isAim = false;
         isFire = true;
-        powSlider.GetComponent<PowerSliderScript>().EneableSlider();
+        powSlider.gameObject.SetActive(true);
     }
 
     //This is to go from hitting the ball to item and aim
@@ -178,7 +178,7 @@ public class PlayerMovement : MonoBehaviour {
         isFire = false;
         hitStrength = 0;
         hitStrengthSign = 1;
-        powSlider.GetComponent<PowerSliderScript>().DisableSlider();
+        powSlider.gameObject.SetActive(false);
     }
 
     //Prints a debug log
@@ -220,7 +220,7 @@ public class PlayerMovement : MonoBehaviour {
         hitStrengthSign = 1;
         hitDirection = Vector3.forward;
         line.enabled = false;
-        powSlider.GetComponent<PowerSliderScript>().DisableSlider();
+        powSlider.gameObject.SetActive(false);
     }
 
     void OnTriggerEnter(Collider col)
