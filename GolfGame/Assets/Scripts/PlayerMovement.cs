@@ -10,12 +10,14 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private InputAction goBack;
     [SerializeField] private InputAction fire;
     [SerializeField] private InputAction doDebug;
+    
     //Non Input Actions
-    [SerializeField] private float stoppingSpeed = 0.01f;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private LineRenderer line;
     [SerializeField] private float hitPower;
     [SerializeField] private float turnSpeed;
+    [SerializeField] private float stoppingSpeed = 0.01f;
+    [SerializeField] private float hitStrength = 0.0f;
     [SerializeField] private Hole hole;
     [SerializeField] private Canvas powSlider;
 
@@ -25,19 +27,19 @@ public class PlayerMovement : MonoBehaviour {
     private bool isTurn = true;
     private bool magnetized;
     public bool IsAim { get => isAim; }
-    //There is a problem with isMoving. It instantly becaomes false right after you hit the ball. Would have to change this to something in 
-    public bool isMoving { get => rb.velocity.magnitude >= stoppingSpeed; }
+    public bool isMoving = false;
 
     //Floats
     private float turnFloat;
     private float angle = 0;
-    [SerializeField] private float hitStrength = 0;
     private float hitStrengthSign = 1;
 
     //Vector3
     private Vector3 hitDirection = Vector3.forward;
     private Vector3 hitForce = Vector3.zero;
+    private Vector3 lastPosition;
     
+
     private void OnEnable() {
         aim.Enable();
         confirm.Enable();
@@ -45,6 +47,7 @@ public class PlayerMovement : MonoBehaviour {
         fire.Enable();
         doDebug.Enable();
         powSlider.GetComponent<PowerSliderScript>().DisableSlider();
+        lastPosition = gameObject.transform.position;
 
         aim.performed += onAim;
         aim.canceled += onAim;
@@ -71,25 +74,31 @@ public class PlayerMovement : MonoBehaviour {
             line.SetPosition(0, new Vector3(0, 0, 0));
             line.SetPosition(1, hitDirection);
             hitStrength = 0;
-        } else if(isFire) {
+        } 
+        else if(isFire) {
             //I dont like this set up, but it is the best i have so far.
-            hitStrength += .01f * hitStrengthSign;
+            hitStrength += .3f * hitStrengthSign * Time.deltaTime;
             if(hitStrength >= 1 || hitStrength <= 0) {
                 hitStrengthSign *= -1;
             }
             powSlider.GetComponent<PowerSliderScript>().ChangeFill(hitStrength);
-        } else {
+        } 
+        else {
             Debug.Log("moving");
             if(!isMoving) {
+                StopCoroutine(CheckMoving());
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
 
-                isAim = true;
                 angle = 0;
                 hitDirection = Vector3.forward;
 
                 magnetized = false;
                 line.enabled = false;
+
+                isTurn = false; //Ping Tunr System
+
+                lastPosition = gameObject.transform.position;
 
                 //turn ends here normally
             }
@@ -130,6 +139,23 @@ public class PlayerMovement : MonoBehaviour {
         Debug.Log("Is hit: " + isFire);
 
     }
+
+
+    ///Inumerator
+    IEnumerator CheckMoving()
+    {
+        while(isMoving)
+        {
+            yield return new WaitForSeconds(1.0f);
+            
+            if(rb.velocity.magnitude < stoppingSpeed)
+            {
+                isMoving = false;
+            }
+        }
+    }
+
+    ///Input Actions
 
     //This is for Q and E to rotate the direction the ball will go
     private void onAim(InputAction.CallbackContext context) {
@@ -183,6 +209,9 @@ public class PlayerMovement : MonoBehaviour {
 
         isFire = false;
         isAim = false;
+        isMoving = true;
+
+        StartCoroutine(CheckMoving());
 
         hitForce = hitDirection * (hitPower * hitStrength);
         Debug.Log(hitForce);
@@ -192,5 +221,24 @@ public class PlayerMovement : MonoBehaviour {
         hitDirection = Vector3.forward;
         line.enabled = false;
         powSlider.GetComponent<PowerSliderScript>().DisableSlider();
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if(col.CompareTag("Reset"))
+        {
+            StopCoroutine(CheckMoving());
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+
+            angle = 0;
+            hitDirection = Vector3.forward;
+
+            magnetized = false;
+            line.enabled = false;
+
+            isTurn = false; //Send Ping To Turn System
+            gameObject.transform.position = lastPosition;
+        }
     }
 }
