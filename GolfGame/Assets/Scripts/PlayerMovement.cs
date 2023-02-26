@@ -151,6 +151,7 @@ public class PlayerMovement : MonoBehaviour {
             if(rb.velocity.magnitude < stoppingSpeed)
             {
                 isMoving = false;
+                isAim = true;
             }
         }
     }
