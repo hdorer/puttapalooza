@@ -29,6 +29,12 @@ public class PlayerPowerups : MonoBehaviour {
         this.powerup = powerup;
         onPowerupUpdate?.Invoke();
     }
+
+    public void usePowerup() {
+        powerup.use(this);
+        powerup = null;
+        onPowerupUpdate?.Invoke();
+    }
     
     private void usePowerup(InputAction.CallbackContext context) {
         powerup.use(this);

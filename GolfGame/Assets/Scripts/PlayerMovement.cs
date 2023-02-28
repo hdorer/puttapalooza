@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private InputAction goBack;
     [SerializeField] private InputAction fire;
     [SerializeField] private InputAction doDebug;
-    
+
     //Non Input Actions
     [SerializeField] private Rigidbody rb;
     [SerializeField] private LineRenderer line;
@@ -23,10 +23,10 @@ public class PlayerMovement : MonoBehaviour {
 
     //Bools
     private bool isAim = true;
+    public bool IsAim { get => isAim; }
     private bool isFire = false;
     private bool isTurn = true;
     private bool magnetized;
-    public bool IsAim { get => isAim; }
     public bool isMoving = false;
 
     //Floats
@@ -38,7 +38,6 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 hitDirection = Vector3.forward;
     private Vector3 hitForce = Vector3.zero;
     private Vector3 lastPosition;
-    
 
     private void OnEnable() {
         aim.Enable();
@@ -74,29 +73,29 @@ public class PlayerMovement : MonoBehaviour {
             line.SetPosition(0, new Vector3(0, 0, 0));
             line.SetPosition(1, hitDirection);
             hitStrength = 0;
-        } 
-        else if(isFire) {
+        } else if(isFire) {
             //I dont like this set up, but it is the best i have so far.
             hitStrength += .3f * hitStrengthSign * Time.deltaTime;
             if(hitStrength >= 1 || hitStrength <= 0) {
                 hitStrengthSign *= -1;
             }
             powSlider.ChangeFill(hitStrength);
-        } 
-        else {
+        } else {
             Debug.Log("moving");
             if(!isMoving) {
                 StopCoroutine(CheckMoving());
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
 
+                transform.rotation = Quaternion.identity; // quick and dirty fix
                 angle = 0;
                 hitDirection = Vector3.forward;
 
                 magnetized = false;
                 line.enabled = false;
+                isAim = true;
 
-                isTurn = false; //Ping Tunr System
+                // isTurn = false; //Ping Tunr System
 
                 lastPosition = gameObject.transform.position;
 
@@ -137,26 +136,22 @@ public class PlayerMovement : MonoBehaviour {
         Debug.Log("Is Turn: " + isTurn);
         Debug.Log("Is Aim: " + isAim);
         Debug.Log("Is hit: " + isFire);
-
     }
 
-
     ///Inumerator
-    IEnumerator CheckMoving()
-    {
-        while(isMoving)
-        {
+    private IEnumerator CheckMoving() {
+        Debug.Log("CheckMoving()");
+
+        while(isMoving) {
             yield return new WaitForSeconds(1.0f);
-            
-            if(rb.velocity.magnitude < stoppingSpeed)
-            {
+
+            if(rb.velocity.magnitude < stoppingSpeed) {
                 isMoving = false;
             }
         }
     }
 
     ///Input Actions
-
     //This is for Q and E to rotate the direction the ball will go
     private void onAim(InputAction.CallbackContext context) {
         Debug.Log("aim " + context.ReadValue<float>());
@@ -223,10 +218,8 @@ public class PlayerMovement : MonoBehaviour {
         powSlider.gameObject.SetActive(false);
     }
 
-    void OnTriggerEnter(Collider col)
-    {
-        if(col.CompareTag("Reset"))
-        {
+    private void OnTriggerEnter(Collider col) {
+        if(col.CompareTag("Reset")) {
             StopCoroutine(CheckMoving());
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
