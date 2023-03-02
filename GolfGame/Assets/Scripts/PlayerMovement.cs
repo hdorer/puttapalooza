@@ -37,7 +37,8 @@ public class PlayerMovement : MonoBehaviour {
     //Vector3
     private Vector3 hitDirection = Vector3.forward;
     private Vector3 hitForce = Vector3.zero;
-    private Vector3 lastPosition;
+    private Vector3 thisTurnStart;
+    private Vector3 lastTurnStart;
 
     private void OnEnable() {
         aim.Enable();
@@ -45,8 +46,6 @@ public class PlayerMovement : MonoBehaviour {
         goBack.Enable();
         fire.Enable();
         doDebug.Enable();
-        powSlider.gameObject.SetActive(false);
-        lastPosition = gameObject.transform.position;
 
         aim.performed += onAim;
         aim.canceled += onAim;
@@ -54,6 +53,12 @@ public class PlayerMovement : MonoBehaviour {
         goBack.performed += onGoBack;
         fire.performed += onFire;
         doDebug.performed += onDebug;
+    }
+
+    private void Start() {
+        powSlider.gameObject.SetActive(false);
+        thisTurnStart = gameObject.transform.position;
+        lastTurnStart = gameObject.transform.position;
     }
 
     private void Update() {
@@ -83,29 +88,19 @@ public class PlayerMovement : MonoBehaviour {
         } else {
             Debug.Log("moving");
             if(!isMoving) {
-                StopCoroutine(CheckMoving());
-                rb.velocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-
-                transform.rotation = Quaternion.identity; // quick and dirty fix
-                angle = 0;
-                hitDirection = Vector3.forward;
-
-                magnetized = false;
-                line.enabled = false;
-                isAim = true;
-
-                // isTurn = false; //Ping Tunr System
-
-                lastPosition = gameObject.transform.position;
-
-                //turn ends here normally
+                endTurn(true);
             }
         }
     }
 
     private void FixedUpdate() {
         doMagnetization();
+    }
+
+    private void OnTriggerEnter(Collider col) {
+        if(col.CompareTag("Reset")) {
+            endTurn(false);
+        }
     }
 
     private void OnDisable() {
@@ -219,20 +214,28 @@ public class PlayerMovement : MonoBehaviour {
         powSlider.gameObject.SetActive(false);
     }
 
-    private void OnTriggerEnter(Collider col) {
-        if(col.CompareTag("Reset")) {
-            StopCoroutine(CheckMoving());
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+    private void endTurn(bool success) {
+        StopCoroutine(CheckMoving());
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
 
-            angle = 0;
-            hitDirection = Vector3.forward;
+        transform.rotation = Quaternion.identity; // quick and dirty fix
+        angle = 0;
+        hitDirection = Vector3.forward;
 
-            magnetized = false;
-            line.enabled = false;
+        magnetized = false;
+        line.enabled = false;
+        isAim = true;
 
-            isTurn = false; //Send Ping To Turn System
-            gameObject.transform.position = lastPosition;
+        if(success) {
+            lastTurnStart = thisTurnStart;
+            thisTurnStart = gameObject.transform.position;
+        } else {
+            gameObject.transform.position = thisTurnStart;
         }
+
+        // isTurn = false; //Ping Turn System
+
+        //turn ends here normally
     }
 }
