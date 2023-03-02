@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9b1c789e956d6d4a8dd84e1ff3f4374, type: 3}
-  m_Name: HoleMagnet
+  m_Script: {fileID: 11500000, guid: edad80cb2e7accc4aaaeb25027a2ff82, type: 3}
+  m_Name: Mulligan
   m_EditorClassIdentifier: 
-  powerupName: Hole Magnet
-  description: The ball is attracted to the hole as it moves if it is within a certain
-    distance to the hole.
+  powerupName: Mulligan
+  description: Re-do your last shot.

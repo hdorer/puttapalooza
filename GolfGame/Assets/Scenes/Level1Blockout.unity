@@ -20399,7 +20399,7 @@ PrefabInstance:
     - target: {fileID: 8478246674797983135, guid: e00226edbed928d41ad85c92429f4d22, type: 3}
       propertyPath: powerup
       value: 
-      objectReference: {fileID: 11400000, guid: 63606ada9ff635446a9591a4beee238c, type: 2}
+      objectReference: {fileID: 11400000, guid: 1d93948fbb767db48a620c98bdeb4381, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e00226edbed928d41ad85c92429f4d22, type: 3}
 --- !u!850595691 &1601928000

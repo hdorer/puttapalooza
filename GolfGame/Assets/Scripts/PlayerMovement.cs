@@ -57,8 +57,8 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Start() {
         powSlider.gameObject.SetActive(false);
-        thisTurnStart = gameObject.transform.position;
-        lastTurnStart = gameObject.transform.position;
+        thisTurnStart = transform.position;
+        lastTurnStart = transform.position;
     }
 
     private void Update() {
@@ -122,6 +122,11 @@ public class PlayerMovement : MonoBehaviour {
 
     public void activateMagnet() {
         magnetized = true;
+    }
+
+    public void doMulligan() {
+        transform.position = lastTurnStart;
+        // score--;
     }
 
     private void DebugLog() {
@@ -229,9 +234,9 @@ public class PlayerMovement : MonoBehaviour {
 
         if(success) {
             lastTurnStart = thisTurnStart;
-            thisTurnStart = gameObject.transform.position;
+            thisTurnStart = transform.position;
         } else {
-            gameObject.transform.position = thisTurnStart;
+            transform.position = thisTurnStart;
         }
 
         // isTurn = false; //Ping Turn System
