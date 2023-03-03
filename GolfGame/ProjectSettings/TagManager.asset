@@ -7,6 +7,7 @@ TagManager:
   - GolfBall
   - Reset
   - Hole
+  - HoleFinal
   layers:
   - Default
   - TransparentFX

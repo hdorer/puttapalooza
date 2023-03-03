@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour {
 
     //Floats
     private float turnFloat;
-    private float angle = 0;
+    private float angle;
     private float hitStrengthSign = 1;
 
     //Vector3
@@ -59,6 +59,7 @@ public class PlayerMovement : MonoBehaviour {
         powSlider.gameObject.SetActive(false);
         thisTurnStart = transform.position;
         lastTurnStart = transform.position;
+        angle = 0;
     }
 
     private void Update() {
@@ -67,6 +68,9 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         if(isAim) {
+            line.SetPosition(0, new Vector3(0, 0, 0));
+            line.SetPosition(1, hitDirection);
+
             angle += turnFloat * turnSpeed * Time.deltaTime;
             if(angle > 360 || angle < -360) {
                 angle = 0;
@@ -75,8 +79,7 @@ public class PlayerMovement : MonoBehaviour {
             hitDirection = Quaternion.AngleAxis(angle, Vector3.up) * Vector3.forward;
 
             line.enabled = true;
-            line.SetPosition(0, new Vector3(0, 0, 0));
-            line.SetPosition(1, hitDirection);
+            
             hitStrength = 0;
         } else if(isFire) {
             //I dont like this set up, but it is the best i have so far.
@@ -103,6 +106,9 @@ public class PlayerMovement : MonoBehaviour {
         }
         else if(col.CompareTag("Hole")){
             SceneChange.SwitchToScene(SceneChange.CheckScene()+1);
+        }
+        else if(col.CompareTag("HoleFinal")){
+            SceneChange.SwitchToScene(0);
         }
     }
 
@@ -145,14 +151,16 @@ public class PlayerMovement : MonoBehaviour {
     private IEnumerator CheckMoving() {
         Debug.Log("CheckMoving()");
 
+        yield return new WaitForSeconds(1.0f);
         while(isMoving) {
-            yield return new WaitForSeconds(1.0f);
-
+            
+            yield return new WaitForSeconds(0.1f);
             if(rb.velocity.magnitude < stoppingSpeed) {
                 isMoving = false;
                 isAim = true;
             }
         }
+        StopCoroutine(CheckMoving());
     }
 
     ///Input Actions
@@ -220,6 +228,8 @@ public class PlayerMovement : MonoBehaviour {
         hitStrength = 0;
         hitStrengthSign = 1;
         hitDirection = Vector3.forward;
+        angle = 0;
+        
         line.enabled = false;
         powSlider.gameObject.SetActive(false);
     }
