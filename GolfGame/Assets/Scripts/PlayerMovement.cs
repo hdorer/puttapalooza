@@ -101,6 +101,9 @@ public class PlayerMovement : MonoBehaviour {
         if(col.CompareTag("Reset")) {
             endTurn(false);
         }
+        else if(col.CompareTag("Hole")){
+            SceneChange.SwitchToScene(SceneChange.CheckScene()+1);
+        }
     }
 
     private void OnDisable() {
