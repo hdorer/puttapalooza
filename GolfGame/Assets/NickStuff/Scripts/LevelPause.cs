@@ -22,6 +22,17 @@ public class LevelPause : MonoBehaviour
     {
         PausePanel.SetActive(false);
     }
+    public void SwitchScene()
+    {
+        if(isPause)
+        {
+            SceneChange.SwitchToScene(0);
+        }
+        else
+        {
+            Debug.Log("OOp");
+        }
+    }
     private void onPause(InputAction.CallbackContext context)
     {
         isPause = !isPause;

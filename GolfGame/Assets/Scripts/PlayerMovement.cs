@@ -199,6 +199,8 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void onFire(InputAction.CallbackContext context) {
+        Debug.Log("onFire");
+
         if(!isFire) {
             return;
         }
