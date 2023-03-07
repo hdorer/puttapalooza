@@ -73,6 +73,7 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         if(isAim) {
+            Debug.Log("if(isAim)");
             line.SetPosition(0, new Vector3(0, 0, 0));
             line.SetPosition(1, hitDirection);
 
@@ -96,6 +97,7 @@ public class PlayerMovement : MonoBehaviour {
         } else {
             // Debug.Log("moving");
             if(!isMoving) {
+                Debug.Log("if(!isMoving)");
                 endTurn(true);
             }
         }
@@ -239,7 +241,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void endTurn(bool success) {
-        Debug.Log("This code is being reached");
+        Debug.Log("endTurn()");
         StopCoroutine(CheckMoving());
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
