@@ -73,7 +73,6 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         if(isAim) {
-            Debug.Log("if(isAim)");
             line.SetPosition(0, new Vector3(0, 0, 0));
             line.SetPosition(1, hitDirection);
 
@@ -94,12 +93,6 @@ public class PlayerMovement : MonoBehaviour {
                 hitStrengthSign *= -1;
             }
             powSlider.ChangeFill(hitStrength);
-        } else {
-            // Debug.Log("moving");
-            if(!isMoving) {
-                Debug.Log("if(!isMoving)");
-                endTurn(true);
-            }
         }
     }
 
@@ -145,12 +138,12 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void DebugLog() {
-        //Debug.Log("Angle: " + angle);
-        //Debug.Log("hit direction: " + hitDirection);
-        //Debug.Log("hit force: " + hitForce);
-        //Debug.Log("Is Turn: " + isTurn);
-        //Debug.Log("Is Aim: " + isAim);
-        //Debug.Log("Is hit: " + isFire);
+        Debug.Log("Angle: " + angle);
+        Debug.Log("hit direction: " + hitDirection);
+        Debug.Log("hit force: " + hitForce);
+        Debug.Log("Is Turn: " + isTurn);
+        Debug.Log("Is Aim: " + isAim);
+        Debug.Log("Is hit: " + isFire);
     }
 
     ///Inumerator
@@ -159,11 +152,9 @@ public class PlayerMovement : MonoBehaviour {
 
         yield return new WaitForSeconds(1.0f);
         while(isMoving) {
-            
             yield return new WaitForSeconds(0.1f);
             if(rb.velocity.magnitude < stoppingSpeed) {
-                isMoving = false;
-                isAim = true;
+                endTurn(true);
             }
         }
         StopCoroutine(CheckMoving());
@@ -241,7 +232,6 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void endTurn(bool success) {
-        Debug.Log("endTurn()");
         StopCoroutine(CheckMoving());
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
@@ -252,6 +242,7 @@ public class PlayerMovement : MonoBehaviour {
 
         magnetized = false;
         line.enabled = false;
+        isMoving = false;
         isAim = true;
 
         if(success) {
