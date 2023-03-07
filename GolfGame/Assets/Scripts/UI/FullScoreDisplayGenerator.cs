@@ -20,8 +20,6 @@ public class FullScoreDisplayGenerator : MonoBehaviour {
     [Header("Parameters")]
     [SerializeField] private int players = 4;
     [SerializeField] private int holes = 5;
-    [SerializeField] private float horizontalPadding = 15;
-    [SerializeField] private float verticalPadding = 15;
 
     public void generatePanel() {
         clearTexts();
@@ -41,7 +39,7 @@ public class FullScoreDisplayGenerator : MonoBehaviour {
 
     private void generatePlayerLabels() {
         for(int i = 0; i < players; i++) {
-            Vector3 position = playerLabelStartingPoint.position + new Vector3(0, playerLabelPrefab.rectTransform.rect.height * i, 0);
+            Vector3 position = playerLabelStartingPoint.position - new Vector3(0, playerLabelPrefab.rectTransform.rect.height * i, 0);
             TextMeshProUGUI text = Instantiate(playerLabelPrefab, position, Quaternion.identity);
             text.rectTransform.parent = scoreDisplayPanel;
             text.text = "Player " + i;
@@ -59,7 +57,7 @@ public class FullScoreDisplayGenerator : MonoBehaviour {
             text.gameObject.name = "Hole" + i + "Label";
         }
 
-        Vector3 totalPosition = holeLabelStartingPoint.position + new Vector3(holeLabelPrefab.rectTransform.rect.width * (i + 1), 0, 0);
+        Vector3 totalPosition = holeLabelStartingPoint.position + new Vector3(holeLabelPrefab.rectTransform.rect.width * i, 0, 0);
         TextMeshProUGUI totalText = Instantiate(holeLabelPrefab, totalPosition, Quaternion.identity);
         totalText.rectTransform.parent = scoreDisplayPanel;
         totalText.text = "T";
