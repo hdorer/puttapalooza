@@ -20,6 +20,10 @@ public class FullScoreDisplayGenerator : MonoBehaviour {
 
     private FullScoreDisplay display;
 
+    private void Start() {
+        generatePanel();
+    }
+
     public void generatePanel() {
         display = GetComponent<FullScoreDisplay>();
         display.initializeArrays(players, holes);
