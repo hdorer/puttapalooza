@@ -30,7 +30,7 @@ public class LevelPause : MonoBehaviour
         }
         else
         {
-            Debug.Log("OOp");
+            // Debug.Log("OOp");
         }
     }
     private void onPause(InputAction.CallbackContext context)

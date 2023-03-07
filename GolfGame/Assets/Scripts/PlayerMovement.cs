@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour {
     //Non Input Actions
     [SerializeField] private Rigidbody rb;
     [SerializeField] private LineRenderer line;
+    [SerializeField] private PlayerScore pScore;
     [SerializeField] private float hitPower;
     [SerializeField] private float turnSpeed;
     [SerializeField] private float stoppingSpeed = 0.01f;
@@ -55,6 +56,10 @@ public class PlayerMovement : MonoBehaviour {
         doDebug.performed += onDebug;
     }
 
+    private void Awake() {
+        pScore = GetComponent<PlayerScore>();
+    }
+
     private void Start() {
         powSlider.gameObject.SetActive(false);
         thisTurnStart = transform.position;
@@ -89,7 +94,7 @@ public class PlayerMovement : MonoBehaviour {
             }
             powSlider.ChangeFill(hitStrength);
         } else {
-            Debug.Log("moving");
+            // Debug.Log("moving");
             if(!isMoving) {
                 endTurn(true);
             }
@@ -135,21 +140,20 @@ public class PlayerMovement : MonoBehaviour {
 
     public void doMulligan() {
         transform.position = lastTurnStart;
-        // score--;
     }
 
     private void DebugLog() {
-        Debug.Log("Angle: " + angle);
-        Debug.Log("hit direction: " + hitDirection);
-        Debug.Log("hit force: " + hitForce);
-        Debug.Log("Is Turn: " + isTurn);
-        Debug.Log("Is Aim: " + isAim);
-        Debug.Log("Is hit: " + isFire);
+        //Debug.Log("Angle: " + angle);
+        //Debug.Log("hit direction: " + hitDirection);
+        //Debug.Log("hit force: " + hitForce);
+        //Debug.Log("Is Turn: " + isTurn);
+        //Debug.Log("Is Aim: " + isAim);
+        //Debug.Log("Is hit: " + isFire);
     }
 
     ///Inumerator
     private IEnumerator CheckMoving() {
-        Debug.Log("CheckMoving()");
+        // Debug.Log("CheckMoving()");
 
         yield return new WaitForSeconds(1.0f);
         while(isMoving) {
@@ -166,13 +170,13 @@ public class PlayerMovement : MonoBehaviour {
     ///Input Actions
     //This is for Q and E to rotate the direction the ball will go
     private void onAim(InputAction.CallbackContext context) {
-        Debug.Log("aim " + context.ReadValue<float>());
+        // Debug.Log("aim " + context.ReadValue<float>());
         turnFloat = context.ReadValue<float>();
     }
 
     //This is to continue from aim and item use to hitting
     private void onConfirm(InputAction.CallbackContext context) {
-        Debug.Log("confirm");
+        // Debug.Log("confirm");
         isAim = false;
         isFire = true;
         powSlider.gameObject.SetActive(true);
@@ -180,7 +184,7 @@ public class PlayerMovement : MonoBehaviour {
 
     //This is to go from hitting the ball to item and aim
     private void onGoBack(InputAction.CallbackContext context) {
-        Debug.Log("go back");
+        // Debug.Log("go back");
         isAim = true;
         isFire = false;
         hitStrength = 0;
@@ -210,7 +214,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void onFire(InputAction.CallbackContext context) {
-        Debug.Log("onFire");
+        // Debug.Log("onFire");
 
         if(!isFire) {
             return;
@@ -223,7 +227,7 @@ public class PlayerMovement : MonoBehaviour {
         StartCoroutine(CheckMoving());
 
         hitForce = hitDirection * (hitPower * hitStrength);
-        Debug.Log(hitForce);
+        // Debug.Log(hitForce);
         rb.AddForce(hitForce, ForceMode.Impulse);
         hitStrength = 0;
         hitStrengthSign = 1;
@@ -235,6 +239,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void endTurn(bool success) {
+        Debug.Log("This code is being reached");
         StopCoroutine(CheckMoving());
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
@@ -253,6 +258,8 @@ public class PlayerMovement : MonoBehaviour {
         } else {
             transform.position = thisTurnStart;
         }
+
+        pScore.increaseScore();
 
         // isTurn = false; //Ping Turn System
 
