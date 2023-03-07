@@ -19,7 +19,12 @@ public class FullScoreDisplayGenerator : MonoBehaviour {
     [SerializeField] private int players = 4;
     [SerializeField] private int holes = 5;
 
+    private FullScoreDisplay display;
+
     public void generatePanel() {
+        display = GetComponent<FullScoreDisplay>();
+        display.initializeArrays(players, holes);
+
         clearTexts();
         generatePlayerLabels();
         generateHoleLabels();
@@ -75,6 +80,8 @@ public class FullScoreDisplayGenerator : MonoBehaviour {
                 TextMeshProUGUI text = Instantiate(scoreLabelPrefab, position, Quaternion.identity);
                 text.rectTransform.SetParent(scoreDisplayPanel);
                 text.gameObject.name = "Player" + (i + 1) + "Hole" + (j + 1);
+
+                display.addScoreLabel(i, j, text);
             }
 
             float totalPosX = holeLabelStartingPoint.position.x + holeLabelPrefab.rectTransform.rect.width * j;
@@ -84,6 +91,8 @@ public class FullScoreDisplayGenerator : MonoBehaviour {
             TextMeshProUGUI totalText = Instantiate(scoreLabelPrefab, totalPosition, Quaternion.identity);
             totalText.rectTransform.SetParent(scoreDisplayPanel);
             totalText.gameObject.name = "Player" + (i + 1) + "Total";
+
+            display.addScoreLabel(i, totalText);
         }
     }
 
