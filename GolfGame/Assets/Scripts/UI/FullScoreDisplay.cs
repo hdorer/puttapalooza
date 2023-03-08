@@ -19,15 +19,12 @@ public class FullScoreDisplay : MonoBehaviour {
     private void OnEnable() {
         showScoreDisplayInput.Enable();
 
-        showScoreDisplayInput.performed += showScoreDisplay;
-        showScoreDisplayInput.canceled += hideScoreDisplay;
+        showScoreDisplayInput.performed += context => showScoreDisplay();
+        showScoreDisplayInput.canceled += context => hideScoreDisplay();
     }
 
     private void OnDisable() {
         showScoreDisplayInput.Disable();
-
-        showScoreDisplayInput.performed -= showScoreDisplay;
-        showScoreDisplayInput.canceled -= hideScoreDisplay;
     }
 
     public void initializeArrays(int players, int holes) {
@@ -43,10 +40,6 @@ public class FullScoreDisplay : MonoBehaviour {
         totalScoreLabels[player] = scoreLabel;
     }
 
-    private void showScoreDisplay(InputAction.CallbackContext context) {
-        showScoreDisplay();
-    }
-
     private void showScoreDisplay() {
         scoreDisplayPanel.SetActive(true);
 
@@ -59,10 +52,6 @@ public class FullScoreDisplay : MonoBehaviour {
 
             totalScoreLabels[i].text = pScores[i].TotalScore.ToString();
         }
-    }
-
-    private void hideScoreDisplay(InputAction.CallbackContext context) {
-        hideScoreDisplay();
     }
 
     private void hideScoreDisplay() {
