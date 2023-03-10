@@ -14,10 +14,6 @@ public class FullScoreDisplayGenerator : MonoBehaviour {
     [SerializeField] private RectTransform playerLabelStartingPoint;
     [SerializeField] private RectTransform holeLabelStartingPoint;
 
-    [Header("Parameters")]
-    [SerializeField] private int players = 4;
-    [SerializeField] private int holes = 5;
-
     private FullScoreDisplay display;
 
     private void Start() {
@@ -26,7 +22,7 @@ public class FullScoreDisplayGenerator : MonoBehaviour {
 
     public void generatePanel() {
         display = GetComponent<FullScoreDisplay>();
-        display.initializeArrays(players, holes);
+        display.initializeArrays(GameManager.Players, GameManager.Holes);
 
         clearTexts();
         generatePlayerLabels();
@@ -46,7 +42,7 @@ public class FullScoreDisplayGenerator : MonoBehaviour {
     }
 
     private void generatePlayerLabels() {
-        for(int i = 0; i < players; i++) {
+        for(int i = 0; i < GameManager.Players; i++) {
             Vector3 position = playerLabelStartingPoint.position - new Vector3(0, playerLabelPrefab.rectTransform.rect.height * i, 0);
             TextMeshProUGUI text = Instantiate(playerLabelPrefab, position, Quaternion.identity);
             text.rectTransform.SetParent(scoreDisplayPanel);
@@ -57,7 +53,7 @@ public class FullScoreDisplayGenerator : MonoBehaviour {
 
     private void generateHoleLabels() {
         int i;
-        for(i = 0; i < holes; i++) {
+        for(i = 0; i < GameManager.Holes; i++) {
             Vector3 position = holeLabelStartingPoint.position + new Vector3(holeLabelPrefab.rectTransform.rect.width * i, 0, 0);
             TextMeshProUGUI text = Instantiate(holeLabelPrefab, position, Quaternion.identity);
             text.rectTransform.SetParent(scoreDisplayPanel);
@@ -73,9 +69,9 @@ public class FullScoreDisplayGenerator : MonoBehaviour {
     }
 
     private void generateScoreLabels() {
-        for(int i = 0; i < players; i++) {
+        for(int i = 0; i < GameManager.Players; i++) {
             int j;
-            for(j = 0; j < holes; j++) {
+            for(j = 0; j < GameManager.Holes; j++) {
                 float posX = holeLabelStartingPoint.position.x + holeLabelPrefab.rectTransform.rect.width * j;
                 float posY = playerLabelStartingPoint.position.y - playerLabelPrefab.rectTransform.rect.height * i;
                 Vector3 position = new Vector3(posX, posY, 0);
@@ -105,8 +101,8 @@ public class FullScoreDisplayGenerator : MonoBehaviour {
         float hPadding = playerLabelStartingPoint.position.x - playerLabelPrefab.rectTransform.rect.width / 2;
         float vPadding = holeLabelStartingPoint.position.y - holeLabelPrefab.rectTransform.rect.width / 2;
 
-        float panelWidth = (holeLabelStartingPoint.position.x + holeLabelPrefab.rectTransform.rect.width * (holes - 1) + hPadding);
-        float panelHeight = (playerLabelStartingPoint.position.y + playerLabelPrefab.rectTransform.rect.height * (players - 1) + vPadding);
+        float panelWidth = (holeLabelStartingPoint.position.x + holeLabelPrefab.rectTransform.rect.width * (GameManager.Holes - 1) + hPadding);
+        float panelHeight = (playerLabelStartingPoint.position.y + playerLabelPrefab.rectTransform.rect.height * (GameManager.Players - 1) + vPadding);
 
         scoreDisplayPanel.sizeDelta = new Vector2(panelWidth, panelHeight);
 

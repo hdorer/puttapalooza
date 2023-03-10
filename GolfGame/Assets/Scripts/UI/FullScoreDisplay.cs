@@ -11,9 +11,6 @@ public class FullScoreDisplay : MonoBehaviour {
 
     [SerializeField] GameObject scoreDisplayPanel;
 
-    // TODO: figure out a way to make this event-based
-    [SerializeField] private PlayerScore[] pScores;
-
     [SerializeField] private InputAction showScoreDisplayInput;
 
     private void OnEnable() {
@@ -43,14 +40,14 @@ public class FullScoreDisplay : MonoBehaviour {
     private void showScoreDisplay() {
         scoreDisplayPanel.SetActive(true);
 
-        for(int i = 0; i < scoreLabels.GetLength(0); i++) {
-            int j;
-            for(j = 0; i < pScores[i].numHoleScores; i++) {
-                scoreLabels[i, j].text = pScores[i].getHoleScore(j).ToString();
+        for(int i = 0; i < GameManager.Players; i++) {
+            int[] scores = GameManager.getHoleScores(i);
+            for(int j = 0; j < GameManager.Holes; j++) {
+                scoreLabels[i, j].text = scores[j].ToString();
             }
-            scoreLabels[i, j].text = pScores[i].CurrentScore.ToString();
+            scoreLabels[i, LevelManager.LevelId].text = LevelManager.getPlayerScore(i).CurrentScore.ToString();
 
-            totalScoreLabels[i].text = pScores[i].TotalScore.ToString();
+            totalScoreLabels[i].text = LevelManager.getPlayerScore(i).TotalScore.ToString();
         }
     }
 

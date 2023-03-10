@@ -12,7 +12,8 @@ public class Hole : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if(other.tag == "GolfBall") {
-            Debug.Log("Clack!  Hole reached");
+            other.GetComponent<PlayerScore>().saveScore();
+            LevelManager.loadNextLevel();
         }
     }
 }

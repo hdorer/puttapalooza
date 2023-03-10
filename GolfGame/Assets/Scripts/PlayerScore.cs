@@ -29,7 +29,7 @@ public class PlayerScore : MonoBehaviour {
         onScoreUpdate?.Invoke(totalScore);
     }
 
-    public int getHoleScore(int index) {
-        return holeScores[index];
+    public void saveScore() {
+        GameManager.saveScore(playerId, LevelManager.LevelId, currentScore);
     }
 }
