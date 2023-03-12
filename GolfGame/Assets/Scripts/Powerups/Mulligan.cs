@@ -6,5 +6,6 @@ using UnityEngine;
 public class Mulligan : Powerup {
     public override void use(PlayerPowerups ball) {
         ball.GetComponent<PlayerMovement>().doMulligan();
+        ball.GetComponent<PlayerScore>().resetScore();
     }
 }
