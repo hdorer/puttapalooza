@@ -14,13 +14,16 @@ public class LevelManager : MonoBehaviour {
     [Header("Player Prefab")]
     [SerializeField] private GameObject playerPrefab;
     private GameObject[] players;
+    private int currentPlayer = 0;
 
-    [Header("Hole Start")]
+    [Header("Level Objects")]
     [SerializeField] private Transform holeStart;
+    [SerializeField] private Hole hole;
 
     [Header("UI")]
     [SerializeField] private PowerupButton powerupIcon;
     [SerializeField] private ScoreDisplay scoreDisplay;
+    [SerializeField] private PowerSliderScript powSlider;
 
     public static int LevelId { get => instance.levelId; }
 
@@ -37,8 +40,13 @@ public class LevelManager : MonoBehaviour {
             players[i] = Instantiate(playerPrefab, holeStart.position, Quaternion.identity);
             players[i].name = "Player" + i;
             players[i].GetComponent<PlayerTurn>().initialize(GameManager.Players[i]);
+            players[i].GetComponent<PlayerMovement>().initialize(hole, powSlider);
             players[i].GetComponent<PlayerTurn>().Initialized = true;
+            players[i].SetActive(false);
         }
+
+        players[currentPlayer].SetActive(true);
+        players[currentPlayer].GetComponent<PlayerTurn>().startTurn();
     }
 
     private void OnDestroy() {
@@ -63,5 +71,17 @@ public class LevelManager : MonoBehaviour {
 
     public static void updateScoreText(PlayerScore pScore) {
         instance.scoreDisplay.updateScoreText(pScore.CurrentScore);
+    }
+
+    public static void goToNextTurn() {
+        instance.players[instance.currentPlayer].SetActive(false);
+        
+        instance.currentPlayer++;
+        if(instance.currentPlayer >= GameManager.NumPlayers) {
+            instance.currentPlayer = 0;
+        }
+
+        instance.players[instance.currentPlayer].SetActive(true);
+        instance.players[instance.currentPlayer].GetComponent<PlayerTurn>().startTurn();
     }
 }

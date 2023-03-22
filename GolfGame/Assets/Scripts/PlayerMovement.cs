@@ -26,7 +26,6 @@ public class PlayerMovement : MonoBehaviour {
     private bool isAim = true;
     public bool IsAim { get => isAim; }
     private bool isFire = false;
-    private bool isTurn = true;
     private bool magnetized;
     public bool isMoving = false;
 
@@ -68,7 +67,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void Update() {
-        if(!isTurn) {
+        if(!GetComponent<PlayerTurn>().IsTurn) {
             return;
         }
 
@@ -123,6 +122,15 @@ public class PlayerMovement : MonoBehaviour {
         line.enabled = false;
     }
 
+    public void initialize(Hole hole, PowerSliderScript powSlider) {
+        if(GetComponent<PlayerTurn>().Initialized) {
+            return;
+        }
+
+        this.hole = hole;
+        this.powSlider = powSlider;
+    }
+
     public void activateMagnet() {
         magnetized = true;
     }
@@ -135,7 +143,7 @@ public class PlayerMovement : MonoBehaviour {
         Debug.Log("Angle: " + angle);
         Debug.Log("hit direction: " + hitDirection);
         Debug.Log("hit force: " + hitForce);
-        Debug.Log("Is Turn: " + isTurn);
+        Debug.Log("Is Turn: " + GetComponent<PlayerTurn>().IsTurn);
         Debug.Log("Is Aim: " + isAim);
         Debug.Log("Is hit: " + isFire);
     }
@@ -257,6 +265,7 @@ public class PlayerMovement : MonoBehaviour {
         pScore.increaseScore();
 
         // isTurn = false; //Ping Turn System
+        GetComponent<PlayerTurn>().endTurn();
 
         //turn ends here normally
     }

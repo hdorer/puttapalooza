@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class PlayerTurn : MonoBehaviour {
     private bool initialized = false;
-    public bool Initialized { set => initialized = initialized ? initialized : value; }
+    private bool isTurn = false;
 
     private int id;
+
+    public bool Initialized { get => initialized; set => initialized = initialized ? initialized : value; }
+    public bool IsTurn { get => isTurn; }
     public int Id { get => id; }
 
     public void initialize(PlayerData player) {
@@ -16,5 +19,18 @@ public class PlayerTurn : MonoBehaviour {
 
         id = player.id;
         Debug.Log(gameObject.name + " ID: " + id);
+    }
+
+    public void startTurn() {
+        isTurn = true;
+
+        LevelManager.updateButtonState(GetComponent<PlayerMovement>(), GetComponent<PlayerPowerups>());
+        LevelManager.updateScoreText(GetComponent<PlayerScore>());
+    }
+
+    public void endTurn() {
+        isTurn = false;
+
+        LevelManager.goToNextTurn();
     }
 }

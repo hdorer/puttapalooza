@@ -7574,6 +7574,10 @@ MonoBehaviour:
   nextSceneIndex: 2
   playerPrefab: {fileID: 3260920021278610009, guid: 3b58c479e8be2a04fa0a6ef1a25b38d2, type: 3}
   holeStart: {fileID: 2140198507}
+  hole: {fileID: 856984332}
+  powerupIcon: {fileID: 1068154941}
+  scoreDisplay: {fileID: 2103236165}
+  powSlider: {fileID: 39766712}
 --- !u!4 &405957312
 Transform:
   m_ObjectHideFlags: 0
@@ -36385,8 +36389,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 197328342}
-  pMovement: {fileID: 1317447512}
-  pPowerups: {fileID: 1317447505}
 --- !u!114 &1068154942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55361,17 +55363,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3260920021278610014, guid: 3b58c479e8be2a04fa0a6ef1a25b38d2, type: 3}
   m_PrefabInstance: {fileID: 3260920020313830665}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1317447512 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3260920021278610001, guid: 3b58c479e8be2a04fa0a6ef1a25b38d2, type: 3}
-  m_PrefabInstance: {fileID: 3260920020313830665}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31f504cb73644d64bb9551311087b9c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1335400620
 GameObject:
   m_ObjectHideFlags: 0
@@ -56410,7 +56401,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh39928
+  m_Name: pb_Mesh49698
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -61165,7 +61156,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballCameraAnchor: {fileID: 31418811}
-  movementSpeed: 5
   movementInput:
     m_Name: Movement Input
     m_Type: 0
