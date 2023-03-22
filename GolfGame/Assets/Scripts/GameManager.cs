@@ -2,16 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct PlayerData {
+    public int id;
+    public int[] holeScores;
+}
+
 public class GameManager : MonoBehaviour {
     private static GameManager instance;
 
-    [SerializeField] private int players;
-    [SerializeField] private int holes;
-    
-    private int[,] holeScores;
+    [SerializeField] private int numPlayers;
+    [SerializeField] private int numHoles;
 
-    public static int Players { get => getPlayers(); }
-    public static int Holes { get => getHoles(); }
+    private PlayerData[] players;
+    public static PlayerData[] Players { get => instance.players; }
+
+    public static int NumPlayers { get => instance.numPlayers; }
+    public static int NumHoles { get => instance.numHoles; }
 
     private void Awake() {
         instance = this;
@@ -25,29 +31,26 @@ public class GameManager : MonoBehaviour {
         instance = null;
     }
 
-    public static void initializeScores() {
-        instance.holeScores = new int[instance.players, instance.holes];
+    public static void initializeGame() {
+        instance.players = new PlayerData[instance.numPlayers];
+
+        for(int i = 0; i < instance.numPlayers; i++) {
+            instance.players[i].id = i;
+            instance.players[i].holeScores = new int[instance.numHoles];
+        }
     }
 
     public static void saveScore(int player, int hole, int score) {
-        instance.holeScores[player, hole] = score;
+        instance.players[player].holeScores[hole] = score;
     }
 
     public static int[] getHoleScores(int player) {
-        int[] scores = new int[instance.holes];
+        int[] scores = new int[instance.numHoles];
         
         for(int i = 0; i < scores.Length; i++) {
-            scores[i] = instance.holeScores[player, i];
+            scores[i] = instance.players[player].holeScores[i];
         }
 
         return scores;
-    }
-
-    private static int getPlayers() {
-        return instance.players;
-    }
-
-    private static int getHoles() {
-        return instance.holes;
     }
 }

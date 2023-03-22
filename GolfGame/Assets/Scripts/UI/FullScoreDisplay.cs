@@ -40,9 +40,9 @@ public class FullScoreDisplay : MonoBehaviour {
     private void showScoreDisplay() {
         scoreDisplayPanel.SetActive(true);
 
-        for(int i = 0; i < GameManager.Players; i++) {
+        for(int i = 0; i < GameManager.NumPlayers; i++) {
             int[] scores = GameManager.getHoleScores(i);
-            for(int j = 0; j < GameManager.Holes; j++) {
+            for(int j = 0; j < GameManager.NumHoles; j++) {
                 scoreLabels[i, j].text = scores[j].ToString();
             }
             scoreLabels[i, LevelManager.LevelId].text = LevelManager.getPlayerScore(i).CurrentScore.ToString();

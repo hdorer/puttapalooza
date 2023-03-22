@@ -1383,7 +1383,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1213371266}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: initializeScores
+        m_MethodName: initializeGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1824,8 +1824,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb6daa28219583c4da21a2fe88ff5442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players: 1
-  holes: 5
+  numPlayers: 2
+  numHoles: 5
 --- !u!4 &1213371267
 Transform:
   m_ObjectHideFlags: 0
