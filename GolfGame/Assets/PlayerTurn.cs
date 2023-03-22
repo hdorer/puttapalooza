@@ -10,6 +10,10 @@ public class PlayerTurn : MonoBehaviour {
     public int Id { get => id; }
 
     public void initialize(PlayerData player) {
+        if(initialized) {
+            return;
+        }
+
         id = player.id;
         Debug.Log(gameObject.name + " ID: " + id);
     }

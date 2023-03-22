@@ -12,8 +12,8 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] private int nextSceneIndex;
 
     [Header("Player Prefab")]
-    private GameObject[] players;
     [SerializeField] private GameObject playerPrefab;
+    private GameObject[] players;
 
     [Header("Hole Start")]
     [SerializeField] private Transform holeStart;
