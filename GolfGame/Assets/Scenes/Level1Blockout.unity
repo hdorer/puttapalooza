@@ -66047,9 +66047,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 39766712}
     - target: {fileID: 3260920021278610008, guid: 3b58c479e8be2a04fa0a6ef1a25b38d2, type: 3}
+      propertyPath: onPowerupUpdate.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3260920021278610008, guid: 3b58c479e8be2a04fa0a6ef1a25b38d2, type: 3}
+      propertyPath: onPowerupUpdate.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3260920021278610008, guid: 3b58c479e8be2a04fa0a6ef1a25b38d2, type: 3}
       propertyPath: onPowerupUpdate.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1068154941}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3260920021278610008, guid: 3b58c479e8be2a04fa0a6ef1a25b38d2, type: 3}
+      propertyPath: onPowerupUpdate.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3260920021278610009, guid: 3b58c479e8be2a04fa0a6ef1a25b38d2, type: 3}
       propertyPath: m_Name
       value: Player

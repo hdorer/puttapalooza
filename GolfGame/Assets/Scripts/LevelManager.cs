@@ -18,7 +18,9 @@ public class LevelManager : MonoBehaviour {
     [Header("Hole Start")]
     [SerializeField] private Transform holeStart;
 
-    // [Header("UI")]
+    [Header("UI")]
+    [SerializeField] private PowerupButton powerupIcon;
+    [SerializeField] private ScoreDisplay scoreDisplay;
 
     public static int LevelId { get => instance.levelId; }
 
@@ -47,7 +49,19 @@ public class LevelManager : MonoBehaviour {
         SceneManager.LoadScene(instance.nextSceneIndex);
     }
 
-    public static PlayerScore getPlayerScore(int player) {
-        return instance.players[player].GetComponent<PlayerScore>();
+    public static int getPlayerCurrentScore(int player) {
+        return instance.players[player].GetComponent<PlayerScore>().CurrentScore;
+    }
+
+    public static int getPlayerTotalScore(int player) {
+        return instance.players[player].GetComponent<PlayerScore>().TotalScore;
+    }
+
+    public static void updateButtonState(PlayerMovement pMovement, PlayerPowerups pPowerups) {
+        instance.powerupIcon.updateButtonState(pMovement, pPowerups);
+    }
+
+    public static void updateScoreText(PlayerScore pScore) {
+        instance.scoreDisplay.updateScoreText(pScore.CurrentScore);
     }
 }

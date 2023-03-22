@@ -45,9 +45,9 @@ public class FullScoreDisplay : MonoBehaviour {
             for(int j = 0; j < GameManager.NumHoles; j++) {
                 scoreLabels[i, j].text = scores[j].ToString();
             }
-            scoreLabels[i, LevelManager.LevelId].text = LevelManager.getPlayerScore(i).CurrentScore.ToString();
+            scoreLabels[i, LevelManager.LevelId].text = LevelManager.getPlayerCurrentScore(i).ToString();
 
-            totalScoreLabels[i].text = LevelManager.getPlayerScore(i).TotalScore.ToString();
+            totalScoreLabels[i].text = LevelManager.getPlayerTotalScore(i).ToString();
         }
     }
 

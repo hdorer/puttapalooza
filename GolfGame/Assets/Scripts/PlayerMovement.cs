@@ -167,6 +167,8 @@ public class PlayerMovement : MonoBehaviour {
         isAim = false;
         isFire = true;
         powSlider.gameObject.SetActive(true);
+
+        LevelManager.updateButtonState(this, GetComponent<PlayerPowerups>());
     }
 
     //This is to go from hitting the ball to item and aim
@@ -177,6 +179,8 @@ public class PlayerMovement : MonoBehaviour {
         hitStrength = 0;
         hitStrengthSign = 1;
         powSlider.gameObject.SetActive(false);
+
+        LevelManager.updateButtonState(this, GetComponent<PlayerPowerups>());
     }
 
     //Prints a debug log
@@ -211,6 +215,8 @@ public class PlayerMovement : MonoBehaviour {
         isAim = false;
         isMoving = true;
 
+        LevelManager.updateButtonState(this, GetComponent<PlayerPowerups>());
+
         StartCoroutine(CheckMoving());
 
         hitForce = hitDirection * (hitPower * hitStrength);
@@ -238,6 +244,8 @@ public class PlayerMovement : MonoBehaviour {
         line.enabled = false;
         isMoving = false;
         isAim = true;
+
+        LevelManager.updateButtonState(this, GetComponent<PlayerPowerups>());
 
         if(success) {
             lastTurnStart = thisTurnStart;
