@@ -26,26 +26,14 @@ public class GameManager : MonoBehaviour {
     }
 
     public static void initializeScores() {
-        if(instance == null) {
-            throw new NullSingletonException("GameManager");
-        }
-
         instance.holeScores = new int[instance.players, instance.holes];
     }
 
     public static void saveScore(int player, int hole, int score) {
-        if(instance == null) {
-            throw new NullSingletonException("GameManager");
-        }
-
         instance.holeScores[player, hole] = score;
     }
 
     public static int[] getHoleScores(int player) {
-        if(instance == null) {
-            throw new NullSingletonException("GameManager");
-        }
-
         int[] scores = new int[instance.holes];
         
         for(int i = 0; i < scores.Length; i++) {
@@ -56,18 +44,10 @@ public class GameManager : MonoBehaviour {
     }
 
     private static int getPlayers() {
-        if(instance == null) {
-            throw new NullSingletonException("GameManager");
-        }
-
         return instance.players;
     }
 
     private static int getHoles() {
-        if(instance == null) {
-            throw new NullSingletonException("GameManager");
-        }
-
         return instance.holes;
     }
 }
