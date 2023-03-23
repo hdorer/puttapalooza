@@ -19,6 +19,7 @@ public class LevelManager : MonoBehaviour {
     [Header("Level Objects")]
     [SerializeField] private Transform holeStart;
     [SerializeField] private Hole hole;
+    [SerializeField] private CameraSwitcher camSwitcher;
 
     [Header("UI")]
     [SerializeField] private PowerupButton powerupIcon;
@@ -41,9 +42,10 @@ public class LevelManager : MonoBehaviour {
             players[i].name = "Player" + i;
             players[i].GetComponent<PlayerTurn>().initialize(GameManager.Players[i]);
             players[i].GetComponent<PlayerMovement>().initialize(hole, powSlider);
-            players[i].GetComponent<PlayerTurn>().Initialized = true;
             players[i].SetActive(false);
         }
+
+        camSwitcher.initialize(players);
 
         players[currentPlayer].SetActive(true);
         players[currentPlayer].GetComponent<PlayerTurn>().startTurn();

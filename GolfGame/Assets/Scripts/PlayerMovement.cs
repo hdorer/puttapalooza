@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour {
+    private bool initialized = false;
+
     //SerializeField Items
     [SerializeField] private InputAction aim;
     [SerializeField] private InputAction confirm;
@@ -123,12 +125,14 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void initialize(Hole hole, PowerSliderScript powSlider) {
-        if(GetComponent<PlayerTurn>().Initialized) {
+        if(initialized) {
             return;
         }
 
         this.hole = hole;
         this.powSlider = powSlider;
+
+        initialized = true;
     }
 
     public void activateMagnet() {

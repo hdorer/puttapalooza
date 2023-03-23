@@ -8,7 +8,6 @@ public class PlayerTurn : MonoBehaviour {
 
     private int id;
 
-    public bool Initialized { get => initialized; set => initialized = initialized ? initialized : value; }
     public bool IsTurn { get => isTurn; }
     public int Id { get => id; }
 
@@ -19,6 +18,8 @@ public class PlayerTurn : MonoBehaviour {
 
         id = player.id;
         Debug.Log(gameObject.name + " ID: " + id);
+
+        initialized = true;
     }
 
     public void startTurn() {

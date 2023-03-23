@@ -5,7 +5,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CameraSwitcher : MonoBehaviour {
-    [SerializeField] private GameObject ballCamera;
+    private bool initialized = false;
+    [SerializeField] private BallCameraController anchorPrefab;
+
+    private BallCameraController[] ballCams;
+    private int activeBallCam = 0;
     [SerializeField] private GameObject hoverCamera;
 
     [SerializeField] private InputAction switchCamerasInput;
@@ -18,7 +22,6 @@ public class CameraSwitcher : MonoBehaviour {
     }
 
     private void Start() {
-        ballCamera.SetActive(true);
         hoverCamera.SetActive(false);
     }
 
@@ -28,9 +31,25 @@ public class CameraSwitcher : MonoBehaviour {
         switchCamerasInput.performed -= switchCameras;
     }
 
+    public void initialize(GameObject[] players) {
+        if(initialized) {
+            return;
+        }
+
+        ballCams = new BallCameraController[GameManager.NumPlayers];
+
+        for(int i = 0; i < ballCams.Length; i++) {
+            ballCams[i].initialize(players[i].transform);
+        }
+
+        ballCams[activeBallCam].gameObject.SetActive(true);
+
+        initialized = true;
+    }
+
     private void switchCameras(InputAction.CallbackContext context) {
         hoverCameraActive = !hoverCameraActive;
-        ballCamera.SetActive(!hoverCameraActive);
+        ballCams[activeBallCam].gameObject.SetActive(true);
         hoverCamera.SetActive(hoverCameraActive);
     }
 }
