@@ -5,8 +5,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class HoverCameraController : MonoBehaviour {
-    [SerializeField] private Transform ballCameraAnchor;
-
     [SerializeField] private InputAction movementInput;
     Vector2 movement;
 

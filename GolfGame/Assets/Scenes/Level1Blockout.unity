@@ -451,11 +451,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!4 &31418811 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9129429328006002441, guid: 32f83d4388964094fa38188e073b1f05, type: 3}
-  m_PrefabInstance: {fileID: 9129429327976062642}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &39766710
 GameObject:
   m_ObjectHideFlags: 0
@@ -60960,7 +60955,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0a277d6ecfd96c4cbb5bb109bd43edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballCameraAnchor: {fileID: 31418811}
   movementInput:
     m_Name: Movement Input
     m_Type: 0

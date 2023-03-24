@@ -1,4 +1,3 @@
-using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,12 +38,26 @@ public class CameraSwitcher : MonoBehaviour {
         ballCams = new BallCameraController[GameManager.NumPlayers];
 
         for(int i = 0; i < ballCams.Length; i++) {
+            ballCams[i] = Instantiate(anchorPrefab, LevelManager.HoleStart.position, LevelManager.HoleStart.rotation);
+            ballCams[i].gameObject.name = "Player" + i + "BallCameraAnchor";
             ballCams[i].initialize(players[i].transform);
+            ballCams[i].gameObject.SetActive(false);
         }
 
         ballCams[activeBallCam].gameObject.SetActive(true);
 
         initialized = true;
+    }
+
+    public void switchActiveCam() {
+        ballCams[activeBallCam].gameObject.SetActive(false);
+
+        activeBallCam++;
+        if(activeBallCam >= ballCams.Length) {
+            activeBallCam = 0;
+        }
+
+        ballCams[activeBallCam].gameObject.SetActive(true);
     }
 
     private void switchCameras(InputAction.CallbackContext context) {

@@ -27,6 +27,7 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] private PowerSliderScript powSlider;
 
     public static int LevelId { get => instance.levelId; }
+    public static Transform HoleStart { get => instance.holeStart; }
 
     private void Awake() {
         instance = this;
@@ -84,6 +85,8 @@ public class LevelManager : MonoBehaviour {
         }
 
         instance.players[instance.currentPlayer].SetActive(true);
+        instance.camSwitcher.switchActiveCam();
+
         instance.players[instance.currentPlayer].GetComponent<PlayerTurn>().startTurn();
     }
 }

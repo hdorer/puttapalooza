@@ -29,12 +29,20 @@ public class PlayerPowerups : MonoBehaviour {
     }
 
     public void usePowerup() {
+        if(powerup == null) {
+            return;
+        }
+
         powerup.use(this);
         powerup = null;
         LevelManager.updateButtonState(GetComponent<PlayerMovement>(), this);
     }
     
     private void usePowerup(InputAction.CallbackContext context) {
+        if(powerup == null) {
+            return;
+        }
+
         powerup.use(this);
         powerup = null;
         LevelManager.updateButtonState(GetComponent<PlayerMovement>(), this);

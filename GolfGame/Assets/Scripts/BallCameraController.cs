@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class BallCameraController : MonoBehaviour {
-    private bool initialized = true;
+    private bool initialized = false;
 
-    [SerializeField] private Transform ball;
+    private Transform ball;
 
     private bool rotating = false;
     [SerializeField] private float sensitivity = 1.0f;
