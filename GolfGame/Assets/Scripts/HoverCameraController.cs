@@ -27,9 +27,9 @@ public class HoverCameraController : MonoBehaviour {
         movementInput.canceled -= updateMoveVector;
     }
 
-    public void resetTransform() {
-        transform.position = new Vector3(ballCameraAnchor.position.x, transform.position.y, ballCameraAnchor.position.z);
-        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, ballCameraAnchor.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+    public void resetTransform(Transform anchor) {
+        transform.position = new Vector3(anchor.position.x, transform.position.y, anchor.position.z);
+        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, anchor.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
     }
 
     private void updateMoveVector(InputAction.CallbackContext context) {

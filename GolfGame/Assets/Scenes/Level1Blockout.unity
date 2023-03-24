@@ -36193,7 +36193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anchorPrefab: {fileID: 9129429328006002440, guid: 32f83d4388964094fa38188e073b1f05, type: 3}
-  hoverCamera: {fileID: 1709213645}
+  hoverCamera: {fileID: 1709213648}
   switchCamerasInput:
     m_Name: Switch Cameras Input
     m_Type: 0

@@ -9,10 +9,10 @@ public class CameraSwitcher : MonoBehaviour {
 
     private BallCameraController[] ballCams;
     private int activeBallCam = 0;
-    [SerializeField] private GameObject hoverCamera;
+    [SerializeField] private HoverCameraController hoverCamera;
+    private bool hoverCameraActive = false;
 
     [SerializeField] private InputAction switchCamerasInput;
-    private bool hoverCameraActive = false;
 
     private void OnEnable() {
         switchCamerasInput.Enable();
@@ -21,7 +21,7 @@ public class CameraSwitcher : MonoBehaviour {
     }
 
     private void Start() {
-        hoverCamera.SetActive(false);
+        hoverCamera.gameObject.SetActive(false);
     }
 
     private void OnDisable() {
@@ -63,6 +63,7 @@ public class CameraSwitcher : MonoBehaviour {
     private void switchCameras(InputAction.CallbackContext context) {
         hoverCameraActive = !hoverCameraActive;
         ballCams[activeBallCam].gameObject.SetActive(true);
-        hoverCamera.SetActive(hoverCameraActive);
+        hoverCamera.gameObject.SetActive(hoverCameraActive);
+        hoverCamera.resetTransform(ballCams[activeBallCam].transform);
     }
 }
