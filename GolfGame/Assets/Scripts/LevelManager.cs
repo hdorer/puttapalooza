@@ -1,20 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
     private static LevelManager instance;
 
+    [Header("Level Data")]
     [SerializeField] private int levelId;
     [SerializeField] private int nextSceneIndex;
 
-    [SerializeField] private GameObject[] players;
+    [Header("Player Prefab")]
+    [SerializeField] private GameObject playerPrefab;
+    private GameObject[] players;
+    private int currentPlayer = 0;
 
-    public static int LevelId { get => getLevelId(); }
+    [Header("Level Objects")]
+    [SerializeField] private Transform holeStart;
+    [SerializeField] private Hole hole;
+    [SerializeField] private CameraSwitcher camSwitcher;
+
+    [Header("UI")]
+    [SerializeField] private PowerupButton powerupIcon;
+    [SerializeField] private ScoreDisplay scoreDisplay;
+    [SerializeField] private PowerSliderScript powSlider;
+
+    public static int LevelId { get => instance.levelId; }
+    public static Transform HoleStart { get => instance.holeStart; }
 
     private void Awake() {
         instance = this;
+    }
+
+    private void Start() {
+        Debug.Log("This code is being reached");
+
+        players = new GameObject[GameManager.NumPlayers];
+
+        for(int i = 0; i < players.Length; i++) {
+            players[i] = Instantiate(playerPrefab, holeStart.position, Quaternion.identity);
+            players[i].name = "Player" + i;
+            players[i].GetComponent<PlayerTurn>().initialize(GameManager.Players[i]);
+            players[i].GetComponent<PlayerMovement>().initialize(hole, powSlider);
+            players[i].SetActive(false);
+        }
+
+        camSwitcher.initialize(players);
+
+        players[currentPlayer].SetActive(true);
+        players[currentPlayer].GetComponent<PlayerTurn>().startTurn();
     }
 
     private void OnDestroy() {
@@ -22,26 +57,36 @@ public class LevelManager : MonoBehaviour {
     }
 
     public static void loadNextLevel() {
-        if(instance == null) {
-            throw new NullSingletonException("LevelManager");
-        }
-
         SceneManager.LoadScene(instance.nextSceneIndex);
     }
 
-    public static PlayerScore getPlayerScore(int player) {
-        if(instance == null) {
-            throw new NullSingletonException("LevelManager");
-        }
-
-        return instance.players[player].GetComponent<PlayerScore>();
+    public static int getPlayerCurrentScore(int player) {
+        return instance.players[player].GetComponent<PlayerScore>().CurrentScore;
     }
 
-    private static int getLevelId() {
-        if(instance == null) {
-            throw new NullSingletonException("LevelManager");
+    public static int getPlayerTotalScore(int player) {
+        return instance.players[player].GetComponent<PlayerScore>().TotalScore;
+    }
+
+    public static void updateButtonState(PlayerMovement pMovement, PlayerPowerups pPowerups) {
+        instance.powerupIcon.updateButtonState(pMovement, pPowerups);
+    }
+
+    public static void updateScoreText(PlayerScore pScore) {
+        instance.scoreDisplay.updateScoreText(pScore.CurrentScore);
+    }
+
+    public static void goToNextTurn() {
+        instance.players[instance.currentPlayer].SetActive(false);
+        
+        instance.currentPlayer++;
+        if(instance.currentPlayer >= GameManager.NumPlayers) {
+            instance.currentPlayer = 0;
         }
 
-        return instance.levelId;
+        instance.players[instance.currentPlayer].SetActive(true);
+        instance.camSwitcher.switchActiveCam();
+
+        instance.players[instance.currentPlayer].GetComponent<PlayerTurn>().startTurn();
     }
 }

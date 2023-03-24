@@ -9,27 +9,19 @@ public class PlayerScore : MonoBehaviour {
     private int currentScore = 0;
     public int CurrentScore { get => currentScore; }
 
-    [SerializeField] private int playerId = 0;
-
-    private List<int> holeScores = new List<int>();
-    public int numHoleScores { get => holeScores.Count; }
-
-    [System.Serializable] public class ScoreUpdateEvent : UnityEvent<int> { }
-    public ScoreUpdateEvent onScoreUpdate;
-
     public void increaseScore() {
         totalScore++;
         currentScore++;
-        onScoreUpdate?.Invoke(totalScore);
+        LevelManager.updateScoreText(this);
     }
 
     public void resetScore() {
         totalScore--;
         currentScore--;
-        onScoreUpdate?.Invoke(totalScore);
+        LevelManager.updateScoreText(this);
     }
 
     public void saveScore() {
-        GameManager.saveScore(playerId, LevelManager.LevelId, currentScore);
+        GameManager.saveScore(GetComponent<PlayerTurn>().Id, LevelManager.LevelId, currentScore);
     }
 }

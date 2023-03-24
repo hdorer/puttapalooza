@@ -11,8 +11,6 @@ public class PlayerPowerups : MonoBehaviour {
 
     [SerializeField] private InputAction usePowerupInput;
 
-    public UnityEvent onPowerupUpdate;
-
     private void OnEnable() {
         usePowerupInput.Enable();
 
@@ -27,18 +25,26 @@ public class PlayerPowerups : MonoBehaviour {
 
     public void setPowerup(Powerup powerup) {
         this.powerup = powerup;
-        onPowerupUpdate?.Invoke();
+        LevelManager.updateButtonState(GetComponent<PlayerMovement>(), this);
     }
 
     public void usePowerup() {
+        if(powerup == null) {
+            return;
+        }
+
         powerup.use(this);
         powerup = null;
-        onPowerupUpdate?.Invoke();
+        LevelManager.updateButtonState(GetComponent<PlayerMovement>(), this);
     }
     
     private void usePowerup(InputAction.CallbackContext context) {
+        if(powerup == null) {
+            return;
+        }
+
         powerup.use(this);
         powerup = null;
-        onPowerupUpdate?.Invoke();
+        LevelManager.updateButtonState(GetComponent<PlayerMovement>(), this);
     }
 }
