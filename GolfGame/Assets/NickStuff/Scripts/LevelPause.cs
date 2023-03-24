@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class LevelPause : MonoBehaviour
 {
     [SerializeField] private GameObject PausePanel;
+    [SerializeField] private List<GameObject> otherUI;
     [SerializeField] private InputAction pause;
     private bool isPause;
     void OnEnable()
@@ -40,11 +41,19 @@ public class LevelPause : MonoBehaviour
         if(isPause)
         {
             PausePanel.SetActive(true);
+            foreach(GameObject obj in otherUI)
+            {
+                obj.SetActive(false);
+            }
             Time.timeScale = 0;
         }
         else
         {
             PausePanel.SetActive(false);
+            foreach(GameObject obj in otherUI)
+            {
+                obj.SetActive(true);
+            }
             Time.timeScale = 1;
         }
 
