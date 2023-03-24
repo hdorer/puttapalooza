@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class HoverCameraController : MonoBehaviour {
+    [SerializeField] private float distanceToGround = 10f;
     [SerializeField] private InputAction movementInput;
     Vector2 movement;
 
@@ -18,6 +19,13 @@ public class HoverCameraController : MonoBehaviour {
     private void Update() {
         transform.position += transform.right * movement.x;
         transform.position += transform.up * movement.y;
+
+        int layerMask = 1 << LayerMask.NameToLayer("Ground");
+        RaycastHit hit;
+        Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, layerMask);
+        Debug.Log(hit.point.y);
+
+        transform.position = new Vector3(transform.position.x, hit.point.y + distanceToGround, transform.position.z);
     }
 
     private void OnDisable() {
