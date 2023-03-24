@@ -40,14 +40,14 @@ public class FullScoreDisplay : MonoBehaviour {
     private void showScoreDisplay() {
         scoreDisplayPanel.SetActive(true);
 
-        for(int i = 0; i < GameManager.NumPlayers; i++) {
+        for(int i = 0; i < GameManager.Players; i++) {
             int[] scores = GameManager.getHoleScores(i);
-            for(int j = 0; j < GameManager.NumHoles; j++) {
+            for(int j = 0; j < GameManager.Holes; j++) {
                 scoreLabels[i, j].text = scores[j].ToString();
             }
-            scoreLabels[i, LevelManager.LevelId].text = LevelManager.getPlayerCurrentScore(i).ToString();
+            scoreLabels[i, LevelManager.LevelId].text = LevelManager.getPlayerScore(i).CurrentScore.ToString();
 
-            totalScoreLabels[i].text = LevelManager.getPlayerTotalScore(i).ToString();
+            totalScoreLabels[i].text = LevelManager.getPlayerScore(i).TotalScore.ToString();
         }
     }
 

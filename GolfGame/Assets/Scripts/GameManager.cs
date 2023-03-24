@@ -2,22 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct PlayerData {
-    public int id;
-    public int[] holeScores;
-}
-
 public class GameManager : MonoBehaviour {
     private static GameManager instance;
 
-    [SerializeField] private int numPlayers;
-    [SerializeField] private int numHoles;
+    [SerializeField] private int players;
+    [SerializeField] private int holes;
+    
+    private int[,] holeScores;
 
-    private PlayerData[] players;
-    public static PlayerData[] Players { get => instance.players; }
-
-    public static int NumPlayers { get => instance.numPlayers; }
-    public static int NumHoles { get => instance.numHoles; }
+    public static int Players { get => getPlayers(); }
+    public static int Holes { get => getHoles(); }
 
     private void Awake() {
         instance = this;
@@ -31,26 +25,49 @@ public class GameManager : MonoBehaviour {
         instance = null;
     }
 
-    public static void initializeGame() {
-        instance.players = new PlayerData[instance.numPlayers];
-
-        for(int i = 0; i < instance.numPlayers; i++) {
-            instance.players[i].id = i;
-            instance.players[i].holeScores = new int[instance.numHoles];
+    public static void initializeScores() {
+        if(instance == null) {
+            throw new NullSingletonException("GameManager");
         }
+
+        instance.holeScores = new int[instance.players, instance.holes];
     }
 
     public static void saveScore(int player, int hole, int score) {
-        instance.players[player].holeScores[hole] = score;
+        if(instance == null) {
+            throw new NullSingletonException("GameManager");
+        }
+
+        instance.holeScores[player, hole] = score;
     }
 
     public static int[] getHoleScores(int player) {
-        int[] scores = new int[instance.numHoles];
+        if(instance == null) {
+            throw new NullSingletonException("GameManager");
+        }
+
+        int[] scores = new int[instance.holes];
         
         for(int i = 0; i < scores.Length; i++) {
-            scores[i] = instance.players[player].holeScores[i];
+            scores[i] = instance.holeScores[player, i];
         }
 
         return scores;
+    }
+
+    private static int getPlayers() {
+        if(instance == null) {
+            throw new NullSingletonException("GameManager");
+        }
+
+        return instance.players;
+    }
+
+    private static int getHoles() {
+        if(instance == null) {
+            throw new NullSingletonException("GameManager");
+        }
+
+        return instance.holes;
     }
 }
