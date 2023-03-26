@@ -2847,7 +2847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb6daa28219583c4da21a2fe88ff5442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numPlayers: 2
+  numPlayers: 1
   numHoles: 5
 --- !u!4 &1213371267
 Transform:
