@@ -57,6 +57,14 @@ public class LevelManager : MonoBehaviour {
     }
 
     public static void loadNextLevel() {
+        for(int i = 0; i < GameManager.NumPlayers; i++) {
+            if(!instance.players[i].GetComponent<PlayerTurn>().HoleCompleted) {
+                return;
+            }
+        }
+
+        // show full score display
+
         SceneManager.LoadScene(instance.nextSceneIndex);
     }
 
@@ -78,14 +86,16 @@ public class LevelManager : MonoBehaviour {
 
     public static void goToNextTurn() {
         instance.players[instance.currentPlayer].SetActive(false);
-        
-        instance.currentPlayer++;
-        if(instance.currentPlayer >= GameManager.NumPlayers) {
-            instance.currentPlayer = 0;
-        }
+
+        do {
+            instance.currentPlayer++;
+            if(instance.currentPlayer >= GameManager.NumPlayers) {
+                instance.currentPlayer = 0;
+            }
+        } while(instance.players[instance.currentPlayer].GetComponent<PlayerTurn>().HoleCompleted);
 
         instance.players[instance.currentPlayer].SetActive(true);
-        instance.camSwitcher.switchActiveCam();
+        instance.camSwitcher.switchActiveCam(instance.currentPlayer);
 
         instance.players[instance.currentPlayer].GetComponent<PlayerTurn>().startTurn();
     }
