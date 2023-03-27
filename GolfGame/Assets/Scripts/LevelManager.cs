@@ -73,7 +73,7 @@ public class LevelManager : MonoBehaviour {
     }
 
     public static void updateScoreText(PlayerScore pScore) {
-        instance.scoreDisplay.updateScoreText(pScore.CurrentScore);
+        instance.scoreDisplay.updateScoreText(pScore.GetComponent<PlayerTurn>().Id, pScore.CurrentScore);
     }
 
     public static void goToNextTurn() {

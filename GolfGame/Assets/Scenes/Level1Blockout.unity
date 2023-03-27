@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7573,7 +7573,7 @@ MonoBehaviour:
   hole: {fileID: 856984332}
   camSwitcher: {fileID: 1040393816}
   powerupIcon: {fileID: 1068154941}
-  scoreDisplay: {fileID: 0}
+  scoreDisplay: {fileID: 1565885200}
   powSlider: {fileID: 39766712}
 --- !u!4 &405957312
 Transform:
@@ -56865,6 +56865,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1565885199}
+  - component: {fileID: 1565885200}
   m_Layer: 5
   m_Name: ScoreDisplay
   m_TagString: Untagged
@@ -56896,6 +56897,23 @@ RectTransform:
   m_AnchoredPosition: {x: 370.67102, y: 203.48761}
   m_SizeDelta: {x: 58.658875, y: 43.173187}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1565885200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565885198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da7a46b466728b0498cab82fff5e0c5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreSlots:
+  - {fileID: 2103236163}
+  - {fileID: 397708696}
+  - {fileID: 438271210}
+  - {fileID: 1113370986}
 --- !u!43 &1567218015
 Mesh:
   m_ObjectHideFlags: 0
