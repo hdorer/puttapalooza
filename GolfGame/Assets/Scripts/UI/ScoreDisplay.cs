@@ -5,12 +5,19 @@ using UnityEngine.UI;
 
 public class ScoreDisplay : MonoBehaviour {
     [SerializeField] private GameObject[] scoreSlots;
-    Text[] scoreTexts;
+    private Text[] scoreTexts;
+
+    private Text[] activeScoreSlots;
 
     private void Awake() {
         scoreTexts = new Text[scoreSlots.Length];
         for(int i = 0; i < scoreTexts.Length; i++) {
             scoreTexts[i] = scoreSlots[i].GetComponentInChildren<Text>();
+        }
+
+        activeScoreSlots = new Text[Mathf.Min(GameManager.NumPlayers, scoreSlots.Length)];
+        for(int i = 0; i < activeScoreSlots.Length; i++) {
+            activeScoreSlots[i] = scoreTexts[GameManager.NumPlayers - 1 - i];
         }
     }
 
@@ -21,6 +28,6 @@ public class ScoreDisplay : MonoBehaviour {
     }
 
     public void updateScoreText(int slot, int score) {
-        scoreTexts[slot].text = score.ToString();
+        activeScoreSlots[slot].text = score.ToString();
     }
 }
