@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9b1c789e956d6d4a8dd84e1ff3f4374, type: 3}
+  m_Script: {fileID: 11500000, guid: a8b9714ea6522f14a831a98cb6866256, type: 3}
   m_Name: HoleMagnet
   m_EditorClassIdentifier: 
   powerupName: Hole Magnet
-  description: The ball is attracted to the hole as it moves if it is within a certain
-    distance to the hole.
+  description: Pull yourself towards the hole if you are within range.
