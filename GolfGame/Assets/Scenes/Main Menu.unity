@@ -213,7 +213,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1836,7 +1836,8 @@ MonoBehaviour:
   playerNum: 4
   PlayerBall: {fileID: 2076827840}
   difficultyDropdown: {fileID: 1374339730}
-  playerColor: {r: 0, g: 0.9607844, b: 0, a: 0}
+  powerUpDropdown: {fileID: 1200284625}
+  playerColor: {r: 0, g: 0.9607844, b: 0, a: 1}
 --- !u!1 &253088192
 GameObject:
   m_ObjectHideFlags: 0
@@ -6172,7 +6173,8 @@ MonoBehaviour:
   playerNum: 1
   PlayerBall: {fileID: 1275748072}
   difficultyDropdown: {fileID: 2025801844}
-  playerColor: {r: 0.9607844, g: 0, b: 0, a: 0}
+  powerUpDropdown: {fileID: 283678438}
+  playerColor: {r: 0.9607844, g: 0, b: 0, a: 1}
 --- !u!1 &735321448
 GameObject:
   m_ObjectHideFlags: 0
@@ -9067,7 +9069,8 @@ MonoBehaviour:
   playerNum: 3
   PlayerBall: {fileID: 2144926178}
   difficultyDropdown: {fileID: 1213519651}
-  playerColor: {r: 0, g: 0, b: 0, a: 0}
+  powerUpDropdown: {fileID: 262731507}
+  playerColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &1035007905
 GameObject:
   m_ObjectHideFlags: 0
@@ -12076,7 +12079,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1248532573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16125,7 +16128,8 @@ MonoBehaviour:
   playerNum: 2
   PlayerBall: {fileID: 534156692}
   difficultyDropdown: {fileID: 472761960}
-  playerColor: {r: 0, g: 0, b: 0.9607844, a: 0}
+  powerUpDropdown: {fileID: 1313212810}
+  playerColor: {r: 0, g: 0, b: 0.9607844, a: 1}
 --- !u!1 &1645776847
 GameObject:
   m_ObjectHideFlags: 0
@@ -18044,7 +18048,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 5
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
