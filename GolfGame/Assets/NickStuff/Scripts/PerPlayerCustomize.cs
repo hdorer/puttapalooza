@@ -10,7 +10,7 @@ public class PerPlayerCustomize : MonoBehaviour
 {
     [SerializeField] private int playerNum;
     public Image PlayerBall;
-    public TMP_Dropdown difficultyDropdown;
+    public TMP_Dropdown difficultyDropdown, powerUpDropdown;
     int playerDifficulty;
     public Color playerColor;
     //
@@ -18,11 +18,17 @@ public class PerPlayerCustomize : MonoBehaviour
     {
         //Set color too thing
         difficultyDropdown.onValueChanged.AddListener(delegate {ChangeDifficulty(difficultyDropdown.value);});
+        powerUpDropdown.onValueChanged.AddListener(delegate {ChangeDifficulty(powerUpDropdown.value);});
         PlayerBall.color = playerColor;
     }
     void Destroy()
     {
         difficultyDropdown.onValueChanged.RemoveAllListeners();
+        powerUpDropdown.onValueChanged.RemoveAllListeners();
+    }
+    private void ChangeStartPowerup(int option)
+    {
+        //Nothing yet
     }
     private void ChangeDifficulty(int option)
     {
