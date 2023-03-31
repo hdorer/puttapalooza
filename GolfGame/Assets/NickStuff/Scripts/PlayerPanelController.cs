@@ -5,21 +5,21 @@ using UnityEngine;
 //This Will controll the adding of players
 public class PlayerPanelController : MonoBehaviour
 {
-    int CurrentNumOfPlayers = 0;
+    static public int CurrentNumOfPlayers = 1;
     public List<GameObject> players;
     public void AddPlayer()
     {
-        if(CurrentNumOfPlayers != 3)
+        if(CurrentNumOfPlayers-1 != 3)
         {
             CurrentNumOfPlayers++;
-            players[CurrentNumOfPlayers].SetActive(true);
+            players[CurrentNumOfPlayers-1].SetActive(true);
         }
     }
     public void RemovePlayer()
     {
-        if(CurrentNumOfPlayers != 0)
+        if(CurrentNumOfPlayers-1 != 0)
         {
-            players[CurrentNumOfPlayers].SetActive(false);
+            players[CurrentNumOfPlayers-1].SetActive(false);
             CurrentNumOfPlayers--;
         }
     }
