@@ -57,16 +57,17 @@ public class LevelManager : MonoBehaviour {
         instance = null;
     }
 
-    public static void loadNextLevel() {
+    public static bool loadNextLevel() {
         for(int i = 0; i < GameManager.NumPlayers; i++) {
             if(!instance.players[i].GetComponent<PlayerTurn>().HoleCompleted) {
-                return;
+                return false;
             }
         }
 
         // show full score display
 
         SceneManager.LoadScene(instance.nextSceneIndex);
+        return true;
     }
 
     public static int getPlayerCurrentScore(int player) {
