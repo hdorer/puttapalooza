@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public static void initializeGame() {
+        instance.numPlayers = PlayerPanelController.CurrentNumOfPlayers;
         instance.players = new PlayerData[instance.numPlayers];
 
         for(int i = 0; i < instance.numPlayers; i++) {
