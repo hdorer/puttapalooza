@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -155,7 +155,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1078181682}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1833,7 +1833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c667e580079db24792c172b7fda913e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNum: 4
+  playerNum: 3
   PlayerBall: {fileID: 2076827840}
   difficultyDropdown: {fileID: 1374339730}
   powerUpDropdown: {fileID: 1200284625}
@@ -3520,7 +3520,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.40689087, y: -41.269943}
+  m_AnchoredPosition: {x: -0.4069214, y: -41.269943}
   m_SizeDelta: {x: 11.78, y: 82.718}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &442587743
@@ -6170,7 +6170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c667e580079db24792c172b7fda913e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNum: 1
+  playerNum: 0
   PlayerBall: {fileID: 1275748072}
   difficultyDropdown: {fileID: 2025801844}
   powerUpDropdown: {fileID: 283678438}
@@ -9066,7 +9066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c667e580079db24792c172b7fda913e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNum: 3
+  playerNum: 2
   PlayerBall: {fileID: 2144926178}
   difficultyDropdown: {fileID: 1213519651}
   powerUpDropdown: {fileID: 262731507}
@@ -9628,8 +9628,8 @@ RectTransform:
   - {fileID: 1957096667}
   - {fileID: 2003847890}
   - {fileID: 513083254}
-  - {fileID: 16155876}
   - {fileID: 1790786841}
+  - {fileID: 16155876}
   - {fileID: 580477621}
   m_Father: {fileID: 720503742}
   m_RootOrder: 5
@@ -11251,18 +11251,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2052777972}
-        m_TargetAssemblyTypeName: EventSystemButtons, Assembly-CSharp
-        m_MethodName: SwitchScene
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1213371266}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: initializeGame
@@ -11271,6 +11259,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2052777972}
+        m_TargetAssemblyTypeName: EventSystemButtons, Assembly-CSharp
+        m_MethodName: SwitchScene
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -11477,8 +11477,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb6daa28219583c4da21a2fe88ff5442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numPlayers: 1
   numHoles: 5
+  pPanel: {fileID: 2052777975}
+  powerups:
+  - {fileID: 11400000, guid: 63606ada9ff635446a9591a4beee238c, type: 2}
+  - {fileID: 11400000, guid: 1d93948fbb767db48a620c98bdeb4381, type: 2}
+  - {fileID: 0}
 --- !u!4 &1213371267
 Transform:
   m_ObjectHideFlags: 0
@@ -16272,7 +16276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c667e580079db24792c172b7fda913e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNum: 2
+  playerNum: 1
   PlayerBall: {fileID: 534156692}
   difficultyDropdown: {fileID: 472761960}
   powerUpDropdown: {fileID: 1313212810}
@@ -18272,7 +18276,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1078181682}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -22205,11 +22209,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081c854214072ef4c8795dd497ee6dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players:
-  - {fileID: 720503741}
-  - {fileID: 1644444875}
-  - {fileID: 1023161740}
-  - {fileID: 226636672}
+  pOptions:
+  - {fileID: 720503745}
+  - {fileID: 1644444879}
+  - {fileID: 1023161744}
+  - {fileID: 226636676}
 --- !u!1 &2070329201
 GameObject:
   m_ObjectHideFlags: 0

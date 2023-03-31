@@ -11,13 +11,14 @@ public class PlayerTurn : MonoBehaviour {
     public bool IsTurn { get => isTurn; }
     public int Id { get => id; }
 
-    public void initialize(PlayerData player) {
+    public void initialize(int id, Color color) {
         if(initialized) {
             return;
         }
 
-        id = player.id;
-        Debug.Log(gameObject.name + " ID: " + id);
+        this.id = id;
+        Debug.Log(gameObject.name + " ID: " + this.id);
+        GetComponent<Renderer>().material.color = color;
 
         initialized = true;
     }
