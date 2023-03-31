@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerPanelController : MonoBehaviour
 {
     private int currentNumOfPlayers = 1;
-    private GameObject[] players;
     [SerializeField] private PerPlayerCustomize[] pOptions;
     
     public int CurrentNumOfPlayers { get => currentNumOfPlayers; }
@@ -17,14 +16,14 @@ public class PlayerPanelController : MonoBehaviour
         if(currentNumOfPlayers-1 != 3)
         {
             currentNumOfPlayers++;
-            players[currentNumOfPlayers-1].SetActive(true);
+            pOptions[currentNumOfPlayers-1].gameObject.SetActive(true);
         }
     }
     public void RemovePlayer()
     {
         if(currentNumOfPlayers-1 != 0)
         {
-            players[currentNumOfPlayers-1].SetActive(false);
+            pOptions[currentNumOfPlayers-1].gameObject.SetActive(false);
             currentNumOfPlayers--;
         }
     }

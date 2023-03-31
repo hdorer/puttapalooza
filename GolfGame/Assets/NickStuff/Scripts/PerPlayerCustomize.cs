@@ -22,7 +22,7 @@ public class PerPlayerCustomize : MonoBehaviour
 
     private void OnEnable() {
         difficultyDropdown.onValueChanged.AddListener(delegate { ChangeDifficulty(difficultyDropdown.value); });
-        powerUpDropdown.onValueChanged.AddListener(delegate { ChangeDifficulty(powerUpDropdown.value); });
+        powerUpDropdown.onValueChanged.AddListener(delegate { ChangeStartPowerup(powerUpDropdown.value); });
     }
 
     private void Start()
