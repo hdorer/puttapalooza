@@ -39,7 +39,7 @@ public class EventSystemButtons : MonoBehaviour
     }
     public void SwitchToPlayer()
     {
-        PlayerPanel.SetActive(false);
+        PlayerPanel.SetActive(true);
         MenuPanel.SetActive(false);
     }
     public void SwitchScene(int sceneNum)

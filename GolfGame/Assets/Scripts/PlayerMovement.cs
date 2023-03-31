@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float hitStrength = 0.0f;
     [SerializeField] private Hole hole;
     [SerializeField] private PowerSliderScript powSlider;
+    private int difficulty;
 
     //Bools
     private bool isAim = true;
@@ -124,11 +125,12 @@ public class PlayerMovement : MonoBehaviour {
         line.enabled = false;
     }
 
-    public void initialize(Hole hole, PowerSliderScript powSlider) {
+    public void initialize(int difficulty, Hole hole, PowerSliderScript powSlider) {
         if(initialized) {
             return;
         }
 
+        this.difficulty = difficulty;
         this.hole = hole;
         this.powSlider = powSlider;
 
