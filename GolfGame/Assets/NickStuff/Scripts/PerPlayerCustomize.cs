@@ -9,40 +9,51 @@ using TMPro;
 public class PerPlayerCustomize : MonoBehaviour
 {
     [SerializeField] private int playerNum;
-    public Image PlayerBall;
-    public TMP_Dropdown difficultyDropdown, powerUpDropdown;
-    int playerDifficulty;
-    public Color playerColor;
-    //
-    void Start()
+    [SerializeField] private Image PlayerBall;
+    [SerializeField] private TMP_Dropdown difficultyDropdown, powerUpDropdown;
+    private int playerDifficulty;
+    private int startingPowerup;
+    [SerializeField] private Color playerColor;
+
+    public int id { get => playerNum; }
+    public int difficulty { get => playerDifficulty; }
+    public int StartingPowerup { get => startingPowerup; }
+    public Color color { get => playerColor; }
+
+    private void OnEnable() {
+        difficultyDropdown.onValueChanged.AddListener(delegate { ChangeDifficulty(difficultyDropdown.value); });
+        powerUpDropdown.onValueChanged.AddListener(delegate { ChangeDifficulty(powerUpDropdown.value); });
+    }
+
+    private void Start()
     {
         //Set color too thing
-        difficultyDropdown.onValueChanged.AddListener(delegate {ChangeDifficulty(difficultyDropdown.value);});
-        powerUpDropdown.onValueChanged.AddListener(delegate {ChangeDifficulty(powerUpDropdown.value);});
         PlayerBall.color = playerColor;
     }
-    void Destroy()
+    private void OnDisable()
     {
         difficultyDropdown.onValueChanged.RemoveAllListeners();
         powerUpDropdown.onValueChanged.RemoveAllListeners();
     }
     private void ChangeStartPowerup(int option)
     {
-        //Nothing yet
+        startingPowerup = option;
     }
     private void ChangeDifficulty(int option)
     {
+        playerDifficulty = option;
+
         switch(option)
         {
             case 0:
-            Debug.Log("Easy");
-            break;
+                Debug.Log("Easy");
+                break;
             case 1:
-            Debug.Log("Medium");
-            break;
+                Debug.Log("Medium");
+                break;
             case 2:
-            Debug.Log("Hard");
-            break;
+                Debug.Log("Hard");
+                break;
         }
     }
     public void ChangeColor(int colorNum)
