@@ -67,8 +67,7 @@ public class LevelManager : MonoBehaviour {
         }
 
         // show full score display
-
-        SceneManager.LoadScene(instance.nextSceneIndex);
+        instance.StartCoroutine(instance.showFullScoreDisplay());
         return true;
     }
 
@@ -105,8 +104,11 @@ public class LevelManager : MonoBehaviour {
     }
 
     private IEnumerator showFullScoreDisplay() {
-        
+        fullScoreDisplay.show();
+        fullScoreDisplay.disableInput();
 
         yield return new WaitForSeconds(levelEndDelay);
+
+        SceneManager.LoadScene(nextSceneIndex);
     }
 }

@@ -7705,12 +7705,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelId: 0
   nextSceneIndex: 2
+  levelEndDelay: 3
   playerPrefab: {fileID: 3260920021278610009, guid: 3b58c479e8be2a04fa0a6ef1a25b38d2, type: 3}
   holeStart: {fileID: 2140198507}
   hole: {fileID: 1174158171}
   camSwitcher: {fileID: 1040393816}
   powerupIcon: {fileID: 1068154941}
   scoreDisplay: {fileID: 194483975}
+  fullScoreDisplay: {fileID: 470308639}
   powSlider: {fileID: 39766712}
 --- !u!4 &405957312
 Transform:
