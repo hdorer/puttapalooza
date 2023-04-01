@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour {
     [Header("Level Data")]
     [SerializeField] private int levelId;
     [SerializeField] private int nextSceneIndex;
+    [SerializeField] private float levelEndDelay = 3f;
 
     [Header("Player Prefab")]
     [SerializeField] private GameObject playerPrefab;
@@ -24,6 +25,7 @@ public class LevelManager : MonoBehaviour {
     [Header("UI")]
     [SerializeField] private PowerupButton powerupIcon;
     [SerializeField] private ScoreDisplay scoreDisplay;
+    [SerializeField] private FullScoreDisplay fullScoreDisplay;
     [SerializeField] private PowerSliderScript powSlider;
 
     public static int LevelId { get => instance.levelId; }
@@ -98,5 +100,11 @@ public class LevelManager : MonoBehaviour {
         instance.camSwitcher.switchActiveCam(instance.currentPlayer);
 
         instance.players[instance.currentPlayer].GetComponent<PlayerTurn>().startTurn();
+    }
+
+    private IEnumerator showFullScoreDisplay() {
+        
+
+        yield return new WaitForSeconds(levelEndDelay);
     }
 }
