@@ -22,6 +22,9 @@ public class ScoreDisplay : MonoBehaviour {
     }
 
     private void Start() {
+        for(int i = 0; i < GameManager.NumPlayers; i++) {
+            scoreSlots[i].GetComponent<Image>().color = GameManager.Players[GameManager.NumPlayers - 1 - i].color;
+        }
         for(int i = GameManager.NumPlayers; i < scoreSlots.Length; i++) {
             scoreSlots[i].SetActive(false);
         }

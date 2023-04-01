@@ -43,8 +43,9 @@ public class LevelManager : MonoBehaviour {
         for(int i = 0; i < players.Length; i++) {
             players[i] = Instantiate(playerPrefab, holeStart.position, Quaternion.identity);
             players[i].name = "Player" + i;
-            players[i].GetComponent<PlayerTurn>().initialize(GameManager.Players[i]);
-            players[i].GetComponent<PlayerMovement>().initialize(hole, powSlider);
+            players[i].GetComponent<PlayerTurn>().initialize(GameManager.Players[i].id, GameManager.Players[i].color);
+            players[i].GetComponent<PlayerMovement>().initialize(GameManager.Players[i].difficulty, hole, powSlider);
+            players[i].GetComponent<PlayerPowerups>().initialize(GameManager.Players[i].startingPowerup);
             players[i].SetActive(false);
         }
 
@@ -58,16 +59,17 @@ public class LevelManager : MonoBehaviour {
         instance = null;
     }
 
-    public static void loadNextLevel() {
+    public static bool loadNextLevel() {
         for(int i = 0; i < GameManager.NumPlayers; i++) {
             if(!instance.players[i].GetComponent<PlayerTurn>().HoleCompleted) {
-                return;
+                return false;
             }
         }
 
         // show full score display
 
         SceneManager.LoadScene(instance.nextSceneIndex);
+        return true;
     }
 
     public static int getPlayerCurrentScore(int player) {
