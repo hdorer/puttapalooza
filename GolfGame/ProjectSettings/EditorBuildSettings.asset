@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level2Blockout.unity
     guid: bcc15a5d328b89741af2473456f82bb5
+  - enabled: 1
+    path: Assets/Scenes/CastleGriffinsteed.unity
+    guid: aed5a192815a0a24d95aa0079076ceee
+  - enabled: 1
+    path: Assets/Scenes/Level4Blockout.unity
+    guid: cbd228eee2f8509429ced9dae5303288
   m_configObjects: {}
