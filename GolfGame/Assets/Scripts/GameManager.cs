@@ -2,14 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct PlayerData {
-    public int id;
-    public int difficulty;
-    public Powerup startingPowerup;
-    public Color color;
-    public int[] holeScores;
-}
-
 public class GameManager : MonoBehaviour {
     private static GameManager instance;
 
@@ -42,18 +34,20 @@ public class GameManager : MonoBehaviour {
         instance.players = new PlayerData[instance.numPlayers];
 
         for(int i = 0; i < instance.numPlayers; i++) {
-            instance.players[i].id = instance.pPanel.POptions[i].id;
-            instance.players[i].difficulty = instance.pPanel.POptions[i].difficulty;
-            instance.players[i].startingPowerup = instance.powerups[instance.pPanel.POptions[i].StartingPowerup];
-            instance.players[i].color = instance.pPanel.POptions[i].color;
-            instance.players[i].holeScores = new int[instance.numHoles];
+            instance.players[i] = new PlayerData(
+                instance.pPanel.POptions[i].id,
+                instance.pPanel.POptions[i].difficulty,
+                instance.powerups[instance.pPanel.POptions[i].StartingPowerup],
+                instance.pPanel.POptions[i].color
+            );
         }
 
         instance.pPanel = null;
     }
 
-    public static void saveScore(int player, int hole, int score) {
+    public static void saveScore(int player, int hole, int score, int totalScore) {
         instance.players[player].holeScores[hole] = score;
+        instance.players[player].totalScore = totalScore;
     }
 
     public static int[] getHoleScores(int player) {

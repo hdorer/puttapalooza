@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -59,7 +58,7 @@ public class LevelManager : MonoBehaviour {
         instance = null;
     }
 
-    public static bool loadNextLevel() {
+    public static bool finishLevel() {
         for(int i = 0; i < GameManager.NumPlayers; i++) {
             if(!instance.players[i].GetComponent<PlayerTurn>().HoleCompleted) {
                 return false;
