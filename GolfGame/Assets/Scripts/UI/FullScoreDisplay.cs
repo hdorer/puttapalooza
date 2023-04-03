@@ -16,8 +16,8 @@ public class FullScoreDisplay : MonoBehaviour {
     private void OnEnable() {
         showScoreDisplayInput.Enable();
 
-        showScoreDisplayInput.performed += context => showScoreDisplay();
-        showScoreDisplayInput.canceled += context => hideScoreDisplay();
+        showScoreDisplayInput.performed += context => show();
+        showScoreDisplayInput.canceled += context => hide();
     }
 
     private void OnDisable() {
@@ -37,7 +37,11 @@ public class FullScoreDisplay : MonoBehaviour {
         totalScoreLabels[player] = scoreLabel;
     }
 
-    private void showScoreDisplay() {
+    public void disableInput() {
+        showScoreDisplayInput.Disable();
+    }
+
+    public void show() {
         scoreDisplayPanel.SetActive(true);
 
         for(int i = 0; i < GameManager.NumPlayers; i++) {
@@ -51,7 +55,7 @@ public class FullScoreDisplay : MonoBehaviour {
         }
     }
 
-    private void hideScoreDisplay() {
+    private void hide() {
         scoreDisplayPanel.SetActive(false);
     }
 }

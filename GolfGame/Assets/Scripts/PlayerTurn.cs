@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerTurn : MonoBehaviour {
     private bool initialized = false;
     private bool isTurn = false;
+    private bool holeCompleted = false;
 
     private int id;
 
     public bool IsTurn { get => isTurn; }
+    public bool HoleCompleted { get => holeCompleted; }
     public int Id { get => id; }
 
     public void initialize(int id, Color color) {
@@ -34,5 +36,9 @@ public class PlayerTurn : MonoBehaviour {
         isTurn = false;
 
         LevelManager.goToNextTurn();
+    }
+
+    public void completeHole() {
+        holeCompleted = true;
     }
 }

@@ -49,14 +49,9 @@ public class CameraSwitcher : MonoBehaviour {
         initialized = true;
     }
 
-    public void switchActiveCam() {
+    public void switchActiveCam(int index) {
         ballCams[activeBallCam].gameObject.SetActive(false);
-
-        activeBallCam++;
-        if(activeBallCam >= ballCams.Length) {
-            activeBallCam = 0;
-        }
-
+        activeBallCam = index;
         ballCams[activeBallCam].gameObject.SetActive(true);
     }
 

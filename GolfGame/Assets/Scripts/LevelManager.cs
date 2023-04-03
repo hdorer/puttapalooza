@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour {
     [Header("Level Data")]
     [SerializeField] private int levelId;
     [SerializeField] private int nextSceneIndex;
+    [SerializeField] private float levelEndDelay = 3f;
 
     [Header("Player Prefab")]
     [SerializeField] private GameObject playerPrefab;
@@ -24,6 +25,7 @@ public class LevelManager : MonoBehaviour {
     [Header("UI")]
     [SerializeField] private PowerupButton powerupIcon;
     [SerializeField] private ScoreDisplay scoreDisplay;
+    [SerializeField] private FullScoreDisplay fullScoreDisplay;
     [SerializeField] private PowerSliderScript powSlider;
 
     public static int LevelId { get => instance.levelId; }
@@ -57,8 +59,16 @@ public class LevelManager : MonoBehaviour {
         instance = null;
     }
 
-    public static void loadNextLevel() {
-        SceneManager.LoadScene(instance.nextSceneIndex);
+    public static bool loadNextLevel() {
+        for(int i = 0; i < GameManager.NumPlayers; i++) {
+            if(!instance.players[i].GetComponent<PlayerTurn>().HoleCompleted) {
+                return false;
+            }
+        }
+
+        // show full score display
+        instance.StartCoroutine(instance.showFullScoreDisplay());
+        return true;
     }
 
     public static int getPlayerCurrentScore(int player) {
@@ -74,20 +84,31 @@ public class LevelManager : MonoBehaviour {
     }
 
     public static void updateScoreText(PlayerScore pScore) {
-        instance.scoreDisplay.updateScoreText(pScore.CurrentScore);
+        instance.scoreDisplay.updateScoreText(pScore.GetComponent<PlayerTurn>().Id, pScore.CurrentScore);
     }
 
     public static void goToNextTurn() {
         instance.players[instance.currentPlayer].SetActive(false);
-        
-        instance.currentPlayer++;
-        if(instance.currentPlayer >= GameManager.NumPlayers) {
-            instance.currentPlayer = 0;
-        }
+
+        do {
+            instance.currentPlayer++;
+            if(instance.currentPlayer >= GameManager.NumPlayers) {
+                instance.currentPlayer = 0;
+            }
+        } while(instance.players[instance.currentPlayer].GetComponent<PlayerTurn>().HoleCompleted);
 
         instance.players[instance.currentPlayer].SetActive(true);
-        instance.camSwitcher.switchActiveCam();
+        instance.camSwitcher.switchActiveCam(instance.currentPlayer);
 
         instance.players[instance.currentPlayer].GetComponent<PlayerTurn>().startTurn();
+    }
+
+    private IEnumerator showFullScoreDisplay() {
+        fullScoreDisplay.show();
+        fullScoreDisplay.disableInput();
+
+        yield return new WaitForSeconds(levelEndDelay);
+
+        SceneManager.LoadScene(nextSceneIndex);
     }
 }
