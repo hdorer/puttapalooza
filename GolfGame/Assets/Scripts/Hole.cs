@@ -12,10 +12,8 @@ public class Hole : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if(other.tag == "GolfBall") {
-            other.GetComponent<PlayerScore>().increaseScore();
-            other.GetComponent<PlayerScore>().saveScore();
             other.GetComponent<PlayerTurn>().completeHole();
-            if(!LevelManager.loadNextLevel()) {
+            if(!LevelManager.finishLevel()) {
                 other.GetComponent<PlayerTurn>().endTurn();
             }
         }

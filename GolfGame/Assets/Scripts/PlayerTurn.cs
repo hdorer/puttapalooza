@@ -39,6 +39,9 @@ public class PlayerTurn : MonoBehaviour {
     }
 
     public void completeHole() {
+        GetComponent<PlayerScore>().increaseScore();
+        GetComponent<PlayerScore>().saveScore();
+
         holeCompleted = true;
     }
 }

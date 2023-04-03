@@ -22,6 +22,6 @@ public class PlayerScore : MonoBehaviour {
     }
 
     public void saveScore() {
-        GameManager.saveScore(GetComponent<PlayerTurn>().Id, LevelManager.LevelId, currentScore);
+        GameManager.saveScore(GetComponent<PlayerTurn>().Id, LevelManager.LevelId, currentScore, totalScore);
     }
 }

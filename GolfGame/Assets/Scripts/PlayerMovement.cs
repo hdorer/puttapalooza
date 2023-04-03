@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour {
     //Non Input Actions
     [SerializeField] private Rigidbody rb;
     [SerializeField] private LineRenderer line;
-    [SerializeField] private PlayerScore pScore;
     [SerializeField] private float hitPower;
     [SerializeField] private float turnSpeed;
     [SerializeField] private float stoppingSpeed = 0.01f;
@@ -56,10 +55,6 @@ public class PlayerMovement : MonoBehaviour {
         goBack.performed += onGoBack;
         fire.performed += onFire;
         doDebug.performed += onDebug;
-    }
-
-    private void Awake() {
-        pScore = GetComponent<PlayerScore>();
     }
 
     private void Start() {
@@ -268,7 +263,7 @@ public class PlayerMovement : MonoBehaviour {
             transform.position = thisTurnStart;
         }
 
-        pScore.increaseScore();
+        GetComponent<PlayerScore>().increaseScore();
 
         // isTurn = false; //Ping Turn System
         GetComponent<PlayerTurn>().endTurn();
