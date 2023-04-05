@@ -245,7 +245,7 @@ public class PlayerMovement : MonoBehaviour {
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
-        transform.rotation = Quaternion.identity; // quick and dirty fix
+        transform.rotation = Quaternion.identity; // quick and dirty fix.  nothing more permanent than a temporary solution
         angle = 0;
         hitDirection = Vector3.forward;
 
@@ -263,11 +263,6 @@ public class PlayerMovement : MonoBehaviour {
             transform.position = thisTurnStart;
         }
 
-        GetComponent<PlayerScore>().increaseScore();
-
-        // isTurn = false; //Ping Turn System
         GetComponent<PlayerTurn>().endTurn();
-
-        //turn ends here normally
     }
 }
