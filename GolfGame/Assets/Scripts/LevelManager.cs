@@ -35,8 +35,6 @@ public class LevelManager : MonoBehaviour {
     }
 
     private void Start() {
-        Debug.Log("This code is being reached");
-
         players = new GameObject[GameManager.NumPlayers];
 
         for(int i = 0; i < players.Length; i++) {
