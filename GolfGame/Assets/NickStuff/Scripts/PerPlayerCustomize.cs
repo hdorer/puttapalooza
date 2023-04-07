@@ -11,7 +11,7 @@ public class PerPlayerCustomize : MonoBehaviour
     [SerializeField] private int playerNum;
     [SerializeField] private Image PlayerBall;
     [SerializeField] private TMP_Dropdown difficultyDropdown, powerUpDropdown;
-    private int playerDifficulty;
+    private int playerDifficulty = 1;
     private int startingPowerup;
     [SerializeField] private Color playerColor;
 
