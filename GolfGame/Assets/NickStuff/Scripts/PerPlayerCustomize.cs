@@ -11,7 +11,7 @@ public class PerPlayerCustomize : MonoBehaviour
     [SerializeField] private int playerNum;
     [SerializeField] private Image PlayerBall;
     [SerializeField] private TMP_Dropdown difficultyDropdown, powerUpDropdown;
-    private int playerDifficulty;
+    private int playerDifficulty = 1;
     private int startingPowerup;
     [SerializeField] private Color playerColor;
 
@@ -41,17 +41,17 @@ public class PerPlayerCustomize : MonoBehaviour
     }
     private void ChangeDifficulty(int option)
     {
-        playerDifficulty = option;
+        playerDifficulty = option + 1;
 
         switch(option)
         {
-            case 0:
+            case 1:
                 Debug.Log("Easy");
                 break;
-            case 1:
+            case 2:
                 Debug.Log("Medium");
                 break;
-            case 2:
+            case 3:
                 Debug.Log("Hard");
                 break;
         }
