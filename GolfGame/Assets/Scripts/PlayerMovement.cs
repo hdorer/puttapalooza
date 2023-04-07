@@ -85,7 +85,7 @@ public class PlayerMovement : MonoBehaviour {
             hitStrength = 0;
         } else if(isFire) {
             //I dont like this set up, but it is the best i have so far.
-            hitStrength += .3f * hitStrengthSign * Time.deltaTime;
+            hitStrength += .3f * hitStrengthSign * Time.deltaTime * difficulty;
             if(hitStrength >= 1 || hitStrength <= 0) {
                 hitStrengthSign *= -1;
             }
