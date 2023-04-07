@@ -18,7 +18,11 @@ public class GameManager : MonoBehaviour {
     public static int NumHoles { get => instance.numHoles; }
 
     private void Awake() {
-        instance = this;
+        if(instance == null) {
+            instance = this;
+        } else {
+            Destroy(gameObject);
+        }
     }
 
     private void Start() {
