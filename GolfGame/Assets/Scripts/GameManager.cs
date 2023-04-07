@@ -63,4 +63,17 @@ public class GameManager : MonoBehaviour {
 
         return scores;
     }
+
+    public static PlayerData getWinner() {
+        int lowestScore = int.MaxValue;
+        int lowestIndex = NumPlayers - 1;
+        for(int i = NumPlayers - 1; i >= 0; i--) {
+            if(instance.players[i].totalScore < lowestScore) {
+                lowestScore = instance.players[i].totalScore;
+                lowestIndex = i;
+            }
+        }
+        
+        return instance.players[lowestIndex];
+    }
 }
