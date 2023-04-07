@@ -18,7 +18,11 @@ public class GameManager : MonoBehaviour {
     public static int NumHoles { get => instance.numHoles; }
 
     private void Awake() {
-        instance = this;
+        if(instance == null) {
+            instance = this;
+        } else {
+            Destroy(gameObject);
+        }
     }
 
     private void Start() {
@@ -58,5 +62,18 @@ public class GameManager : MonoBehaviour {
         }
 
         return scores;
+    }
+
+    public static PlayerData getWinner() {
+        int lowestScore = int.MaxValue;
+        int lowestIndex = NumPlayers - 1;
+        for(int i = NumPlayers - 1; i >= 0; i--) {
+            if(instance.players[i].totalScore < lowestScore) {
+                lowestScore = instance.players[i].totalScore;
+                lowestIndex = i;
+            }
+        }
+        
+        return instance.players[lowestIndex];
     }
 }

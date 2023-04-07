@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour {
 
     [Header("Level Data")]
     [SerializeField] private int levelId;
+    [SerializeField] private bool finalLevel = false;
     [SerializeField] private int nextSceneIndex;
     [SerializeField] private float levelEndDelay = 3f;
 
@@ -25,6 +26,7 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] private PowerupButton powerupIcon;
     [SerializeField] private ScoreDisplay scoreDisplay;
     [SerializeField] private FullScoreDisplay fullScoreDisplay;
+    [SerializeField] private WinnerDisplay winnerDisplay;
     [SerializeField] private PowerSliderScript powSlider;
 
     public static int LevelId { get => instance.levelId; }
@@ -35,8 +37,6 @@ public class LevelManager : MonoBehaviour {
     }
 
     private void Start() {
-        Debug.Log("This code is being reached");
-
         players = new GameObject[GameManager.NumPlayers];
 
         for(int i = 0; i < players.Length; i++) {
@@ -102,12 +102,20 @@ public class LevelManager : MonoBehaviour {
         instance.players[instance.currentPlayer].GetComponent<PlayerTurn>().startTurn();
     }
 
+    public void loadNextLevel() {
+        SceneManager.LoadScene(nextSceneIndex);
+    }
+
     private IEnumerator showFullScoreDisplay() {
         fullScoreDisplay.show();
         fullScoreDisplay.disableInput();
 
         yield return new WaitForSeconds(levelEndDelay);
 
-        SceneManager.LoadScene(nextSceneIndex);
+        if(finalLevel) {
+            winnerDisplay.show(GameManager.getWinner());
+        } else {
+            loadNextLevel();
+        }
     }
 }
