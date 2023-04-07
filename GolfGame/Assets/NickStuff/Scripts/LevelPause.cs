@@ -27,6 +27,7 @@ public class LevelPause : MonoBehaviour
     {
         if(isPause)
         {
+            Time.timeScale = 1;
             SceneChange.SwitchToScene(0);
         }
         else
