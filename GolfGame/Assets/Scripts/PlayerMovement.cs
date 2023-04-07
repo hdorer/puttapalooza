@@ -85,7 +85,7 @@ public class PlayerMovement : MonoBehaviour {
             hitStrength = 0;
         } else if(isFire) {
             //I dont like this set up, but it is the best i have so far.
-            hitStrength += .3f * hitStrengthSign * Time.deltaTime;
+            hitStrength += .3f * hitStrengthSign * Time.deltaTime * difficulty;
             if(hitStrength >= 1 || hitStrength <= 0) {
                 hitStrengthSign *= -1;
             }
@@ -233,8 +233,8 @@ public class PlayerMovement : MonoBehaviour {
         rb.AddForce(hitForce, ForceMode.Impulse);
         hitStrength = 0;
         hitStrengthSign = 1;
-        hitDirection = Vector3.forward;
-        angle = 0;
+        //hitDirection = Vector3.forward;
+        //angle = 0;
         
         line.enabled = false;
         powSlider.gameObject.SetActive(false);
@@ -246,8 +246,8 @@ public class PlayerMovement : MonoBehaviour {
         rb.angularVelocity = Vector3.zero;
 
         transform.rotation = Quaternion.identity; // quick and dirty fix.  nothing more permanent than a temporary solution
-        angle = 0;
-        hitDirection = Vector3.forward;
+        //angle = 0;
+        //hitDirection = Vector3.forward;
 
         magnetized = false;
         line.enabled = false;

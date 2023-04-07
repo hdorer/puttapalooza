@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
     private int numPlayers;
     [SerializeField] private int numHoles;
 
-    [SerializeField] private PlayerPanelController pPanel;
+    private PlayerPanelController pPanel;
     [SerializeField] private Powerup[] powerups;
 
     private PlayerData[] players;
@@ -27,10 +27,6 @@ public class GameManager : MonoBehaviour {
 
     private void Start() {
         DontDestroyOnLoad(gameObject);
-    }
-
-    private void OnDestroy() {
-        instance = null;
     }
 
     public static void initializeGame() {
@@ -75,5 +71,11 @@ public class GameManager : MonoBehaviour {
         }
         
         return instance.players[lowestIndex];
+    }
+
+    public static void setPlayerPanel(PlayerPanelController pPanel) {
+        if(instance.pPanel == null) {
+            instance.pPanel = pPanel;
+        }
     }
 }

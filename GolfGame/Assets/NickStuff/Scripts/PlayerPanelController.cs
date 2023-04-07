@@ -11,6 +11,10 @@ public class PlayerPanelController : MonoBehaviour
     public int CurrentNumOfPlayers { get => currentNumOfPlayers; }
     public PerPlayerCustomize[] POptions { get => pOptions; }
 
+    private void Awake() {
+        GameManager.setPlayerPanel(this);
+    }
+
     public void AddPlayer()
     {
         if(currentNumOfPlayers-1 != 3)
