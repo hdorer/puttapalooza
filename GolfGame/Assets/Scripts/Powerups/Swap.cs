@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Swap", menuName = "ScriptableObjects/Powerups/Swap")]
 public class Swap : Powerup {
     public override void use(PlayerPowerups ball) {
         GameObject target = LevelManager.getRandomPlayer(ball.GetComponent<PlayerTurn>().Id);

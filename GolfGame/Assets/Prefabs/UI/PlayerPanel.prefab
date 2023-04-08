@@ -3784,9 +3784,11 @@ MonoBehaviour:
     m_Options:
     - m_Text: Magnet
       m_Image: {fileID: 0}
-    - m_Text: Secondone
+    - m_Text: Mulligan
       m_Image: {fileID: 0}
-    - m_Text: Third
+    - m_Text: Double HIt
+      m_Image: {fileID: 0}
+    - m_Text: Swap
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
