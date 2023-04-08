@@ -102,7 +102,16 @@ public class LevelManager : MonoBehaviour {
         instance.players[instance.currentPlayer].GetComponent<PlayerTurn>().startTurn();
     }
 
-    public void loadNextLevel() {
+    public static GameObject getRandomPlayer(int playerToExclude) {
+        int roll;
+        do {
+            roll = Random.Range(0, GameManager.NumPlayers - 1);
+        } while(roll == playerToExclude);
+
+        return instance.players[roll];
+    }
+
+    private void loadNextLevel() {
         SceneManager.LoadScene(nextSceneIndex);
     }
 
