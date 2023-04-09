@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7188,6 +7188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelId: 0
+  finalLevel: 0
   nextSceneIndex: 2
   levelEndDelay: 3
   playerPrefab: {fileID: 3260920021278610009, guid: 3b58c479e8be2a04fa0a6ef1a25b38d2, type: 3}
@@ -7197,6 +7198,8 @@ MonoBehaviour:
   powerupIcon: {fileID: 2145434108}
   scoreDisplay: {fileID: 2145434106}
   fullScoreDisplay: {fileID: 2145434105}
+  nextButton: {fileID: 2145434109}
+  winnerDisplay: {fileID: 0}
   powSlider: {fileID: 2145434107}
 --- !u!4 &405957312
 Transform:
@@ -54230,7 +54233,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh65512
+  m_Name: pb_Mesh53136
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -60624,6 +60627,34 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8698725258367548625, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698725258367548625, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698725258367548625, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 405957311}
+    - target: {fileID: 8698725258367548625, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698725258367548625, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onNextButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698725258367548625, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698725258367548625, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
 --- !u!114 &2145434105 stripped
@@ -60670,6 +60701,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215453b2ea45ebe4b873f2a1a52ff04c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2145434109 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7368179963259842983, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
+  m_PrefabInstance: {fileID: 2145434104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2146220498
 GameObject:
   m_ObjectHideFlags: 0
