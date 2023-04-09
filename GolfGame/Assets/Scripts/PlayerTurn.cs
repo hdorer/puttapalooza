@@ -38,12 +38,14 @@ public class PlayerTurn : MonoBehaviour {
         if(doubleHit && !holeCompleted) {
             doubleHit = false;
             startTurn();
+            GetComponent<PlayerMovement>().doubleHitPenalty();
             return;
         }
 
         if(increaseScore) {
             GetComponent<PlayerScore>().increaseScore();
         }
+
         isTurn = false;
         LevelManager.goToNextTurn();
     }
