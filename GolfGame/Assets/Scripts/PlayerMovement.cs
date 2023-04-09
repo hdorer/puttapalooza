@@ -263,6 +263,6 @@ public class PlayerMovement : MonoBehaviour {
             transform.position = thisTurnStart;
         }
 
-        GetComponent<PlayerTurn>().endTurn();
+        GetComponent<PlayerTurn>().endTurn(true);
     }
 }

@@ -34,14 +34,16 @@ public class PlayerTurn : MonoBehaviour {
         LevelManager.updateScoreText(GetComponent<PlayerScore>());
     }
 
-    public void endTurn() {
+    public void endTurn(bool increaseScore) {
         if(doubleHit && !holeCompleted) {
             doubleHit = false;
             startTurn();
             return;
         }
 
-        GetComponent<PlayerScore>().increaseScore();
+        if(increaseScore) {
+            GetComponent<PlayerScore>().increaseScore();
+        }
         isTurn = false;
         LevelManager.goToNextTurn();
     }
