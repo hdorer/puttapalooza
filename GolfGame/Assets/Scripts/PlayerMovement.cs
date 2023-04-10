@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float turnSpeed;
     [SerializeField] private float stoppingSpeed = 0.01f;
     [SerializeField] private float hitStrength = 0.0f;
+    private float maxHitStrength = 1f;
     [SerializeField] private Hole hole;
     [SerializeField] private PowerSliderScript powSlider;
     private int difficulty;
@@ -86,7 +87,7 @@ public class PlayerMovement : MonoBehaviour {
         } else if(isFire) {
             //I dont like this set up, but it is the best i have so far.
             hitStrength += .3f * hitStrengthSign * Time.deltaTime * difficulty;
-            if(hitStrength >= 1 || hitStrength <= 0) {
+            if(hitStrength >= maxHitStrength || hitStrength <= 0) {
                 hitStrengthSign *= -1;
             }
             powSlider.ChangeFill(hitStrength);
@@ -138,6 +139,10 @@ public class PlayerMovement : MonoBehaviour {
 
     public void doMulligan() {
         transform.position = lastTurnStart;
+    }
+
+    public void doubleHitPenalty() {
+        maxHitStrength = 0.5f;
     }
 
     private void DebugLog() {
@@ -245,7 +250,7 @@ public class PlayerMovement : MonoBehaviour {
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
-        transform.rotation = Quaternion.identity; // quick and dirty fix
+        transform.rotation = Quaternion.identity; // quick and dirty fix.  nothing more permanent than a temporary solution
         //angle = 0;
         //hitDirection = Vector3.forward;
 
@@ -253,6 +258,8 @@ public class PlayerMovement : MonoBehaviour {
         line.enabled = false;
         isMoving = false;
         isAim = true;
+
+        maxHitStrength = 1f;
 
         LevelManager.updateButtonState(this, GetComponent<PlayerPowerups>());
 
@@ -263,11 +270,6 @@ public class PlayerMovement : MonoBehaviour {
             transform.position = thisTurnStart;
         }
 
-        GetComponent<PlayerScore>().increaseScore();
-
-        // isTurn = false; //Ping Turn System
-        GetComponent<PlayerTurn>().endTurn();
-
-        //turn ends here normally
+        GetComponent<PlayerTurn>().endTurn(true);
     }
 }

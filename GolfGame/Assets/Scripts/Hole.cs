@@ -14,7 +14,7 @@ public class Hole : MonoBehaviour {
         if(other.tag == "GolfBall") {
             other.GetComponent<PlayerTurn>().completeHole();
             if(!LevelManager.finishLevel()) {
-                other.GetComponent<PlayerTurn>().endTurn();
+                other.GetComponent<PlayerTurn>().endTurn(false);
             }
         }
     }

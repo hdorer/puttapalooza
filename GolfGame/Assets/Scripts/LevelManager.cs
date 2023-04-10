@@ -26,6 +26,7 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] private PowerupButton powerupIcon;
     [SerializeField] private ScoreDisplay scoreDisplay;
     [SerializeField] private FullScoreDisplay fullScoreDisplay;
+    [SerializeField] private GameObject nextButton;
     [SerializeField] private WinnerDisplay winnerDisplay;
     [SerializeField] private PowerSliderScript powSlider;
 
@@ -66,7 +67,7 @@ public class LevelManager : MonoBehaviour {
         }
 
         // show full score display
-        instance.StartCoroutine(instance.showFullScoreDisplay());
+        instance.showFullScoreDisplay();
         return true;
     }
 
@@ -102,20 +103,30 @@ public class LevelManager : MonoBehaviour {
         instance.players[instance.currentPlayer].GetComponent<PlayerTurn>().startTurn();
     }
 
-    public void loadNextLevel() {
+    public static GameObject getRandomPlayer(int playerToExclude) {
+        int roll;
+        do {
+            roll = Random.Range(0, GameManager.NumPlayers - 1);
+        } while(roll == playerToExclude);
+
+        return instance.players[roll];
+    }
+
+    private void loadNextLevel() {
         SceneManager.LoadScene(nextSceneIndex);
     }
 
-    private IEnumerator showFullScoreDisplay() {
-        fullScoreDisplay.show();
-        fullScoreDisplay.disableInput();
-
-        yield return new WaitForSeconds(levelEndDelay);
-
+    public void onNextButton() {
         if(finalLevel) {
             winnerDisplay.show(GameManager.getWinner());
         } else {
             loadNextLevel();
         }
+    }
+
+    private void showFullScoreDisplay() {
+        fullScoreDisplay.show();
+        fullScoreDisplay.disableInput();
+        nextButton.SetActive(true);
     }
 }

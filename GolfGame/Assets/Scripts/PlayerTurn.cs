@@ -7,6 +7,8 @@ public class PlayerTurn : MonoBehaviour {
     private bool isTurn = false;
     private bool holeCompleted = false;
 
+    private bool doubleHit = false;
+
     private int id;
 
     public bool IsTurn { get => isTurn; }
@@ -32,9 +34,19 @@ public class PlayerTurn : MonoBehaviour {
         LevelManager.updateScoreText(GetComponent<PlayerScore>());
     }
 
-    public void endTurn() {
-        isTurn = false;
+    public void endTurn(bool increaseScore) {
+        if(doubleHit && !holeCompleted) {
+            doubleHit = false;
+            startTurn();
+            GetComponent<PlayerMovement>().doubleHitPenalty();
+            return;
+        }
 
+        if(increaseScore) {
+            GetComponent<PlayerScore>().increaseScore();
+        }
+
+        isTurn = false;
         LevelManager.goToNextTurn();
     }
 
@@ -43,5 +55,9 @@ public class PlayerTurn : MonoBehaviour {
         GetComponent<PlayerScore>().saveScore();
 
         holeCompleted = true;
+    }
+
+    public void activateDoubleHit() {
+        doubleHit = true;
     }
 }
