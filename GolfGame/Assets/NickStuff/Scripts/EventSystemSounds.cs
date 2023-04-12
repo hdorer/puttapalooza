@@ -7,10 +7,23 @@ public class EventSystemSounds : MonoBehaviour
     [SerializeField] private AudioClip ballSelect;
     [SerializeField] private AudioClip playerJoin;
     [SerializeField] private AudioClip menuButton;
+    public AudioSource audioPlayer;
 
     public void playInputAudio(AudioClip audio)
     {
-
+        audioPlayer.PlayOneShot(audio);
     }
-    
+    public void playBallSelect()
+    {
+        audioPlayer.PlayOneShot(ballSelect);
+    }
+    public void playPlayerJoin()
+    {
+        audioPlayer.PlayOneShot(playerJoin);
+    }
+    public void playMenuButton()
+    {
+        audioPlayer.PlayOneShot(menuButton);
+    }
+
 }
