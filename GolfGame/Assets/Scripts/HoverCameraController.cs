@@ -23,7 +23,7 @@ public class HoverCameraController : MonoBehaviour {
         int layerMask = 1 << LayerMask.NameToLayer("Ground");
         RaycastHit hit;
         Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, layerMask);
-        Debug.Log(hit.point.y);
+        // Debug.Log(hit.point.y);
 
         transform.position = new Vector3(transform.position.x, hit.point.y + distanceToGround, transform.position.z);
     }

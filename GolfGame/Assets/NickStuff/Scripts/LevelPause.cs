@@ -32,10 +32,6 @@ public class LevelPause : MonoBehaviour
             Time.timeScale = 1;
             SceneChange.SwitchToScene(0);
         }
-        else
-        {
-            // Debug.Log("OOp");
-        }
     }
     private void onPause(InputAction.CallbackContext context)
     {

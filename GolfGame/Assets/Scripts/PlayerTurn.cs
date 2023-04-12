@@ -11,9 +11,23 @@ public class PlayerTurn : MonoBehaviour {
 
     private int id;
 
+    private PlayerMovement movement;
+    private PlayerPowerups powerups;
+    private PlayerScore score;
+
     public bool IsTurn { get => isTurn; }
     public bool HoleCompleted { get => holeCompleted; }
     public int Id { get => id; }
+
+    private void OnEnable() {
+        Debug.Log(gameObject.name + " OnEnable()");
+    }
+
+    private void Awake() {
+        movement = GetComponent<PlayerMovement>();
+        powerups = GetComponent<PlayerPowerups>();
+        score = GetComponent<PlayerScore>();
+    }
 
     public void initialize(int id, Color color) {
         if(initialized) {
@@ -21,7 +35,6 @@ public class PlayerTurn : MonoBehaviour {
         }
 
         this.id = id;
-        Debug.Log(gameObject.name + " ID: " + this.id);
         GetComponent<Renderer>().material.color = color;
 
         initialized = true;
@@ -30,15 +43,15 @@ public class PlayerTurn : MonoBehaviour {
     public void startTurn() {
         isTurn = true;
 
-        LevelManager.updateButtonState(GetComponent<PlayerMovement>(), GetComponent<PlayerPowerups>());
-        LevelManager.updateScoreText(GetComponent<PlayerScore>());
+        LevelManager.updateButtonState(movement, powerups);
+        LevelManager.updateScoreText(score);
     }
 
     public void endTurn(bool increaseScore) {
         if(doubleHit && !holeCompleted) {
             doubleHit = false;
             startTurn();
-            GetComponent<PlayerMovement>().doubleHitPenalty();
+            movement.doubleHitPenalty();
             return;
         }
 
@@ -51,8 +64,9 @@ public class PlayerTurn : MonoBehaviour {
     }
 
     public void completeHole() {
-        GetComponent<PlayerScore>().increaseScore();
-        GetComponent<PlayerScore>().saveScore();
+        score.increaseScore();
+        score.saveScore();
+        powerups.savePowerup();
 
         holeCompleted = true;
     }

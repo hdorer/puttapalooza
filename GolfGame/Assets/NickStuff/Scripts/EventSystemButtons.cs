@@ -48,7 +48,6 @@ public class EventSystemButtons : MonoBehaviour
     }
     public void QuitGame()
     {
-        // Debug.Log("Quit Game");
         SceneChange.QuitTheGame();
     }
 }

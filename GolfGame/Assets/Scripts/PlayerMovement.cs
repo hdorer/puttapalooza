@@ -43,6 +43,9 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 thisTurnStart;
     private Vector3 lastTurnStart;
 
+    private PlayerPowerups powerups;
+    private PlayerTurn turn;
+
     private void OnEnable() {
         aim.Enable();
         confirm.Enable();
@@ -58,6 +61,11 @@ public class PlayerMovement : MonoBehaviour {
         doDebug.performed += onDebug;
     }
 
+    private void Awake() {
+        powerups = GetComponent<PlayerPowerups>();
+        turn = GetComponent<PlayerTurn>();
+    }
+
     private void Start() {
         powSlider.gameObject.SetActive(false);
         thisTurnStart = transform.position;
@@ -66,7 +74,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void Update() {
-        if(!GetComponent<PlayerTurn>().IsTurn) {
+        if(!turn.IsTurn) {
             return;
         }
 
@@ -149,15 +157,13 @@ public class PlayerMovement : MonoBehaviour {
         Debug.Log("Angle: " + angle);
         Debug.Log("hit direction: " + hitDirection);
         Debug.Log("hit force: " + hitForce);
-        Debug.Log("Is Turn: " + GetComponent<PlayerTurn>().IsTurn);
+        Debug.Log("Is Turn: " + turn.IsTurn);
         Debug.Log("Is Aim: " + isAim);
         Debug.Log("Is hit: " + isFire);
     }
 
     ///Inumerator
     private IEnumerator CheckMoving() {
-        // Debug.Log("CheckMoving()");
-
         yield return new WaitForSeconds(1.0f);
         while(isMoving) {
             yield return new WaitForSeconds(0.1f);
@@ -171,30 +177,27 @@ public class PlayerMovement : MonoBehaviour {
     ///Input Actions
     //This is for Q and E to rotate the direction the ball will go
     private void onAim(InputAction.CallbackContext context) {
-        // Debug.Log("aim " + context.ReadValue<float>());
         turnFloat = context.ReadValue<float>();
     }
 
     //This is to continue from aim and item use to hitting
     private void onConfirm(InputAction.CallbackContext context) {
-        // Debug.Log("confirm");
         isAim = false;
         isFire = true;
         powSlider.gameObject.SetActive(true);
 
-        LevelManager.updateButtonState(this, GetComponent<PlayerPowerups>());
+        LevelManager.updateButtonState(this, powerups);
     }
 
     //This is to go from hitting the ball to item and aim
     private void onGoBack(InputAction.CallbackContext context) {
-        // Debug.Log("go back");
         isAim = true;
         isFire = false;
         hitStrength = 0;
         hitStrengthSign = 1;
         powSlider.gameObject.SetActive(false);
 
-        LevelManager.updateButtonState(this, GetComponent<PlayerPowerups>());
+        LevelManager.updateButtonState(this, powerups);
     }
 
     //Prints a debug log
@@ -208,9 +211,11 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         float distanceToHole = Vector3.Distance(transform.position, hole.MagnetPoint);
-        if(distanceToHole > hole.MagnetRange && distanceToHole <= hole.MagnetDeadZone) {
+        if(distanceToHole > hole.MagnetRange || distanceToHole <= hole.MagnetDeadZone) {
             return;
         }
+
+        Debug.Log(hole.MagnetDeadZone + " <= " + distanceToHole + " < " + hole.MagnetRange);
 
         float magnitude = rb.velocity.magnitude;
         Vector3 direction = (hole.MagnetPoint - transform.position).normalized;
@@ -219,8 +224,6 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void onFire(InputAction.CallbackContext context) {
-        // Debug.Log("onFire");
-
         if(!isFire) {
             return;
         }
@@ -230,17 +233,14 @@ public class PlayerMovement : MonoBehaviour {
         isAim = false;
         isMoving = true;
 
-        LevelManager.updateButtonState(this, GetComponent<PlayerPowerups>());
+        LevelManager.updateButtonState(this, powerups);
 
         StartCoroutine(CheckMoving());
 
         hitForce = hitDirection * (hitPower * hitStrength);
-        // Debug.Log(hitForce);
         rb.AddForce(hitForce, ForceMode.Impulse);
         hitStrength = 0;
         hitStrengthSign = 1;
-        //hitDirection = Vector3.forward;
-        //angle = 0;
         
         line.enabled = false;
         powSlider.gameObject.SetActive(false);
@@ -252,8 +252,6 @@ public class PlayerMovement : MonoBehaviour {
         rb.angularVelocity = Vector3.zero;
 
         transform.rotation = Quaternion.identity; // quick and dirty fix.  nothing more permanent than a temporary solution
-        //angle = 0;
-        //hitDirection = Vector3.forward;
 
         magnetized = false;
         line.enabled = false;
@@ -262,15 +260,15 @@ public class PlayerMovement : MonoBehaviour {
 
         maxHitStrength = 1f;
 
-        LevelManager.updateButtonState(this, GetComponent<PlayerPowerups>());
+        LevelManager.updateButtonState(this, powerups);
 
+        lastTurnStart = thisTurnStart;
         if(success) {
-            lastTurnStart = thisTurnStart;
             thisTurnStart = transform.position;
         } else {
             transform.position = thisTurnStart;
         }
 
-        GetComponent<PlayerTurn>().endTurn(true);
+        turn.endTurn(true);
     }
 }

@@ -9,7 +9,8 @@ public class PlayerPowerups : MonoBehaviour {
 
     private Powerup powerup;
 
-    private PlayerMovement pMovement;
+    private PlayerMovement movement;
+    private PlayerTurn turn;
 
     [SerializeField] private InputAction usePowerupInput;
 
@@ -23,7 +24,8 @@ public class PlayerPowerups : MonoBehaviour {
     }
 
     private void Awake() {
-        pMovement = GetComponent<PlayerMovement>();
+        movement = GetComponent<PlayerMovement>();
+        turn = GetComponent<PlayerTurn>();
     }
 
     private void OnDisable() {
@@ -38,14 +40,14 @@ public class PlayerPowerups : MonoBehaviour {
         }
 
         this.powerup = powerup;
-        LevelManager.updateButtonState(pMovement, this);
+        LevelManager.updateButtonState(movement, this);
 
         initialized = true;
     }
 
     public void setPowerup(Powerup powerup) {
         this.powerup = powerup;
-        LevelManager.updateButtonState(pMovement, this);
+        LevelManager.updateButtonState(movement, this);
     }
 
     public void usePowerup() {
@@ -55,7 +57,11 @@ public class PlayerPowerups : MonoBehaviour {
 
         powerup.use(this);
         powerup = null;
-        LevelManager.updateButtonState(pMovement, this);
+        LevelManager.updateButtonState(movement, this);
+    }
+
+    public void savePowerup() {
+        GameManager.savePowerup(turn.Id, powerup);
     }
     
     private void usePowerup(InputAction.CallbackContext context) {
@@ -65,6 +71,6 @@ public class PlayerPowerups : MonoBehaviour {
 
         powerup.use(this);
         powerup = null;
-        LevelManager.updateButtonState(pMovement, this);
+        LevelManager.updateButtonState(movement, this);
     }
 }

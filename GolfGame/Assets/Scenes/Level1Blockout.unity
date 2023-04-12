@@ -7965,9 +7965,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelId: 0
-  finalLevel: 1
+  finalLevel: 0
   nextSceneIndex: 2
-  levelEndDelay: 3
   playerPrefab: {fileID: 3260920021278610009, guid: 3b58c479e8be2a04fa0a6ef1a25b38d2, type: 3}
   holeStart: {fileID: 2140198507}
   hole: {fileID: 1174158171}
@@ -7975,8 +7974,8 @@ MonoBehaviour:
   powerupIcon: {fileID: 2145434108}
   scoreDisplay: {fileID: 2145434106}
   fullScoreDisplay: {fileID: 2145434105}
-  nextButton: {fileID: 0}
-  winnerDisplay: {fileID: 0}
+  nextButton: {fileID: 2145434110}
+  winnerDisplay: {fileID: 2145434109}
   powSlider: {fileID: 2145434107}
 --- !u!4 &405957312
 Transform:
@@ -47670,7 +47669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magnetRange: 18
-  magnetDeadZone: 3
+  magnetDeadZone: 3.06
   magnetPoint: {fileID: 13695280}
 --- !u!65 &1174158172
 BoxCollider:
@@ -47693,7 +47692,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1174158170}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 692.15924, y: 16.779018, z: 148.01434}
+  m_LocalPosition: {x: 692.15924, y: -8.52, z: 148.01434}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -56834,6 +56833,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215453b2ea45ebe4b873f2a1a52ff04c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2145434109 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5110906493444147369, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
+  m_PrefabInstance: {fileID: 2145434104}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26a40a8d8bebd754a9cfa75549179f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &2145434110 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7368179963259842983, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
+  m_PrefabInstance: {fileID: 2145434104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2146220498
 GameObject:
   m_ObjectHideFlags: 0

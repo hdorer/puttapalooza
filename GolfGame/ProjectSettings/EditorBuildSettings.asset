@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level4Blockout.unity
     guid: cbd228eee2f8509429ced9dae5303288
+  - enabled: 1
+    path: Assets/Scenes/Level5Blockout.unity
+    guid: 1233d22eb59513f46b32bf0a81086a67
   m_configObjects: {}
