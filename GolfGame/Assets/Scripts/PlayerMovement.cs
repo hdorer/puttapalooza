@@ -261,8 +261,8 @@ public class PlayerMovement : MonoBehaviour {
 
         LevelManager.updateButtonState(this, powerups);
 
+        lastTurnStart = thisTurnStart;
         if(success) {
-            lastTurnStart = thisTurnStart;
             thisTurnStart = transform.position;
         } else {
             transform.position = thisTurnStart;

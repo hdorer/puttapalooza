@@ -58,7 +58,7 @@ public class LevelManager : MonoBehaviour {
         instance = null;
     }
 
-    public static bool finishLevel() {
+     public static bool levelCompleted() {
         for(int i = 0; i < GameManager.NumPlayers; i++) {
             Debug.Log("loop 0");
             if(!instance.players[i].GetComponent<PlayerTurn>().HoleCompleted) {
@@ -66,9 +66,13 @@ public class LevelManager : MonoBehaviour {
             }
         }
 
-        // show full score display
-        instance.showFullScoreDisplay();
         return true;
+    }
+
+    public static void finishLevel() {
+        if(levelCompleted()) {
+            instance.showFullScoreDisplay();
+        }
     }
 
     public static int getPlayerCurrentScore(int player) {
@@ -89,6 +93,10 @@ public class LevelManager : MonoBehaviour {
 
     public static void goToNextTurn() {
         instance.players[instance.currentPlayer].SetActive(false);
+
+        if(levelCompleted()) {
+            return;
+        }
 
         do {
             Debug.Log("loop 3");
