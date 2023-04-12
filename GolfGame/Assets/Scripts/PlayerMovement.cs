@@ -43,6 +43,9 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 thisTurnStart;
     private Vector3 lastTurnStart;
 
+    private PlayerPowerups powerups;
+    private PlayerTurn turn;
+
     private void OnEnable() {
         aim.Enable();
         confirm.Enable();
@@ -58,6 +61,11 @@ public class PlayerMovement : MonoBehaviour {
         doDebug.performed += onDebug;
     }
 
+    private void Awake() {
+        powerups = GetComponent<PlayerPowerups>();
+        turn = GetComponent<PlayerTurn>();
+    }
+
     private void Start() {
         powSlider.gameObject.SetActive(false);
         thisTurnStart = transform.position;
@@ -66,7 +74,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void Update() {
-        if(!GetComponent<PlayerTurn>().IsTurn) {
+        if(!turn.IsTurn) {
             return;
         }
 
@@ -149,7 +157,7 @@ public class PlayerMovement : MonoBehaviour {
         Debug.Log("Angle: " + angle);
         Debug.Log("hit direction: " + hitDirection);
         Debug.Log("hit force: " + hitForce);
-        Debug.Log("Is Turn: " + GetComponent<PlayerTurn>().IsTurn);
+        Debug.Log("Is Turn: " + turn.IsTurn);
         Debug.Log("Is Aim: " + isAim);
         Debug.Log("Is hit: " + isFire);
     }
@@ -182,7 +190,7 @@ public class PlayerMovement : MonoBehaviour {
         isFire = true;
         powSlider.gameObject.SetActive(true);
 
-        LevelManager.updateButtonState(this, GetComponent<PlayerPowerups>());
+        LevelManager.updateButtonState(this, powerups);
     }
 
     //This is to go from hitting the ball to item and aim
@@ -194,7 +202,7 @@ public class PlayerMovement : MonoBehaviour {
         hitStrengthSign = 1;
         powSlider.gameObject.SetActive(false);
 
-        LevelManager.updateButtonState(this, GetComponent<PlayerPowerups>());
+        LevelManager.updateButtonState(this, powerups);
     }
 
     //Prints a debug log
@@ -229,7 +237,7 @@ public class PlayerMovement : MonoBehaviour {
         isAim = false;
         isMoving = true;
 
-        LevelManager.updateButtonState(this, GetComponent<PlayerPowerups>());
+        LevelManager.updateButtonState(this, powerups);
 
         StartCoroutine(CheckMoving());
 
@@ -261,7 +269,7 @@ public class PlayerMovement : MonoBehaviour {
 
         maxHitStrength = 1f;
 
-        LevelManager.updateButtonState(this, GetComponent<PlayerPowerups>());
+        LevelManager.updateButtonState(this, powerups);
 
         if(success) {
             lastTurnStart = thisTurnStart;
@@ -270,6 +278,6 @@ public class PlayerMovement : MonoBehaviour {
             transform.position = thisTurnStart;
         }
 
-        GetComponent<PlayerTurn>().endTurn(true);
+        turn.endTurn(true);
     }
 }

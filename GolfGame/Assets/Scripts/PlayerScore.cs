@@ -1,13 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class PlayerScore : MonoBehaviour {
     private int totalScore = 0;
-    public int TotalScore { get => totalScore; }
     private int currentScore = 0;
+
+    private PlayerTurn turn;
+
+    public int TotalScore { get => totalScore; }
     public int CurrentScore { get => currentScore; }
+
+    private void Awake() {
+        turn = GetComponent<PlayerTurn>();
+    }
 
     public void increaseScore() {
         totalScore++;
@@ -22,6 +30,6 @@ public class PlayerScore : MonoBehaviour {
     }
 
     public void saveScore() {
-        GameManager.saveScore(GetComponent<PlayerTurn>().Id, LevelManager.LevelId, currentScore, totalScore);
+        GameManager.saveScore(turn.Id, LevelManager.LevelId, currentScore, totalScore);
     }
 }
