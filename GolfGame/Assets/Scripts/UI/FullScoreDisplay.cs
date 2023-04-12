@@ -11,11 +11,12 @@ public class FullScoreDisplay : MonoBehaviour {
     [SerializeField] GameObject scoreDisplayPanel;
 
     [SerializeField] private InputAction showScoreDisplayInput;
+    private bool inputEnabled = true;
 
     private void OnEnable() {
         showScoreDisplayInput.Enable();
 
-        showScoreDisplayInput.performed += context => show();
+        showScoreDisplayInput.performed += context => show(false);
         showScoreDisplayInput.canceled += context => hide();
     }
 
@@ -36,25 +37,33 @@ public class FullScoreDisplay : MonoBehaviour {
         totalScoreLabels[player] = scoreLabel;
     }
 
-    public void disableInput() {
-        showScoreDisplayInput.Disable();
-    }
+    public void show(bool disableInput) {
+        if(!inputEnabled) {
+            return;
+        }
 
-    public void show() {
         scoreDisplayPanel.SetActive(true);
 
         for(int i = 0; i < GameManager.NumPlayers; i++) {
+            Debug.Log("for loop 1");
             int[] scores = GameManager.getHoleScores(i);
             for(int j = 0; j < GameManager.NumHoles; j++) {
+                Debug.Log("for loop 2");
                 scoreLabels[i, j].text = scores[j].ToString();
             }
             scoreLabels[i, LevelManager.LevelId].text = LevelManager.getPlayerCurrentScore(i).ToString();
 
             totalScoreLabels[i].text = LevelManager.getPlayerTotalScore(i).ToString();
         }
+
+        inputEnabled = !disableInput;
     }
 
     private void hide() {
+        if(!inputEnabled) {
+            return;
+        }
+
         scoreDisplayPanel.SetActive(false);
     }
 }

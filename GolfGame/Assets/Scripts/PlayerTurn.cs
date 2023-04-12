@@ -19,6 +19,10 @@ public class PlayerTurn : MonoBehaviour {
     public bool HoleCompleted { get => holeCompleted; }
     public int Id { get => id; }
 
+    private void OnEnable() {
+        Debug.Log(gameObject.name + " OnEnable()");
+    }
+
     private void Awake() {
         movement = GetComponent<PlayerMovement>();
         powerups = GetComponent<PlayerPowerups>();
