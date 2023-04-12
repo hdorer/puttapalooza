@@ -422,7 +422,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 187048531}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 31.681976, y: 19.247965, z: 33.766712}
@@ -35793,6 +35793,7 @@ GameObject:
   - component: {fileID: 1751259028}
   - component: {fileID: 1751259027}
   - component: {fileID: 1751259026}
+  - component: {fileID: 1751259030}
   - component: {fileID: 1751259029}
   m_Layer: 0
   m_Name: Main Camera
@@ -35898,6 +35899,40 @@ MonoBehaviour:
       m_Action: Switch Cameras Input
       m_Flags: 0
     m_Flags: 0
+--- !u!114 &1751259030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751259025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowDebugText: 0
+  m_ShowCameraFrustum: 1
+  m_IgnoreTimeScale: 0
+  m_WorldUpOverride: {fileID: 0}
+  m_UpdateMethod: 2
+  m_BlendUpdateMethod: 1
+  m_DefaultBlend:
+    m_Style: 5
+    m_Time: 0.25
+    m_CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  m_CustomBlends: {fileID: 0}
+  m_CameraCutEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CameraActivatedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1789759290
 GameObject:
   m_ObjectHideFlags: 0
@@ -37774,6 +37809,38 @@ PrefabInstance:
     - target: {fileID: 4147354338363067843, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4248798035128260308, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.00024414062
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698725258367548625, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698725258367548625, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698725258367548625, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1160101478}
+    - target: {fileID: 8698725258367548625, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698725258367548625, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: onNextButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698725258367548625, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698725258367548625, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
