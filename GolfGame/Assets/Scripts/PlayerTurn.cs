@@ -66,6 +66,7 @@ public class PlayerTurn : MonoBehaviour {
     public void completeHole() {
         score.increaseScore();
         score.saveScore();
+        powerups.savePowerup();
 
         holeCompleted = true;
     }

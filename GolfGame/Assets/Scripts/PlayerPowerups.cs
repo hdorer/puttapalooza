@@ -25,6 +25,7 @@ public class PlayerPowerups : MonoBehaviour {
 
     private void Awake() {
         movement = GetComponent<PlayerMovement>();
+        turn = GetComponent<PlayerTurn>();
     }
 
     private void OnDisable() {
