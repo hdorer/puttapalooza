@@ -211,9 +211,11 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         float distanceToHole = Vector3.Distance(transform.position, hole.MagnetPoint);
-        if(distanceToHole > hole.MagnetRange && distanceToHole <= hole.MagnetDeadZone) {
+        if(distanceToHole > hole.MagnetRange || distanceToHole <= hole.MagnetDeadZone) {
             return;
         }
+
+        Debug.Log(hole.MagnetDeadZone + " <= " + distanceToHole + " < " + hole.MagnetRange);
 
         float magnitude = rb.velocity.magnitude;
         Vector3 direction = (hole.MagnetPoint - transform.position).normalized;
