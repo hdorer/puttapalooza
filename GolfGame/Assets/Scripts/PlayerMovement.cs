@@ -164,8 +164,6 @@ public class PlayerMovement : MonoBehaviour {
 
     ///Inumerator
     private IEnumerator CheckMoving() {
-        // Debug.Log("CheckMoving()");
-
         yield return new WaitForSeconds(1.0f);
         while(isMoving) {
             yield return new WaitForSeconds(0.1f);
@@ -179,13 +177,11 @@ public class PlayerMovement : MonoBehaviour {
     ///Input Actions
     //This is for Q and E to rotate the direction the ball will go
     private void onAim(InputAction.CallbackContext context) {
-        // Debug.Log("aim " + context.ReadValue<float>());
         turnFloat = context.ReadValue<float>();
     }
 
     //This is to continue from aim and item use to hitting
     private void onConfirm(InputAction.CallbackContext context) {
-        // Debug.Log("confirm");
         isAim = false;
         isFire = true;
         powSlider.gameObject.SetActive(true);
@@ -195,7 +191,6 @@ public class PlayerMovement : MonoBehaviour {
 
     //This is to go from hitting the ball to item and aim
     private void onGoBack(InputAction.CallbackContext context) {
-        // Debug.Log("go back");
         isAim = true;
         isFire = false;
         hitStrength = 0;
@@ -227,8 +222,6 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void onFire(InputAction.CallbackContext context) {
-        // Debug.Log("onFire");
-
         if(!isFire) {
             return;
         }
@@ -242,12 +235,9 @@ public class PlayerMovement : MonoBehaviour {
         StartCoroutine(CheckMoving());
 
         hitForce = hitDirection * (hitPower * hitStrength);
-        // Debug.Log(hitForce);
         rb.AddForce(hitForce, ForceMode.Impulse);
         hitStrength = 0;
         hitStrengthSign = 1;
-        //hitDirection = Vector3.forward;
-        //angle = 0;
         
         line.enabled = false;
         powSlider.gameObject.SetActive(false);
@@ -259,8 +249,6 @@ public class PlayerMovement : MonoBehaviour {
         rb.angularVelocity = Vector3.zero;
 
         transform.rotation = Quaternion.identity; // quick and dirty fix.  nothing more permanent than a temporary solution
-        //angle = 0;
-        //hitDirection = Vector3.forward;
 
         magnetized = false;
         line.enabled = false;

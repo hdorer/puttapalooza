@@ -31,7 +31,6 @@ public class PlayerTurn : MonoBehaviour {
         }
 
         this.id = id;
-        Debug.Log(gameObject.name + " ID: " + this.id);
         GetComponent<Renderer>().material.color = color;
 
         initialized = true;
