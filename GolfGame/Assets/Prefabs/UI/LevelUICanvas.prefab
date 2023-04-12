@@ -4256,6 +4256,8 @@ MonoBehaviour:
       m_Action: Pause
       m_Flags: 0
     m_Flags: 0
+  audioPlayer: {fileID: 0}
+  pauseClip: {fileID: 8300000, guid: 63c8ac6b311b6504f91e8cd89e74f1a6, type: 3}
 --- !u!1 &5055408805895760610
 GameObject:
   m_ObjectHideFlags: 0

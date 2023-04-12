@@ -225,6 +225,7 @@ public class PlayerMovement : MonoBehaviour {
             return;
         }
 
+        GetComponent<PlayerAudio>().playeBallHit();
         isFire = false;
         isAim = false;
         isMoving = true;

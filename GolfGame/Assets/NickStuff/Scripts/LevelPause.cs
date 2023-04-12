@@ -9,6 +9,8 @@ public class LevelPause : MonoBehaviour
     [SerializeField] private List<GameObject> otherUI;
     [SerializeField] private InputAction pause;
     private bool isPause;
+    public AudioSource audioPlayer;
+    public AudioClip pauseClip;
     void OnEnable()
     {
         pause.Enable();
@@ -38,6 +40,7 @@ public class LevelPause : MonoBehaviour
     private void onPause(InputAction.CallbackContext context)
     {
         isPause = !isPause;
+        audioPlayer.PlayOneShot(pauseClip);
 
         if(isPause)
         {
