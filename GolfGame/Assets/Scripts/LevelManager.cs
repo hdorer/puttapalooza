@@ -10,7 +10,6 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] private int levelId;
     [SerializeField] private bool finalLevel = false;
     [SerializeField] private int nextSceneIndex;
-    [SerializeField] private float levelEndDelay = 3f;
 
     [Header("Player Prefab")]
     [SerializeField] private GameObject playerPrefab;
