@@ -78,4 +78,8 @@ public class GameManager : MonoBehaviour {
             instance.pPanel = pPanel;
         }
     }
+
+    public static void savePowerup(int player, Powerup powerup) {
+        instance.players[player].powerup = powerup;
+    }
 }

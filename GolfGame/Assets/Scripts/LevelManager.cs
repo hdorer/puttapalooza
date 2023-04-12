@@ -45,7 +45,7 @@ public class LevelManager : MonoBehaviour {
             players[i].name = "Player" + i;
             players[i].GetComponent<PlayerTurn>().initialize(GameManager.Players[i].id, GameManager.Players[i].color);
             players[i].GetComponent<PlayerMovement>().initialize(GameManager.Players[i].difficulty, hole, powSlider);
-            players[i].GetComponent<PlayerPowerups>().initialize(GameManager.Players[i].startingPowerup);
+            players[i].GetComponent<PlayerPowerups>().initialize(GameManager.Players[i].powerup);
             players[i].SetActive(false);
         }
 

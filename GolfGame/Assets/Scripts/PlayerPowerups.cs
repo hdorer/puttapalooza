@@ -10,6 +10,7 @@ public class PlayerPowerups : MonoBehaviour {
     private Powerup powerup;
 
     private PlayerMovement movement;
+    private PlayerTurn turn;
 
     [SerializeField] private InputAction usePowerupInput;
 
@@ -56,6 +57,10 @@ public class PlayerPowerups : MonoBehaviour {
         powerup.use(this);
         powerup = null;
         LevelManager.updateButtonState(movement, this);
+    }
+
+    public void savePowerup() {
+        GameManager.savePowerup(turn.Id, powerup);
     }
     
     private void usePowerup(InputAction.CallbackContext context) {

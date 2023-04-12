@@ -5,7 +5,7 @@ using UnityEngine;
 public struct PlayerData {
     public int id { get; private set; }
     public int difficulty { get; private set; }
-    public Powerup startingPowerup { get; private set; }
+    public Powerup powerup { get; set; }
     public Color color { get; private set; }
 
     public int[] holeScores { get; private set; }
@@ -14,7 +14,7 @@ public struct PlayerData {
     public PlayerData(int id, int difficulty, Powerup startingPowerup, Color color) {
         this.id = id;
         this.difficulty = difficulty;
-        this.startingPowerup = startingPowerup;
+        this.powerup = startingPowerup;
         this.color = color;
 
         holeScores = new int[GameManager.NumHoles];
