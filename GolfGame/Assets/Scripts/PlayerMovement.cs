@@ -162,6 +162,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void activateCrazyHit() {
+        Debug.Log("activateCrazyHit");
         crazyHit = true;
     }
 
@@ -288,13 +289,11 @@ public class PlayerMovement : MonoBehaviour {
         if(!crazyHit) {
             return;
         }
-        if(turnFloat == 0) {
-            return;
-        }
-        float angle = chTurnDirection * chTurnRate * Time.deltaTime;
-        transform.Rotate(new Vector3(0, angle, 0));
-        chAngle += angle;
-        if((chTurnDirection > 0 && chAngle >= chMaxAngle) || (chTurnDirection < 0 && chAngle <= -chMaxAngle)) {
+        Debug.Log("doCrazyHit");
+        float chRotation = chTurnDirection * chTurnRate * Time.deltaTime;
+        angle += chRotation;
+        chAngle += chRotation;
+        if((chTurnDirection > 0 && this.chAngle >= chMaxAngle) || (chTurnDirection < 0 && this.chAngle <= -chMaxAngle)) {
             chTurnDirection *= -1;
         }
     }

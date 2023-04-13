@@ -357,14 +357,14 @@ MonoBehaviour:
     m_Flags: 0
   rb: {fileID: 3260920021278610013}
   line: {fileID: 3260920020257536161}
-  pScore: {fileID: 0}
   hitPower: 750
   turnSpeed: 60
   stoppingSpeed: 0.65
   hitStrength: 0
   hole: {fileID: 0}
   powSlider: {fileID: 0}
-  isMoving: 0
+  chTurnRate: 75
+  chMaxAngle: 30
 --- !u!114 &3260920021278610008
 MonoBehaviour:
   m_ObjectHideFlags: 0
