@@ -30,12 +30,18 @@ public class PlayerMovement : MonoBehaviour {
     public bool IsAim { get => isAim; }
     private bool isFire = false;
     private bool magnetized;
-    public bool isMoving = false;
+    private bool isMoving = false;
+    private bool crazyHit = false;
 
     //Floats
     private float turnFloat;
     private float angle;
     private float hitStrengthSign = 1;
+
+    private float chAngle = 0f;
+    [SerializeField] private float chTurnRate = 5f;
+    [SerializeField] private float chMaxAngle = 30f;
+    private float chTurnDirection = 1f;
 
     //Vector3
     private Vector3 hitDirection = Vector3.forward;
@@ -92,6 +98,8 @@ public class PlayerMovement : MonoBehaviour {
             line.enabled = true;
             
             hitStrength = 0;
+
+            doCrazyHit();
         } else if(isFire) {
             //I dont like this set up, but it is the best i have so far.
             hitStrength += .3f * hitStrengthSign * Time.deltaTime * difficulty;
@@ -151,6 +159,10 @@ public class PlayerMovement : MonoBehaviour {
 
     public void doubleHitPenalty() {
         maxHitStrength = 0.5f;
+    }
+
+    public void activateCrazyHit() {
+        crazyHit = true;
     }
 
     private void DebugLog() {
@@ -253,6 +265,7 @@ public class PlayerMovement : MonoBehaviour {
         transform.rotation = Quaternion.identity; // quick and dirty fix.  nothing more permanent than a temporary solution
 
         magnetized = false;
+        crazyHit = false;
         line.enabled = false;
         isMoving = false;
         isAim = true;
@@ -269,5 +282,20 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         turn.endTurn(true);
+    }
+
+    private void doCrazyHit() {
+        if(!crazyHit) {
+            return;
+        }
+        if(turnFloat == 0) {
+            return;
+        }
+        float angle = chTurnDirection * chTurnRate * Time.deltaTime;
+        transform.Rotate(new Vector3(0, angle, 0));
+        chAngle += angle;
+        if((chTurnDirection > 0 && chAngle >= chMaxAngle) || (chTurnDirection < 0 && chAngle <= -chMaxAngle)) {
+            chTurnDirection *= -1;
+        }
     }
 }
