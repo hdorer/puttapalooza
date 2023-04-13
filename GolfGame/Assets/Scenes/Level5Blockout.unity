@@ -20313,6 +20313,17 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &674881955 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8809217417173429930, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
+  m_PrefabInstance: {fileID: 2017838367}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcfceed7cb767554c8c7422ff4f42a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &753361931
 GameObject:
   m_ObjectHideFlags: 0
@@ -29031,6 +29042,7 @@ MonoBehaviour:
   nextButton: {fileID: 2017838369}
   winnerDisplay: {fileID: 2017838368}
   powSlider: {fileID: 2017838372}
+  oSelect: {fileID: 674881955}
 --- !u!4 &1160101479
 Transform:
   m_ObjectHideFlags: 0

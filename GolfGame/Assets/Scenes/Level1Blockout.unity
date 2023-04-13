@@ -7977,6 +7977,7 @@ MonoBehaviour:
   nextButton: {fileID: 2145434110}
   winnerDisplay: {fileID: 2145434109}
   powSlider: {fileID: 2145434107}
+  oSelect: {fileID: 778223844}
 --- !u!4 &405957312
 Transform:
   m_ObjectHideFlags: 0
@@ -26855,6 +26856,17 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!114 &778223844 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8809217417173429930, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
+  m_PrefabInstance: {fileID: 2145434104}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcfceed7cb767554c8c7422ff4f42a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &780406034
 Mesh:
   m_ObjectHideFlags: 0

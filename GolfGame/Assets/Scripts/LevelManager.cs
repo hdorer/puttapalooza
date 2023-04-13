@@ -28,6 +28,7 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] private GameObject nextButton;
     [SerializeField] private WinnerDisplay winnerDisplay;
     [SerializeField] private PowerSliderScript powSlider;
+    [SerializeField] private OpponentSelect oSelect;
 
     public static int LevelId { get => instance.levelId; }
     public static Transform HoleStart { get => instance.holeStart; }
@@ -121,8 +122,8 @@ public class LevelManager : MonoBehaviour {
         return instance.players[roll];
     }
 
-    private void loadNextLevel() {
-        SceneManager.LoadScene(nextSceneIndex);
+    public static void showOpponentSelect(int playerToExclude) {
+        instance.oSelect.show(playerToExclude);
     }
 
     public void onNextButton() {
@@ -131,6 +132,10 @@ public class LevelManager : MonoBehaviour {
         } else {
             loadNextLevel();
         }
+    }
+
+    private void loadNextLevel() {
+        SceneManager.LoadScene(nextSceneIndex);
     }
 
     private void showFullScoreDisplay() {
