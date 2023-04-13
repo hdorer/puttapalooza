@@ -40,7 +40,6 @@ public class PlayerMovement : MonoBehaviour {
 
     private float chAngle = 0f;
     [SerializeField] private float chTurnRate = 5f;
-    [SerializeField] private float chMaxAngle = 30f;
     private float chTurnDirection = 1f;
 
     //Vector3
@@ -289,12 +288,8 @@ public class PlayerMovement : MonoBehaviour {
         if(!crazyHit) {
             return;
         }
-        Debug.Log("doCrazyHit");
+        
         float chRotation = chTurnDirection * chTurnRate * Time.deltaTime;
         angle += chRotation;
-        chAngle += chRotation;
-        if((chTurnDirection > 0 && this.chAngle >= chMaxAngle) || (chTurnDirection < 0 && this.chAngle <= -chMaxAngle)) {
-            chTurnDirection *= -1;
-        }
     }
 }

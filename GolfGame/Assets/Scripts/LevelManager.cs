@@ -32,6 +32,7 @@ public class LevelManager : MonoBehaviour {
 
     public static int LevelId { get => instance.levelId; }
     public static Transform HoleStart { get => instance.holeStart; }
+    public static GameObject[] Players { get => instance.players; }
 
     private void Awake() {
         instance = this;
@@ -122,8 +123,8 @@ public class LevelManager : MonoBehaviour {
         return instance.players[roll];
     }
 
-    public static void showOpponentSelect(int playerToExclude) {
-        instance.oSelect.show(playerToExclude);
+    public static void showOpponentSelect(int playerToExclude, OpponentSelect.PowerupEffect effect) {
+        instance.oSelect.show(playerToExclude, effect);
     }
 
     public void onNextButton() {
