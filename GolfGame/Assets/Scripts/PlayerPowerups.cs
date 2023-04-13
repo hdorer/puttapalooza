@@ -16,6 +16,7 @@ public class PlayerPowerups : MonoBehaviour {
 
     public Powerup Powerup { get => powerup; }
     public bool hasPowerup { get => powerup != null; }
+    public int Id { get => turn.Id; }
 
     private void OnEnable() {
         usePowerupInput.Enable();
