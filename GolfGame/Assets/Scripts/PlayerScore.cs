@@ -4,12 +4,10 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class PlayerScore : MonoBehaviour {
-    private int totalScore = 0;
     private int currentScore = 0;
 
     private PlayerTurn turn;
 
-    public int TotalScore { get => totalScore; }
     public int CurrentScore { get => currentScore; }
 
     private void Awake() {
@@ -17,13 +15,11 @@ public class PlayerScore : MonoBehaviour {
     }
 
     public void increaseScore() {
-        totalScore++;
         currentScore++;
         LevelManager.updateScoreText(this);
     }
 
     public void resetScore() {
-        totalScore--;
         currentScore--;
         LevelManager.updateScoreText(this);
     }

@@ -81,10 +81,6 @@ public class LevelManager : MonoBehaviour {
         return instance.players[player].GetComponent<PlayerScore>().CurrentScore;
     }
 
-    public static int getPlayerTotalScore(int player) {
-        return instance.players[player].GetComponent<PlayerScore>().TotalScore;
-    }
-
     public static void updateButtonState(PlayerMovement pMovement, PlayerPowerups pPowerups) {
         instance.powerupIcon.updateButtonState(pMovement, pPowerups);
     }

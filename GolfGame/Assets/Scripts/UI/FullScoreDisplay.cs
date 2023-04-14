@@ -53,7 +53,7 @@ public class FullScoreDisplay : MonoBehaviour {
             }
             scoreLabels[i, LevelManager.LevelId].text = LevelManager.getPlayerCurrentScore(i).ToString();
 
-            totalScoreLabels[i].text = LevelManager.getPlayerTotalScore(i).ToString();
+            totalScoreLabels[i].text = GameManager.Players[i].totalScore.ToString();
         }
 
         inputEnabled = !disableInput;
