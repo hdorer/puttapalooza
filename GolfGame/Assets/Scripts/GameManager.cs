@@ -45,9 +45,9 @@ public class GameManager : MonoBehaviour {
         instance.pPanel = null;
     }
 
-    public static void saveScore(int player, int hole, int score, int totalScore) {
+    public static void saveScore(int player, int hole, int score) {
         instance.players[player].holeScores[hole] = score;
-        instance.players[player].totalScore = totalScore;
+        instance.players[player].totalScore += score;
     }
 
     public static int[] getHoleScores(int player) {

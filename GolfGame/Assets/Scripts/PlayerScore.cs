@@ -30,6 +30,6 @@ public class PlayerScore : MonoBehaviour {
     }
 
     public void saveScore() {
-        GameManager.saveScore(turn.Id, LevelManager.LevelId, currentScore, totalScore);
+        GameManager.saveScore(turn.Id, LevelManager.LevelId, currentScore);
     }
 }
