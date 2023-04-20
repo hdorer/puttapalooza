@@ -19212,7 +19212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0a277d6ecfd96c4cbb5bb109bd43edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceToGround: 10
+  distanceToGround: 100
   movementInput:
     m_Name: Movement Input
     m_Type: 0

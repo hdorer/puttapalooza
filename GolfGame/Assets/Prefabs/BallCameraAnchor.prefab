@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64e9a2bbb8f99a8499695f680dc02ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 10
+  sensitivity: 25
   startMovement:
     m_Name: Start Movement
     m_Type: 0
