@@ -11,6 +11,8 @@ public class PerPlayerCustomize : MonoBehaviour
     [SerializeField] private int playerNum;
     [SerializeField] private Image PlayerBall;
     [SerializeField] private TMP_Dropdown difficultyDropdown, powerUpDropdown;
+    [SerializeField] private Image powerupImage;
+    [SerializeField] private Sprite[] imgSprites;
     private int playerDifficulty = 1;
     private int startingPowerup;
     [SerializeField] private Color playerColor;
@@ -38,6 +40,24 @@ public class PerPlayerCustomize : MonoBehaviour
     private void ChangeStartPowerup(int option)
     {
         startingPowerup = option;
+        switch(startingPowerup)
+        {
+            case 0:
+            powerupImage.sprite = imgSprites[startingPowerup];
+            break;
+            case 1:
+            powerupImage.sprite = imgSprites[startingPowerup];
+            break;
+            case 2:
+            powerupImage.sprite = imgSprites[startingPowerup];
+            break;
+            case 3:
+            powerupImage.sprite = imgSprites[startingPowerup];
+            break;
+            case 4:
+            powerupImage.sprite = imgSprites[startingPowerup];
+            break;
+        }
     }
     private void ChangeDifficulty(int option)
     {
