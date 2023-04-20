@@ -9,21 +9,21 @@ public class LevelPause : MonoBehaviour
     [SerializeField] private List<GameObject> otherUI;
     [SerializeField] private InputAction pause;
     private bool isPause;
-    public AudioSource audioPlayer;
-    public AudioClip pauseClip;
-    void OnEnable()
+    [SerializeField] private AudioSource audioPlayer;
+    [SerializeField] private AudioClip pauseClip;
+    private void OnEnable()
     {
         pause.Enable();
         pause.performed += onPause;
     }
-    void OnDisable()
+    private void Start() {
+        PausePanel.SetActive(false);
+        audioPlayer.volume = GameManager.SfxVolume;
+    }
+    private void OnDisable()
     {
         pause.Disable();
         pause.performed -= onPause;
-    }
-    void Start()
-    {
-        PausePanel.SetActive(false);
     }
     public void SwitchScene()
     {

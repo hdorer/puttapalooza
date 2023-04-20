@@ -12,10 +12,13 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private Powerup[] powerups;
 
     private PlayerData[] players;
-    public static PlayerData[] Players { get => instance.players; }
+
+    private float sfxVolume = 1f;
 
     public static int NumPlayers { get => instance.numPlayers; }
     public static int NumHoles { get => instance.numHoles; }
+    public static PlayerData[] Players { get => instance.players; }
+    public static float SfxVolume { get => instance.sfxVolume; set => instance.sfxVolume = value; }
 
     private void Awake() {
         if(instance == null) {

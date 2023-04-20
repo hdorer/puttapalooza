@@ -39,9 +39,7 @@ public class PlayerMovement : MonoBehaviour {
     private float angle;
     private float hitStrengthSign = 1;
 
-    private float chAngle = 0f;
     [SerializeField] private float chTurnRate = 5f;
-    private float chTurnDirection = 1f;
 
     //Vector3
     private Vector3 hitDirection = Vector3.forward;
@@ -252,7 +250,7 @@ public class PlayerMovement : MonoBehaviour {
             return;
         }
 
-        GetComponent<PlayerAudio>().playeBallHit();
+        GetComponent<PlayerAudio>().playBallHit();
         isFire = false;
         isAim = false;
         isMoving = true;
@@ -302,7 +300,7 @@ public class PlayerMovement : MonoBehaviour {
             return;
         }
         
-        float chRotation = chTurnDirection * chTurnRate * Time.deltaTime;
+        float chRotation = chTurnRate * Time.deltaTime;
         angle += chRotation;
     }
 }

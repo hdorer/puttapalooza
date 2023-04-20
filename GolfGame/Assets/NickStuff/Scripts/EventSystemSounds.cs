@@ -7,7 +7,7 @@ public class EventSystemSounds : MonoBehaviour
     [SerializeField] private AudioClip ballSelect;
     [SerializeField] private AudioClip playerJoin;
     [SerializeField] private AudioClip menuButton;
-    public AudioSource audioPlayer;
+    [SerializeField] private AudioSource audioPlayer;
 
     public void playInputAudio(AudioClip audio)
     {

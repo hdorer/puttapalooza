@@ -5,13 +5,14 @@ using UnityEngine;
 //Where all audio for player goes
 public class PlayerAudio : MonoBehaviour
 {
-    public AudioSource audioPlayer;
+    [SerializeField] AudioSource audioPlayer;
+    [SerializeField] private AudioClip ballHit;
 
-    [SerializeField]
-    private AudioClip ballHit;
+    private void Start() {
+        audioPlayer.volume = GameManager.SfxVolume;
+    }
 
-    public void playeBallHit()
-    {
+    public void playBallHit() {
         audioPlayer.PlayOneShot(ballHit);
     }
 }

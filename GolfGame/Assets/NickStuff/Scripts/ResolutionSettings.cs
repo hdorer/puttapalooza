@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
-public class SoundResolutionSettings : MonoBehaviour
+public class ResolutionSettings : MonoBehaviour
 {
     public TMP_Dropdown resDropdown;
     static bool fullscreen = true;
