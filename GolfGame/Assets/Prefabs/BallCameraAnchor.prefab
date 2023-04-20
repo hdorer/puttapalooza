@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64e9a2bbb8f99a8499695f680dc02ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 0}
   sensitivity: 10
   startMovement:
     m_Name: Start Movement
@@ -74,7 +73,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: 1ade879b-499a-4d15-92be-aabdd664ff49
-      m_Path: <Mouse>/delta/x
+      m_Path: <Mouse>/delta
       m_Interactions: 
       m_Processors: 
       m_Groups: 

@@ -10,6 +10,10 @@ public class BallCameraController : MonoBehaviour {
 
     private bool rotating = false;
     [SerializeField] private float sensitivity = 1.0f;
+    private float xAngle = 0f;
+    private float minXAngle = 0f;
+    private float maxXAngle = 70.0f;
+    private float yAngle = 0f;
 
     [SerializeField] private InputAction startMovement;
     [SerializeField] private InputAction rotate;
@@ -47,9 +51,17 @@ public class BallCameraController : MonoBehaviour {
 
     private void onLook(InputAction.CallbackContext context) {
         if(rotating) {
-            float rotation = context.ReadValue<float>();
-            rotation = rotation * sensitivity * Time.deltaTime;
-            transform.Rotate(new Vector3(0, rotation, 0));
+            Vector2 rotation = context.ReadValue<Vector2>();
+            float xRotation = rotation.y;
+            float yRotation = rotation.x;
+
+            xRotation *= sensitivity * Time.deltaTime;
+            yRotation *= sensitivity * Time.deltaTime;
+
+            xAngle += xRotation;
+            xAngle = Mathf.Clamp(xAngle, minXAngle, maxXAngle);
+            yAngle += yRotation;
+            transform.eulerAngles = new Vector3(xAngle, yAngle, 0);
         }
     }
 }
