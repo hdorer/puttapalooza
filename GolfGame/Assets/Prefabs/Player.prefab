@@ -456,7 +456,7 @@ MonoBehaviour:
   rb: {fileID: 3260920021278610013}
   line: {fileID: 3260920020257536161}
   hitPower: 750
-  turnSpeed: 60
+  turnSpeed: 100
   stoppingSpeed: 0.65
   hitStrength: 0
   hole: {fileID: 0}
