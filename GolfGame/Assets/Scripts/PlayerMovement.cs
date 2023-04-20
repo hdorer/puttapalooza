@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour {
     private bool magnetized;
     private bool isMoving = false;
     private bool crazyHit = false;
+    private bool confirmedThisFrame = false;
 
     //Floats
     private float turnFloat;
@@ -194,8 +195,14 @@ public class PlayerMovement : MonoBehaviour {
 
     //This is to continue from aim and item use to hitting
     private void onConfirm(InputAction.CallbackContext context) {
+        if(!isAim) {
+            return;
+        }
+
         isAim = false;
         isFire = true;
+        confirmedThisFrame = true;
+
         powSlider.gameObject.SetActive(true);
 
         LevelManager.updateButtonState(this, powerups);
@@ -237,6 +244,11 @@ public class PlayerMovement : MonoBehaviour {
 
     private void onFire(InputAction.CallbackContext context) {
         if(!isFire) {
+            return;
+        }
+
+        if(confirmedThisFrame) {
+            confirmedThisFrame = false;
             return;
         }
 

@@ -403,7 +403,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: e70ace01-4cc8-42e3-8802-133e03e8b927
-      m_Path: <Keyboard>/z
+      m_Path: <Mouse>/leftButton
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -462,7 +462,6 @@ MonoBehaviour:
   hole: {fileID: 0}
   powSlider: {fileID: 0}
   chTurnRate: 75
-  chMaxAngle: 30
 --- !u!114 &3260920021278610008
 MonoBehaviour:
   m_ObjectHideFlags: 0
