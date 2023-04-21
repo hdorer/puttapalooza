@@ -114,8 +114,8 @@ public class PlayerMovement : MonoBehaviour {
 
     private void OnTriggerEnter(Collider col) {
         if(col.CompareTag("Reset")) {
-            GetComponent<PlayerAudio>().playBallWater();
             endTurn(false);
+            GetComponent<PlayerAudio>().playBallWater();
         }
     }
 
