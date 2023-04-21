@@ -12,6 +12,7 @@ public class PlayerAudio : MonoBehaviour
     [SerializeField] private AudioClip ballLandSand;
     [SerializeField] private AudioClip ballLandIce;
     [SerializeField] private AudioClip powerUpUse;
+    [SerializeField] private AudioClip ballLandWater;
 
     private void Start() {
         audioPlayer.volume = GameManager.SfxVolume;
@@ -34,5 +35,8 @@ public class PlayerAudio : MonoBehaviour
     }
     public void playPowerupUse() {
         audioPlayer.PlayOneShot(powerUpUse);
+    }
+    public void playBallWater(){
+        audioPlayer.PlayOneShot(ballLandWater);
     }
 }

@@ -126,7 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerup: {fileID: 11400000, guid: 1d93948fbb767db48a620c98bdeb4381, type: 2}
   audioPlayer: {fileID: 2015160123249903679}
-  pickupSound: {fileID: 8300000, guid: 14e9bb43fa3906f4d942f38a223474ff, type: 3}
+  pickupSound: {fileID: 8300000, guid: 4278d6617104f8749ab9a640a3785a7f, type: 3}
 --- !u!82 &2015160123249903679
 AudioSource:
   m_ObjectHideFlags: 0

@@ -70,6 +70,7 @@ public class PlayerPowerups : MonoBehaviour {
             return;
         }
 
+        GetComponent<PlayerAudio>().playPowerupUse();
         powerup.use(this);
         powerup = null;
         LevelManager.updateButtonState(movement, this);
