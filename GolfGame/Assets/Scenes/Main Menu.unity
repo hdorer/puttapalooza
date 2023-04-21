@@ -5939,7 +5939,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -10.905914, y: -33.722}
+  m_AnchoredPosition: {x: -10.905945, y: -33.722}
   m_SizeDelta: {x: -462.1879, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1287425873
@@ -9044,19 +9044,19 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Q/E - Rotate Aim
 
-    Z - confirm Aim
+    Left Click - Confirm Aim/Hit Shot
 
-    X - Back to aiming
+    X - Back
+    to aiming
 
-    Space
-    - Toggle Hover Camera
+    Space - Toggle Hover Camera
 
     WASD - Move Hover Camera
 
-    Right Click - Rotate
-    Ball Camera
+    Right
+    Click - Rotate Ball Camera
 
-    Left Click - Hit Shot'
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
