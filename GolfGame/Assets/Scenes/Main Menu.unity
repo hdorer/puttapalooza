@@ -4912,6 +4912,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2052777976}
+        m_TargetAssemblyTypeName: EventSystemSounds, Assembly-CSharp
+        m_MethodName: playStartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1210369834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5654,7 +5666,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1248532573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8875,6 +8887,7 @@ MonoBehaviour:
   playerJoin: {fileID: 8300000, guid: e3e5537b1c92e8242903062d80b56cee, type: 3}
   menuButton: {fileID: 8300000, guid: b533cc6afe62dfe468c8171c34d494cc, type: 3}
   audioPlayer: {fileID: 2052777977}
+  startGame: {fileID: 8300000, guid: b70a168389f9df7459248261f85dcadf, type: 3}
 --- !u!82 &2052777977
 AudioSource:
   m_ObjectHideFlags: 0
