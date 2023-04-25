@@ -10,6 +10,7 @@ public class EventSystemButtons : MonoBehaviour
     [SerializeField] private GameObject SettingPanel;
     [SerializeField] private GameObject ControlPanel;
     [SerializeField] private GameObject PlayerPanel;
+    [SerializeField] private GameObject CreditsPanel;
     void Start()
     {
         if(SceneChange.CheckScene() == 0)
@@ -18,6 +19,7 @@ public class EventSystemButtons : MonoBehaviour
             SettingPanel.SetActive(false);
             ControlPanel.SetActive(false);
             PlayerPanel.SetActive(false);
+            CreditsPanel.SetActive(false);
         }
     }
     public void SwitchToSettings()
@@ -31,6 +33,7 @@ public class EventSystemButtons : MonoBehaviour
         MenuPanel.SetActive(true);
         SettingPanel.SetActive(false);
         PlayerPanel.SetActive(false);
+        CreditsPanel.SetActive(false);
     }
     public void SwitchToControl()
     {
@@ -49,5 +52,9 @@ public class EventSystemButtons : MonoBehaviour
     public void QuitGame()
     {
         SceneChange.QuitTheGame();
+    }
+    public void SwitchToCredits()
+    {
+        CreditsPanel.SetActive(true);
     }
 }
