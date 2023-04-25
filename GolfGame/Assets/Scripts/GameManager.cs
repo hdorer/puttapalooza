@@ -15,13 +15,14 @@ public class GameManager : MonoBehaviour {
 
     private float sfxVolume = 1f;
 
-    private int mercyRule = 10;
+    private bool mercyRule = true;
+    private int mercyScore = 15;
 
     public static int NumPlayers { get => instance.numPlayers; }
     public static int NumHoles { get => instance.numHoles; }
     public static PlayerData[] Players { get => instance.players; }
     public static float SfxVolume { get => instance.sfxVolume; set => instance.sfxVolume = value; }
-    public static int MercyRule { get => instance.mercyRule; }
+    public static int MercyScore { get => instance.mercyScore; }
 
     private void Awake() {
         if(instance == null) {
@@ -87,5 +88,25 @@ public class GameManager : MonoBehaviour {
 
     public static void savePowerup(int player, Powerup powerup) {
         instance.players[player].powerup = powerup;
+    }
+
+    public void setMercyRule(int sliderValue) {
+        switch(sliderValue) {
+            case 0:
+                mercyRule = false;
+                break;
+            case 1:
+                mercyRule = true;
+                mercyScore = 10;
+                break;
+            case 2:
+                mercyRule = true;
+                mercyScore = 15;
+                break;
+            case 3:
+                mercyRule = true;
+                mercyScore = 20;
+                break;
+        }
     }
 }

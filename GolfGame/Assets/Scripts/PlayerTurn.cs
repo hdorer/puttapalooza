@@ -59,7 +59,7 @@ public class PlayerTurn : MonoBehaviour {
             score.increaseScore();
         }
 
-        if(score.CurrentScore >= GameManager.MercyRule && !holeCompleted) {
+        if(score.CurrentScore >= GameManager.MercyScore && !holeCompleted) {
             completeHole(false);
         }
 
