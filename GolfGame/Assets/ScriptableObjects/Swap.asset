@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerupName: Swap
   description: Swap places with another random player.
+  powerupSprite: {fileID: -770195286, guid: 1a74c09b652bef04cb2a5e9692f2dbee, type: 3}
