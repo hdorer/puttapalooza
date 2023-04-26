@@ -9,10 +9,14 @@ public class Hole : MonoBehaviour {
     public float MagnetDeadZone { get => magnetDeadZone; }
     [SerializeField] Transform magnetPoint;
     public Vector3 MagnetPoint { get => magnetPoint.position; }
+    public AudioSource audioPlayer;
+    public AudioClip holeSound;
 
     private void OnTriggerEnter(Collider other) {
         if(other.tag == "GolfBall") {
+            audioPlayer.PlayOneShot(holeSound);
             other.GetComponent<PlayerTurn>().completeHole(true);
+            LevelManager.finishLevel();
             other.GetComponent<PlayerTurn>().endTurn(false);
         }
     }

@@ -9,6 +9,11 @@ TagManager:
   - Hole
   - HoleFinal
   - DontDestroyThis
+  - Ground
+  - Wall
+  - Sand
+  - Ice
+  - PowerUp
   layers:
   - Default
   - TransparentFX

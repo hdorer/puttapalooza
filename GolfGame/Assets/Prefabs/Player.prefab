@@ -529,3 +529,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioPlayer: {fileID: 3488580912616686777}
   ballHit: {fileID: 8300000, guid: 0e8293cd446eaba4faac0bf9b5500017, type: 3}
+  ballHitWall: {fileID: 8300000, guid: 4150499934a7e3a459c0780eb75a2b1d, type: 3}
+  ballLandGround: {fileID: 8300000, guid: fc9f7433aec706f4c88ae09f6412a9a9, type: 3}
+  ballLandSand: {fileID: 8300000, guid: a8604f9b62eefd046886055a870a4e42, type: 3}
+  ballLandIce: {fileID: 8300000, guid: 27d0679041f443e45bd6226bf1ee37df, type: 3}
+  powerUpUse: {fileID: 8300000, guid: 55c3b2a058c85f2459e6352172ac83ee, type: 3}
+  ballLandWater: {fileID: 8300000, guid: 9244e0a55571a7243acbc03c7a6826c6, type: 3}
+  pickUP: {fileID: 8300000, guid: 7458edc42787eab45b2ad38a4ae648f7, type: 3}

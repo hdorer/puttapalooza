@@ -8,6 +8,7 @@ public class EventSystemSounds : MonoBehaviour
     [SerializeField] private AudioClip playerJoin;
     [SerializeField] private AudioClip menuButton;
     [SerializeField] private AudioSource audioPlayer;
+    [SerializeField] private AudioClip startGame;
 
     public void playInputAudio(AudioClip audio)
     {
@@ -25,5 +26,8 @@ public class EventSystemSounds : MonoBehaviour
     {
         audioPlayer.PlayOneShot(menuButton);
     }
-
+    public void playStartGame()
+    {
+        audioPlayer.PlayOneShot(startGame);
+    }
 }
