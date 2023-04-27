@@ -56,27 +56,19 @@ public class PlayerTurn : MonoBehaviour {
         }
 
         if(increaseScore) {
-            score.increaseScore();
-        }
-
-        if(score.CurrentScore >= GameManager.MercyScore && !holeCompleted) {
-            completeHole(false);
+            GetComponent<PlayerScore>().increaseScore();
         }
 
         isTurn = false;
         LevelManager.goToNextTurn();
     }
 
-    public void completeHole(bool increaseScore) {
-        if(increaseScore) {
-            score.increaseScore();
-        }
+    public void completeHole() {
+        score.increaseScore();
         score.saveScore();
         powerups.savePowerup();
 
         holeCompleted = true;
-
-        LevelManager.finishLevel();
     }
 
     public void activateDoubleHit() {

@@ -414,8 +414,6 @@ MonoBehaviour:
   magnetRange: 37.08
   magnetDeadZone: 6.4
   magnetPoint: {fileID: 1030678411}
-  audioPlayer: {fileID: 1954728999}
-  holeSound: {fileID: 8300000, guid: 4777fe1257556d040902e829c3c8cb7e, type: 3}
 --- !u!65 &187048533
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37542,11 +37540,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!82 &1954728999 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 4068102134330000094, guid: be9cbbbc3cc3b81408be7bb9a35b0980, type: 3}
-  m_PrefabInstance: {fileID: 2017838367}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1999316436
 GameObject:
   m_ObjectHideFlags: 0

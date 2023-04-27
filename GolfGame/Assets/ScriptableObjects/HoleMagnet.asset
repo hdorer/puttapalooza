@@ -14,4 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerupName: Hole Magnet
   description: Pull yourself towards the hole if you are within range.
-  powerupSprite: {fileID: 270756040, guid: 4b1bceca12a38e247bed2cbbcbae7d4e, type: 3}

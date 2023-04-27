@@ -14,4 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerupName: Crazy Hit
   description: Pick an opponent; their next hit is significantly harder to aim.
-  powerupSprite: {fileID: -1121233087, guid: 59fbbdee601f65a4b9256dff13a8cbdd, type: 3}
