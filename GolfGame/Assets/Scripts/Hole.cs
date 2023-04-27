@@ -12,7 +12,8 @@ public class Hole : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if(other.tag == "GolfBall") {
-            other.GetComponent<PlayerTurn>().completeHole(true);
+            other.GetComponent<PlayerTurn>().completeHole();
+            LevelManager.finishLevel();
             other.GetComponent<PlayerTurn>().endTurn(false);
         }
     }

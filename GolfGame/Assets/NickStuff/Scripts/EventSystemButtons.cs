@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System.Runtime.ConstrainedExecution;
 
 public class EventSystemButtons : MonoBehaviour
 {   
@@ -45,6 +46,10 @@ public class EventSystemButtons : MonoBehaviour
         PlayerPanel.SetActive(true);
         MenuPanel.SetActive(false);
     }
+    public void SwitchToCredits() {
+        MenuPanel.SetActive(false);
+        CreditsPanel.SetActive(true);
+    }
     public void SwitchScene(int sceneNum)
     {
         SceneChange.SwitchToScene(sceneNum);
@@ -52,9 +57,5 @@ public class EventSystemButtons : MonoBehaviour
     public void QuitGame()
     {
         SceneChange.QuitTheGame();
-    }
-    public void SwitchToCredits()
-    {
-        CreditsPanel.SetActive(true);
     }
 }
