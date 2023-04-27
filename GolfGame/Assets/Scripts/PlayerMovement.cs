@@ -113,8 +113,13 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider col) {
+        if(col.CompareTag("PowerUp"))
+        {
+            GetComponent<PlayerAudio>().playPickup();
+        }
         if(col.CompareTag("Reset")) {
             endTurn(false);
+            GetComponent<PlayerAudio>().playBallWater();
         }
     }
 
@@ -302,5 +307,24 @@ public class PlayerMovement : MonoBehaviour {
         
         float chRotation = chTurnRate * Time.deltaTime;
         angle += chRotation;
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Ground"))
+        {
+            GetComponent<PlayerAudio>().playBallGround();
+        }
+        else if(collision.gameObject.CompareTag("Wall"))
+        {
+            GetComponent<PlayerAudio>().playBallWall();
+        }
+        else if(collision.gameObject.CompareTag("Sand"))
+        {
+            GetComponent<PlayerAudio>().playBallSand();
+        }
+        else if(collision.gameObject.CompareTag("Ice"))
+        {
+            GetComponent<PlayerAudio>().playBallIce();
+        }
     }
 }

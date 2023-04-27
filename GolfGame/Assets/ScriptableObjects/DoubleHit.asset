@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerupName: Double Hit
   description: Hit the ball twice in your turn
+  powerupSprite: {fileID: 1632000368, guid: 92489ae2b64c6a748a059c90ec3f6ca3, type: 3}
