@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerupName: Mulligan
   description: Re-do your last shot.
+  powerupSprite: {fileID: 929239242, guid: 34d01101ccd25e2409ef641418c0b0fd, type: 3}
